@@ -1,4 +1,4 @@
-package fr.lelouet.services.external.binance.bean;
+package fr.lelouet.services.external.binance.config.bean;
 
 
 public record BinanceApiKeys(String publicKey, String secretKey) {

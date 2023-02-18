@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.typesafe.config.Config;
-import fr.lelouet.services.external.binance.bean.BinanceApiKeys;
+import fr.lelouet.services.external.binance.config.bean.BinanceApiKeys;
 
 @Singleton
 public class ConfigurationService {

@@ -8,7 +8,7 @@ import com.binance.connector.client.impl.spot.Staking;
 import com.binance.connector.client.impl.spot.UserData;
 import com.binance.connector.client.impl.spot.Wallet;
 import fr.lelouet.services.configuration.ConfigurationService;
-import fr.lelouet.services.external.binance.bean.BinanceApiKeys;
+import fr.lelouet.services.external.binance.config.bean.BinanceApiKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +23,8 @@ public class BinanceGlobalProvider {
 
     /**
      * Documentation externe :
-     *  Bible : https://binance-docs.github.io/apidocs/spot/en/#api-key-setup
-     *  Users can use the SPOT Testnet to practice SPOT trading : https://testnet.binance.vision/
-     *
+     * Bible : https://binance-docs.github.io/apidocs/spot/en/#api-key-setup
+     * Users can use the SPOT Testnet to practice SPOT trading : https://testnet.binance.vision/
      */
 
     private static final Logger logger = LoggerFactory.getLogger(BinanceGlobalProvider.class);
@@ -45,24 +44,32 @@ public class BinanceGlobalProvider {
     }
 
     public void initClient() {
-        logger.info("Initialisation du client Binance Staking");
-        Staking clientStaking = client.createStaking();
+//        logger.info("Initialisation du client Binance Staking");
+//        Staking clientStaking = client.createStaking();
+//
+//        logger.info("Initialisation du client Binance Market");
+//        Market clientMarket = client.createMarket();
+//
+//        logger.info("Initialisation du client Binance Savings");
+//        Savings clientSavings = client.createSavings();
+//
+//        logger.info("Initialisation du client Binance UserData");
+//        UserData clientUserData = client.createUserData();
+        createWalletClient();
+    }
 
-        logger.info("Initialisation du client Binance UserData");
-        Market clientMarket = client.createMarket();
+    public SpotClient getSpotClient() {
+        return this.client;
+    }
 
-        logger.info("Initialisation du client Binance UserData");
-        Savings clientSavings = client.createSavings();
-
+    public void createWalletClient() {
         logger.info("Initialisation du client Binance Wallet");
         Wallet clientWallet = client.createWallet();
 
-        logger.info("Initialisation du client Binance UserData");
-        UserData clientUserData = client.createUserData();
-    }
+        // TODO faire un snapshot journalier = Scheduler
+        // Daily Account Snapshot GET /sapi/v1/accountSnapshot
 
-    public void createUserDataClient(){
-
+//        clientWallet.
     }
 
     /**

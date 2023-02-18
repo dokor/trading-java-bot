@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import fr.lelouet.services.external.binance.BinanceGlobalProvider;
+import fr.lelouet.services.external.binance.test.TestBinanceApi;
 import org.glassfish.grizzly.GrizzlyFuture;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -51,6 +52,7 @@ public class WebApplication {
 
 			// Initialisation des données/services au démarage de l'application
 			initAppData(injector);
+			applyTestClass(injector);
 
 			logger.info("Server started in {} ms", System.currentTimeMillis() - startTimestamp);
 		} catch (Throwable e) {
@@ -68,6 +70,12 @@ public class WebApplication {
 
 		// Rafraichissement du token Binance pour le client
 		// TODO Scheduler ?
+	}
+
+	// A supprimer plus tard
+	private static void applyTestClass(Injector injector){
+		// Lancement du service de test
+		injector.getInstance(TestBinanceApi.class).mainTest();
 	}
 
 	private static void addShutDownListener(HttpServer httpServer) { // If scheduler is used, add arg: Scheduler scheduler
