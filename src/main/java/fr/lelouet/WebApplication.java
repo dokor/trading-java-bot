@@ -48,6 +48,9 @@ public class WebApplication {
 			// If Plume Scheduler / Wisp is used, uncomment next line
 			// addShutDownListerner(httpServer, injector.getInstance(Scheduler.class));
 
+			// Initialisation des données/services au démarage de l'application
+			initAppData(injector);
+
 			logger.info("Server started in {} ms", System.currentTimeMillis() - startTimestamp);
 		} catch (Throwable e) {
 			logger.error("Failed to start server", e);
@@ -56,6 +59,11 @@ public class WebApplication {
 			// Stopping the JVM is important to enable production supervision tools to detect and restart the project.
 			System.exit(1);
 		}
+	}
+
+	private static void initAppData(Injector injector){
+		// Création du client Binance
+		// Rafraichissement du token => Scheduler
 	}
 
 	private static void addShutDownListener(HttpServer httpServer) { // If scheduler is used, add arg: Scheduler scheduler
