@@ -34,4 +34,14 @@ public class TestBinanceApi {
 //        logger.info("Retour Api getAll {}", coinsWalletInformations.getFreeCoins());
         logger.info("------------- Fin des tests principaux -------------");
     }
+
+    /**
+     * TODO :
+     * - Récupérer le portefeuille des monnaies earn stackés
+     * - Récupérer le stacking disponible pour une monnaie
+     * - Faire un scheduler qui indique les monnaies qui peuvent etre stackés
+     *   - Fonction qui crée directement le stacking ?
+     *   - alerting par slack ou Mail des derniers trades effectués
+     *
+     */
 }
