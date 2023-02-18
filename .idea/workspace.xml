@@ -5,13 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceGlobalProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/bean/BinanceApiKeys.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/webservices/api/ExampleWs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/webservices/api/ExampleWs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Record" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -50,6 +63,19 @@
   }
 }]]></component>
   <component name="RunManager">
+    <configuration name="WebApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.lelouet.WebApplication" />
+      <module name="trading-backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.lelouet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="trading-backend" />
       <method v="2">
@@ -63,6 +89,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.WebApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -73,7 +104,7 @@
       <option name="presentableId" value="Default" />
       <updated>1676691748252</updated>
       <workItem from="1676691749172" duration="1173000" />
-      <workItem from="1676722889686" duration="2225000" />
+      <workItem from="1676722889686" duration="6248000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -89,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676723058783</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add binance API + initAppData dans webApp">
+      <created>1676726655849</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676726655849</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -98,6 +136,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init squelette java" />
     <MESSAGE value="rename" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename" />
+    <MESSAGE value="add binance API + initAppData dans webApp" />
+    <option name="LAST_COMMIT_MESSAGE" value="add binance API + initAppData dans webApp" />
   </component>
 </project>

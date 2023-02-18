@@ -8,6 +8,7 @@ import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,18 +27,15 @@ import fr.lelouet.webservices.api.data.Test;
 @Singleton
 public class ExampleWs {
 
-	private final ConfigurationService configurationService;
+    @Inject
+    public ExampleWs() {
+    }
 
-	@Inject
-	public ExampleWs(ConfigurationService configurationService) {
-		this.configurationService = configurationService;
-	}
-
-	@GET
-	@Path("/test/{name}")
-	@Operation(description = "Example web-service")
-	public Test test(@Parameter(required = true) @PathParam("name") String name) {
-		return new Test("hello " + name + "\n" + configurationService.hello());
-	}
+    @GET
+    @Path("/test/{name}")
+    @Operation(description = "Example web-service")
+    public Test test(@Parameter(required = true) @PathParam("name") String name) {
+        return new Test("hello " + name + "\n");
+    }
 
 }

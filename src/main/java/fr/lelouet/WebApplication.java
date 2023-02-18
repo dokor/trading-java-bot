@@ -3,6 +3,7 @@ package fr.lelouet;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import fr.lelouet.services.external.binance.BinanceGlobalProvider;
 import org.glassfish.grizzly.GrizzlyFuture;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -63,7 +64,10 @@ public class WebApplication {
 
 	private static void initAppData(Injector injector){
 		// Création du client Binance
-		// Rafraichissement du token => Scheduler
+		injector.getInstance(BinanceGlobalProvider.class).initClient();
+
+		// Rafraichissement du token Binance pour le client
+		// TODO Scheduler ?
 	}
 
 	private static void addShutDownListener(HttpServer httpServer) { // If scheduler is used, add arg: Scheduler scheduler
