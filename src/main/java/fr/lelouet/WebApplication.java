@@ -66,7 +66,7 @@ public class WebApplication {
 
 	private static void initAppData(Injector injector){
 		// Création du client Binance
-		injector.getInstance(BinanceGlobalProvider.class).initClient();
+//		injector.getInstance(BinanceGlobalProvider.class).initClient();
 
 		// Rafraichissement du token Binance pour le client
 		// TODO Scheduler ?

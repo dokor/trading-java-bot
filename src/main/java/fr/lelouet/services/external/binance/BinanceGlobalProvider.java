@@ -2,18 +2,19 @@ package fr.lelouet.services.external.binance;
 
 import com.binance.connector.client.SpotClient;
 import com.binance.connector.client.impl.SpotClientImpl;
-import com.binance.connector.client.impl.spot.Market;
-import com.binance.connector.client.impl.spot.Savings;
-import com.binance.connector.client.impl.spot.Staking;
-import com.binance.connector.client.impl.spot.UserData;
 import com.binance.connector.client.impl.spot.Wallet;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.external.binance.config.bean.BinanceApiKeys;
+import fr.lelouet.services.external.binance.config.bean.BinanceResponse;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * Gestionnaire des différents clients d'api Binance
@@ -30,13 +31,16 @@ public class BinanceGlobalProvider {
     private static final Logger logger = LoggerFactory.getLogger(BinanceGlobalProvider.class);
     private final SpotClient client;
     private final BinanceApiKeys binanceApiKeys;
+    private final ObjectMapper objectMapper;
 
     @Inject
     public BinanceGlobalProvider(
+        ObjectMapper objectMapper,
         ConfigurationService configurationService
     ) {
         // Récupération des clés d'api binance depuis la configuration projejt
         this.binanceApiKeys = configurationService.getBinanceKeys();
+        this.objectMapper = objectMapper;
         // Création du client principal
         this.client = new SpotClientImpl(binanceApiKeys.publicKey(), binanceApiKeys.secretKey());
         logger.info("Client d'API Binance global crée");
@@ -55,21 +59,26 @@ public class BinanceGlobalProvider {
 //
 //        logger.info("Initialisation du client Binance UserData");
 //        UserData clientUserData = client.createUserData();
-        createWalletClient();
     }
 
     public SpotClient getSpotClient() {
         return this.client;
     }
 
-    public void createWalletClient() {
-        logger.info("Initialisation du client Binance Wallet");
-        Wallet clientWallet = client.createWallet();
+    @SneakyThrows
+    public <T> BinanceResponse<T> read(String json, Class<T> contentClass) {
+        JavaType type = objectMapper.getTypeFactory().constructParametricType(BinanceResponse.class, contentClass);
+        return objectMapper.readValue(json, type);
+    }
 
-        // TODO faire un snapshot journalier = Scheduler
-        // Daily Account Snapshot GET /sapi/v1/accountSnapshot
-
-//        clientWallet.
+    @SneakyThrows
+    public  <T> List<T> readArray(String json, Class<T> contentClass) {
+        JavaType type = objectMapper.getTypeFactory()
+            .constructParametricType(
+                BinanceResponse.class,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, contentClass)
+            );
+        return objectMapper.readValue(json, type);
     }
 
     /**

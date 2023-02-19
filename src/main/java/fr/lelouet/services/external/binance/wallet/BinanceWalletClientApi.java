@@ -38,10 +38,13 @@ public class BinanceWalletClientApi {
     private final Wallet clientWallet;
     private final BinanceGlobalProvider binanceGlobalProvider;
 
+    // TODO faire un snapshot journalier = Scheduler
+    // Daily Account Snapshot GET /sapi/v1/accountSnapshot
+
     @Inject
     public BinanceWalletClientApi(
         ObjectMapper objectMapper,
-        // todo trouver comment passer directement le spotWallet plutot que de réinjecter toute la classe
+        // todo trouver comment passer directement le spotWallet en global app (ou package) plutot que de réinjecter toute la classe
         BinanceGlobalProvider binanceGlobalProvider
     ) {
         this.objectMapper = objectMapper;
@@ -56,7 +59,6 @@ public class BinanceWalletClientApi {
         try {
             String response = clientWallet.coinInfo(stringObjectLinkedHashMap);
             if (response != null) {
-//                logger.debug("Response from Binance API : {}", response);
                 return Arrays.stream(objectMapper.readValue(response, CoinWallet[].class)).toList();
             }
         } catch (BinanceConnectorException e) {
@@ -77,7 +79,7 @@ public class BinanceWalletClientApi {
             String response = clientWallet.coinInfo(bodyParameter);
             if (response != null) {
                 logger.debug("Response from Binance API : {}", response);
-                return read(Objects.requireNonNull(response), responseClass);
+                return binanceGlobalProvider.read(Objects.requireNonNull(response), responseClass);
 
             }
         } catch (BinanceConnectorException e) {
@@ -87,22 +89,6 @@ public class BinanceWalletClientApi {
                 e.getMessage(), e.getErrMsg(), e.getErrorCode(), e.getHttpStatusCode(), e);
         }
         return null;
-    }
-
-    @SneakyThrows
-    private <T> BinanceResponse<T> read(String json, Class<T> contentClass) {
-        JavaType type = objectMapper.getTypeFactory().constructParametricType(BinanceResponse.class, contentClass);
-        return objectMapper.readValue(json, type);
-    }
-
-    @SneakyThrows
-    private <T> BinanceResponse<List<T>> readArray(String json, Class<T> contentClass) {
-        JavaType type = objectMapper.getTypeFactory()
-            .constructParametricType(
-                BinanceResponse.class,
-                objectMapper.getTypeFactory().constructCollectionType(List.class, contentClass)
-            );
-        return objectMapper.readValue(json, type);
     }
 
 }

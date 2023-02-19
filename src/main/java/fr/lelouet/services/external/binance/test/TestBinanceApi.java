@@ -1,10 +1,8 @@
 package fr.lelouet.services.external.binance.test;
 
-import fr.lelouet.services.external.binance.config.bean.BinanceResponse;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
-import io.swagger.v3.core.util.Json;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
