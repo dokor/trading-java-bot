@@ -61,6 +61,19 @@ public class BinanceGlobalProvider {
 //        UserData clientUserData = client.createUserData();
     }
 
+    //Implements
+    // MARKET
+    // GET /api/v3/depth => Récupere l'orderBook
+    // GET /api/v3/ticker/bookTicker => Best price/qty on the order book for a symbol or symbols.
+
+    // SPot
+    // GET /api/v3/openOrders (HMAC SHA256) => Get all open orders on a symbol. Careful when accessing this with no symbol.GET /api/v3/openOrders (HMAC SHA256)
+    // GET /api/v3/allOrders (HMAC SHA256) =>  Get all account orders; active, canceled, or filled.
+    // GET /api/v3/account (HMAC SHA256) => Get current account information.
+
+    // SAVINGS
+    // STAKINGS
+
     public SpotClient getSpotClient() {
         return this.client;
     }

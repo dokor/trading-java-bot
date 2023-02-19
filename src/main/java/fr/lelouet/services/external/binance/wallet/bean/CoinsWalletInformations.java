@@ -2,12 +2,10 @@ package fr.lelouet.services.external.binance.wallet.bean;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public record CoinsWalletInformations(
     List<CoinWallet> coinWalletList
-//    Map<String, CoinWallet> coinWalletMap
 ) {
 
     public List<CoinWallet> getAllLegalMoney() {
@@ -23,8 +21,8 @@ public record CoinsWalletInformations(
             .filter(coinWallet ->
                 !Objects.equals(coinWallet.free(), "0")
                 || !Objects.equals(coinWallet.freeze(), "0")
-                || !Objects.equals(coinWallet.ipoable(), "0")
-                || !Objects.equals(coinWallet.ipoing(), "0")
+//                || !Objects.equals(coinWallet.ipoable(), "0")
+//                || !Objects.equals(coinWallet.ipoing(), "0")
                 || !Objects.equals(coinWallet.locked(), "0")
                 || !Objects.equals(coinWallet.storage(), "0")
                 || !Objects.equals(coinWallet.withdrawing(), "0")

@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +53,10 @@ public class BinanceWalletClientApi {
         this.clientWallet = binanceGlobalProvider.getSpotClient().createWallet();
     }
 
+
+    /**
+     * Récupération des différentes monnaies de l'utilisateur dans Spot
+     */
     @SneakyThrows
     public List<CoinWallet> getAllCoinsOfConnectedUser() {
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
@@ -67,9 +72,15 @@ public class BinanceWalletClientApi {
             logger.error("fullErrMessage: {} \nerrMessage: {} \nerrCode: {} \nHTTPStatusCode: {}",
                 e.getMessage(), e.getErrMsg(), e.getErrorCode(), e.getHttpStatusCode(), e);
         }
-        return null;
-//        return this.executeBinanceWalletRequest(null, stringObjectLinkedHashMap, CoinsWalletInformations.class);
+        return Collections.emptyList();
     }
+
+    // TODO implements
+    // GET /sapi/v1/asset/tradeFee   =>  Fetch trade fee
+    // POST /sapi/v1/asset/transfer (HMAC SHA256) =>  You need to enable Permits Universal Transfer option for the API Key which requests this endpoint.
+    // GET /sapi/v1/asset/transfer (HMAC SHA256) => Get les transferts de compte actuels
+    // POST /sapi/v1/asset/get-funding-asset (HMAC SHA256) => Récuperer le solde d'un asset dans spot
+    // POST /sapi/v3/asset/getUserAsset => Get user assets, just for positive data. (plus simple que l'api CoinInfo
 
 
     // Todo Remplacer le path par la fonction du client à exécuter

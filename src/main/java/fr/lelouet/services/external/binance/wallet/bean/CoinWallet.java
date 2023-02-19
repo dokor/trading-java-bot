@@ -21,8 +21,8 @@ public record CoinWallet(
         return "CoinWallet [" + coin + "] " +
             "=> free [" + free + "]"
             + " freeze [" + freeze + ']'
-            + " ipoable [" + ipoable + ']'
-            + " ipoing [" + ipoing + ']'
+//            + " ipoable [" + ipoable + ']'
+//            + " ipoing [" + ipoing + ']'
             + " locked [" + locked + ']'
             + " storage [" + storage + ']'
             + " withdrawing [" + withdrawing + ']'
