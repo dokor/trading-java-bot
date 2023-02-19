@@ -2,7 +2,6 @@ package fr.lelouet.services.external.binance;
 
 import com.binance.connector.client.SpotClient;
 import com.binance.connector.client.impl.SpotClientImpl;
-import com.binance.connector.client.impl.spot.Wallet;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.lelouet.services.configuration.ConfigurationService;

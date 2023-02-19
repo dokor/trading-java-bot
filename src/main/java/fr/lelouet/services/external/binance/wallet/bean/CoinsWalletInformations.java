@@ -16,26 +16,30 @@ public record CoinsWalletInformations(
         return this.coinWalletList().stream().filter(coinWallet -> !coinWallet.isLegalMoney()).toList();
     }
 
-    public List<CoinWallet> getCoinsNotZero(){
+    public List<CoinWallet> getCoinsNotZero() {
         return this.coinWalletList().stream()
             .filter(coinWallet ->
                 !Objects.equals(coinWallet.free(), "0")
-                || !Objects.equals(coinWallet.freeze(), "0")
-//                || !Objects.equals(coinWallet.ipoable(), "0")
-//                || !Objects.equals(coinWallet.ipoing(), "0")
-                || !Objects.equals(coinWallet.locked(), "0")
-                || !Objects.equals(coinWallet.storage(), "0")
-                || !Objects.equals(coinWallet.withdrawing(), "0")
-        )
+                    || !Objects.equals(coinWallet.freeze(), "0")
+                    || !Objects.equals(coinWallet.locked(), "0")
+                    || !Objects.equals(coinWallet.storage(), "0")
+                    || !Objects.equals(coinWallet.withdrawing(), "0")
+            )
             .sorted(Comparator.comparing(CoinWallet::coin))
             .toList();
     }
 
+    public List<CoinWallet> getCoinsAvalaible() {
+        return this.coinWalletList().stream()
+            .filter(coinWallet -> !Objects.equals(coinWallet.free(), "0"))
+            .sorted(Comparator.comparing(CoinWallet::coin))
+            .toList();
+    }
+
+
     /**
      *  TODO : faire fonctions
-     *  récupérer la liste des cryptos disponibles
-     *  Calculer le montant moyen en € de chaque ligne
-     *  Avoir une MAP par coin
+     *  Avoir une MAP par coin ?
      */
 
 }

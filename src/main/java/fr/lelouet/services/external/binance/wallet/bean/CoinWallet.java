@@ -18,21 +18,34 @@ public record CoinWallet(
 ) {
 
     public String toCloseString() {
-        return "CoinWallet [" + coin + "] " +
-            "=> free [" + free + "]"
-            + " freeze [" + freeze + ']'
-//            + " ipoable [" + ipoable + ']'
-//            + " ipoing [" + ipoing + ']'
-            + " locked [" + locked + ']'
-            + " storage [" + storage + ']'
-            + " withdrawing [" + withdrawing + ']'
-            ;
+        return "CoinWallet [" + this.coin + "] " +
+            "=> free [" + this.free + "]"
+            + " freeze [" + this.freeze + ']'
+            + " locked [" + this.locked + ']'
+            + " storage [" + this.storage + ']'
+            + " withdrawing [" + this.withdrawing + ']';
     }
 
+    private static Integer convertStringToInteger(String ammount) {
+        return Integer.valueOf(ammount);
+    }
+
+    private static Double convertStringToDouble(String ammount) {
+        // TODO Vérifier la conversion avec les doubles + les virgules de l'infini
+        return Double.valueOf(ammount);
+    }
+
+    public Double getTotalAmmount() {
+        return convertStringToDouble(this.free) +
+            convertStringToDouble(this.freeze) +
+            convertStringToDouble(this.locked) +
+            convertStringToDouble(this.storage) +
+            convertStringToDouble(this.withdrawing);
+    }
 }
 
-
 /**
+ * MOCK exemple
  * {
  * "coin": "BTC",
  * "depositAllEnable": true,
