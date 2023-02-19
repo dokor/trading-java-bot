@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceGlobalProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceGlobalProvider.java" afterDir="false" />
+    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="comment">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/slack/SlackService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/slack/bean/SlackConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/slack/bean/SlackMessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/config/bean/BinanceApiKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/config/bean/BinanceApiKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/test/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/test/TestBinanceApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinWallet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinWallet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinsWalletInformations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinsWalletInformations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +24,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
         <option value="Class" />
+        <option value="Record" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -102,7 +110,7 @@
       <workItem from="1676691749172" duration="1173000" />
       <workItem from="1676722889686" duration="8178000" />
       <workItem from="1676737548308" duration="689000" />
-      <workItem from="1676738250206" duration="14069000" />
+      <workItem from="1676738250206" duration="16185000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -160,7 +168,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676772801865</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add functions calcul des coinsWallet">
+      <created>1676773236711</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676773236711</updated>
+    </task>
+    <task id="LOCAL-00010" summary="clean">
+      <created>1676773504583</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676773504583</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,9 +194,10 @@
     <MESSAGE value="add binance API + initAppData dans webApp" />
     <MESSAGE value="init keys binance" />
     <MESSAGE value="affichage de la récupération du porte feuille" />
-    <MESSAGE value="clean" />
     <MESSAGE value="add todo + recherche dans l'api" />
-    <option name="LAST_COMMIT_MESSAGE" value="add todo + recherche dans l'api" />
+    <MESSAGE value="add functions calcul des coinsWallet" />
+    <MESSAGE value="clean" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
