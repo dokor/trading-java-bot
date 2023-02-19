@@ -29,7 +29,6 @@ public class TestBinanceApi {
         List<CoinWallet> brCoinWallets = binanceWalletClientApi.getAllCoinsOfConnectedUser();
         CoinsWalletInformations coinsWalletInformations = new CoinsWalletInformations(brCoinWallets);
         coinsWalletInformations.getCoinsNotZero().forEach(coinWallet -> logger.info(coinWallet.toCloseString()));
-//        logger.info("Retour Api getAll {}", coinsWalletInformations.getFreeCoins());
         logger.info("------------- Fin des tests principaux -------------");
     }
 

@@ -46,32 +46,24 @@ public class BinanceGlobalProvider {
         // todo : regarder l'histoire de changement de base endpoint pour gagner en perf
     }
 
-    public void initClient() {
-//        logger.info("Initialisation du client Binance Staking");
-//        Staking clientStaking = client.createStaking();
-//
-//        logger.info("Initialisation du client Binance Market");
-//        Market clientMarket = client.createMarket();
-//
-//        logger.info("Initialisation du client Binance Savings");
-//        Savings clientSavings = client.createSavings();
-//
-//        logger.info("Initialisation du client Binance UserData");
-//        UserData clientUserData = client.createUserData();
-    }
-
     //Implements
     // MARKET
+    // Market clientMarket = client.createMarket();
     // GET /api/v3/depth => Récupere l'orderBook
     // GET /api/v3/ticker/bookTicker => Best price/qty on the order book for a symbol or symbols.
 
-    // SPot
+    // SPOT
     // GET /api/v3/openOrders (HMAC SHA256) => Get all open orders on a symbol. Careful when accessing this with no symbol.GET /api/v3/openOrders (HMAC SHA256)
     // GET /api/v3/allOrders (HMAC SHA256) =>  Get all account orders; active, canceled, or filled.
     // GET /api/v3/account (HMAC SHA256) => Get current account information.
 
     // SAVINGS
-    // STAKINGS
+    // Savings clientSavings = client.createSavings();
+    // TODO : regarder la doc pour trouver des trucs intéréssants
+
+    // STAKING
+    // Staking clientStaking = client.createStaking();
+    // TODO : regarder la doc pour trouver des trucs intéréssants
 
     public SpotClient getSpotClient() {
         return this.client;
@@ -98,20 +90,6 @@ public class BinanceGlobalProvider {
      * "base asset" refers to the asset that is the "quantity" of a symbol. For the symbol BTCUSDT, BTC would be the base asset.
      * "quote asset" refers to the asset that is the "price" of a symbol. For the symbol BTCUSDT, USDT would be the quote asset.
      */
-
-    /**
-     * Exemple de gestion d'erreur :
-     * try {
-     *       String result = client.createTrade().newOrder(parameters);
-     *       logger.info(result);
-     *     } catch (BinanceConnectorException e) {
-     *       logger.error("fullErrMessage: {}", e.getMessage(), e);
-     *     } catch (BinanceClientException e) {
-     *       logger.error("fullErrMessage: {} \nerrMessage: {} \nerrCode: {} \nHTTPStatusCode: {}",
-     *       e.getMessage(), e.getErrMsg(), e.getErrorCode(), e.getHttpStatusCode(), e);
-     *     }
-     */
-
 
     /**
      * Base endpoint without auth for market info :

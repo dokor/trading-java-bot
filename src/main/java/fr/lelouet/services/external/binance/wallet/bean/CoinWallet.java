@@ -26,10 +26,6 @@ public record CoinWallet(
             + " withdrawing [" + this.withdrawing + ']';
     }
 
-    private static Integer convertStringToInteger(String ammount) {
-        return Integer.valueOf(ammount);
-    }
-
     private static Double convertStringToDouble(String ammount) {
         // TODO Vérifier la conversion avec les doubles + les virgules de l'infini
         return Double.valueOf(ammount);

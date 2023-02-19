@@ -33,8 +33,6 @@ public class JerseyConfigProvider implements Provider<ResourceConfig> {
 		config.register(WsResultExceptionMapper.class);
 		// require explicit access control on API
 		config.register(RequireExplicitAccessControlFeature.accessControlAnnotations(PublicApi.class));
-		// to debug web-service requests
-		// register(LoggingFeature.class);
 
 		// java 8
 		config.register(TimeParamProvider.class);

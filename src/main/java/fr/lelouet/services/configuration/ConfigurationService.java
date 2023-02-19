@@ -11,7 +11,7 @@ public class ConfigurationService {
 
     private final Config config;
 
-    private final static String API_BINANCE_KEY = "api.binance.key";
+    private static final String API_BINANCE_KEY = "api.binance.key";
 
     @Inject
     public ConfigurationService(Config config) {

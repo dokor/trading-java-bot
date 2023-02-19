@@ -56,8 +56,7 @@ public class GrizzlySetup {
 			GrizzlySetup.class.getClassLoader(),
 			"/statics/"
 		);
-		// enable to view changes on a dev environnement when the project is run in debug mode ;
-		// in production, statics assets should be served by apache or nginx
+
 		httpHandler.setFileCacheEnabled(false);
 		httpServer.getServerConfiguration().addHttpHandler(httpHandler);
 

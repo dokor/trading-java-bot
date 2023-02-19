@@ -16,7 +16,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.webservices.api.data.Test;
 
 @Path("/example")
@@ -29,6 +28,7 @@ public class ExampleWs {
 
     @Inject
     public ExampleWs() {
+        throw new UnsupportedOperationException();
     }
 
     @GET

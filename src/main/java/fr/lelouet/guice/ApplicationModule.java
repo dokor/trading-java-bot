@@ -18,7 +18,7 @@ public class ApplicationModule extends AbstractModule {
 		install(new GuiceConfModule());
 		install(new GuiceJacksonModule());
 		// database & Querydsl installation
-		//install(new GuiceQuerydslModule());
+		// install(new GuiceQuerydslModule());
 
 		// prepare Jersey configuration
 		bind(ResourceConfig.class).toProvider(JerseyConfigProvider.class);
