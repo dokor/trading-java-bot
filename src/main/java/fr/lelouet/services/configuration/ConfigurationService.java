@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 
 import com.typesafe.config.Config;
 import fr.lelouet.services.external.binance.config.bean.BinanceApiKeys;
+import fr.lelouet.services.scheduler.bean.JobsConfiguration;
 import fr.lelouet.services.slack.bean.SlackConfiguration;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ConfigurationService {
 
     private static final String API_BINANCE_KEY = "api.binance.key";
     private static final String API_SLACK = "api.slack";
+    private static final String JOBS_CRON = "jobs.cron";
 
     @Inject
     public ConfigurationService(Config config) {
@@ -48,5 +50,13 @@ public class ConfigurationService {
 
     public List<String> ignoreAutoStakingCryptoList() {
         return config.getStringList("algotithm.staking.crypto.list");
+    }
+
+    public JobsConfiguration getJobsConfiguration() {
+        Config configBinance = config.getConfig(JOBS_CRON);
+        return JobsConfiguration.of(
+            configBinance.getString("auto-restack"),
+            configBinance.getString("destack-flexible")
+        );
     }
 }

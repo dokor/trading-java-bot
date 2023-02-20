@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/scheduler/ScheduledJobs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/scheduler/bean/JobsConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/slack/bean/SlackMessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/slack/bean/SlackMessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/guice/ApplicationModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/guice/ApplicationModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +91,7 @@
       <recent name="fr.lelouet.services.external.binance.config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="fr.lelouet.services.scheduler" />
       <recent name="fr.lelouet.services.external.binance.spot" />
       <recent name="fr.lelouet.services.external.binance.trade" />
       <recent name="fr.lelouet.services.external.binance.stacking" />
@@ -137,7 +142,7 @@
       <workItem from="1676737548308" duration="689000" />
       <workItem from="1676738250206" duration="16185000" />
       <workItem from="1676819380332" duration="952000" />
-      <workItem from="1676885681089" duration="18285000" />
+      <workItem from="1676885681089" duration="19747000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -293,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676908740043</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="clean">
+      <created>1676910506280</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1676910506280</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,7 +320,6 @@
     <MESSAGE value="add functions calcul des coinsWallet" />
     <MESSAGE value="clean conf" />
     <MESSAGE value="comment Slack service" />
-    <MESSAGE value="clean" />
     <MESSAGE value="refacto et init les différents clients" />
     <MESSAGE value="clean + todo" />
     <MESSAGE value="rename" />
@@ -316,6 +327,7 @@
     <MESSAGE value="add Stacking module" />
     <MESSAGE value="add queryParam ENUM" />
     <MESSAGE value="fin autostaking" />
-    <option name="LAST_COMMIT_MESSAGE" value="fin autostaking" />
+    <MESSAGE value="clean" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean" />
   </component>
 </project>

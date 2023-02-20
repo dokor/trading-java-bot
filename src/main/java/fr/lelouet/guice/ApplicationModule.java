@@ -1,5 +1,6 @@
 package fr.lelouet.guice;
 
+import com.coreoz.plume.scheduler.guice.GuiceSchedulerModule;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import fr.lelouet.jersey.JerseyConfigProvider;
@@ -19,6 +20,8 @@ public class ApplicationModule extends AbstractModule {
 		install(new GuiceJacksonModule());
 		// database & Querydsl installation
 		// install(new GuiceQuerydslModule());
+
+		install(new GuiceSchedulerModule());
 
 		// prepare Jersey configuration
 		bind(ResourceConfig.class).toProvider(JerseyConfigProvider.class);

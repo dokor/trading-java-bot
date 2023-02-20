@@ -106,10 +106,15 @@
 			<version>1.5.6</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>com.coreoz</groupId>
 			<artifactId>plume-conf</artifactId>
+		</dependency>
+
+		<!-- Scheduled tasks -->
+		<dependency>
+			<groupId>com.coreoz</groupId>
+			<artifactId>plume-scheduler</artifactId>
 		</dependency>
 
 		<!-- database -->
