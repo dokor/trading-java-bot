@@ -32,7 +32,7 @@ public class SlackService {
 
     /**
      * Méthode public permetant d'envoyer un message sur un channel Slack
-     * Ex : 
+     * Ex :
      *  SlackService.sendMessage("mon message", SlackMessageType.INFORMATIF);
      */
     public void sendMessage(String message, SlackMessageType slackMessageType) {
