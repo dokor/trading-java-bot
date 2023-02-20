@@ -64,10 +64,11 @@ public class SlackService {
     private String computeMessage(String message, SlackMessageType slackMessageType) {
         StringBuilder stringBuilder = new StringBuilder();
         switch (slackMessageType) {
-            case LANCEMENT -> stringBuilder.append("LANCEMENT " + message);
-            case INFORMATIF -> stringBuilder.append("INFORMATIF " + message);
-            default -> stringBuilder.append(message);
+            case LANCEMENT -> stringBuilder.append("LANCEMENT ");
+            case INFORMATIF -> stringBuilder.append("INFORMATIF ");
+            default -> stringBuilder.append("");
         }
+        stringBuilder.append(message);
         return stringBuilder.toString();
     }
 
