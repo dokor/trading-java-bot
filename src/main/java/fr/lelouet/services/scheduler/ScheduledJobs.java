@@ -39,20 +39,20 @@ public class ScheduledJobs {
      * Initialisation des taches schedulées
      */
     public void scheduleJobs() {
-        if (jobsConfiguration.getCronDestackFlex() != null && !jobsConfiguration.getCronDestackFlex().isEmpty()) {
-            scheduler.schedule(
-                "Lancement du destack flexible automatique",
-                autoRestackService::destackFlexibleStaking,
-                CronSchedule.parseQuartzCron(jobsConfiguration.getCronDestackFlex())
-            );
-        }
-        if (jobsConfiguration.getCronAutoRestack() != null && !jobsConfiguration.getCronAutoRestack().isEmpty()) {
-            scheduler.schedule(
-                "Lancement du restack automatique",
-                autoRestackService::automatiqueReStack,
-                CronSchedule.parseQuartzCron(jobsConfiguration.getCronAutoRestack())
-            );
-        }
+//        if (jobsConfiguration.getCronDestackFlex() != null && !jobsConfiguration.getCronDestackFlex().isEmpty()) {
+//            scheduler.schedule(
+//                "Lancement du destack flexible automatique",
+//                autoRestackService::destackFlexibleStaking,
+//                CronSchedule.parseUnixCron(jobsConfiguration.getCronDestackFlex())
+//            );
+//        }
+//        if (jobsConfiguration.getCronAutoRestack() != null && !jobsConfiguration.getCronAutoRestack().isEmpty()) {
+//            scheduler.schedule(
+//                "Lancement du restack automatique",
+//                autoRestackService::automatiqueReStack,
+//                CronSchedule.parseUnixCron(jobsConfiguration.getCronAutoRestack())
+//            );
+//        }
 
     }
 }

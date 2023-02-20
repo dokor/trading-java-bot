@@ -38,7 +38,10 @@ public class BinanceWalletClientApi {
         logger.debug("Tentative de récupération des différentes monnaies du user courant");
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         CoinWallet[] coinWalletList = binanceGlobalProvider.callBinanceApi(clientWallet, "coinInfo", CoinWallet[].class, stringObjectLinkedHashMap);
-        return CoinsWalletInformations.of(Arrays.stream(coinWalletList).toList());
+        if (coinWalletList != null) {
+            return CoinsWalletInformations.of(Arrays.stream(coinWalletList).toList());
+        }
+        return null;
     }
 
     // TODO implements

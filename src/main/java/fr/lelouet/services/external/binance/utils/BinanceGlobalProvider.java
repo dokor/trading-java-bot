@@ -64,7 +64,7 @@ public class BinanceGlobalProvider {
 
     public <T, K> T callBinanceApi(K client, String functionName, Class<T> returnType, LinkedHashMap<String, Object> stringObjectLinkedHashMap) {
         try {
-            Method method = client.getClass().getMethod(functionName, String.class);
+            Method method = client.getClass().getMethod(functionName, LinkedHashMap.class);
             String response = (String) method.invoke(client, stringObjectLinkedHashMap);
             // Vérifier si le type de retour est une liste ou non
             if (List.class.isAssignableFrom(returnType)) {

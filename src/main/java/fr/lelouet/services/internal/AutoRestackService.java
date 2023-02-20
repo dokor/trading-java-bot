@@ -43,48 +43,51 @@ public class AutoRestackService {
     public void automatiqueReStack() {
         // Récupération des cryptos depuis le compte spot de l'utilisateur
         CoinsWalletInformations coinsWalletInformations = binanceApi.getCoinsInformationsOfSpotWallet();
-
-        // Coins dispos pour le stacking
-        coinsWalletInformations.getCoinsAvalaible()
-            .stream()
-            // Filtre les cryptos volontairement à ignorer
-            .filter(coinWallet -> configurationService.ignoreAutoStakingCryptoList().contains(coinWallet.coin().name()))
-            // Pour chaque crypto disponible
-            .forEach(coinWallet -> {
-                String logFind = AutoRestackService.concatFind(coinWallet.coin().name(), coinWallet.free());
-                logger.info(logFind);
-                slackService.sendMessage(logFind, SlackMessageType.AUTO_STAKING);
-                // Récupération des stakings products disponible pour cette crypto
-                StakingProducts stakingProducts = binanceApi.getStakingProducts(coinWallet.coin());
-                // Pour chaque produits disponibles,
-                stakingProducts.stakingList()
-                    .stream()
-                    // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
-                    .filter(projectStaking -> Double.valueOf(projectStaking.quota().minimum()) >= Double.valueOf(coinWallet.free()))
-                    // Filtre les stakings déjà remplis totalement
-                    .filter(projectStaking -> {
-                        // Récupération du quota réstant sur le produit
-                        PersonalLeftQuota personalLeftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
-                        Double leftQuota = Double.valueOf(personalLeftQuota.leftPersonalQuota());
-                        Double totalPersonnalQuota = Double.valueOf(projectStaking.quota().totalPersonalQuota());
-                        // Comparaison avec le QuotaTotal de l'utilisateur
-                        return (leftQuota > 0) && leftQuota > totalPersonnalQuota;
-                    })
-                    .forEach(projectStaking -> {
-                        // Tentative de staking du produit avec le montant de la crypto disponible
-                        ProductResponse productResponse = binanceApi.postStakingProducts(projectStaking.projectId(), Double.valueOf(coinWallet.free()));
-                        String log = AutoRestackService.concatEndResult(
-                            coinWallet.coin().name(),
-                            coinWallet.free(),
-                            projectStaking.projectId(),
-                            productResponse.positionId(),
-                            productResponse.success()
-                        );
-                        // Envoie de la notif slack
-                        slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
-                        logger.info(log);
-                    });
-            });
+        if (coinsWalletInformations != null) {
+            // Coins dispos pour le stacking
+            coinsWalletInformations.getCoinsAvalaible()
+                .stream()
+                // Filtre les cryptos volontairement à ignorer
+                .filter(coinWallet -> !configurationService.ignoreAutoStakingCryptoList().contains(coinWallet.coin()))
+                // Pour chaque crypto disponible
+                .forEach(coinWallet -> {
+                    String logFind = AutoRestackService.concatFind(coinWallet.coin(), coinWallet.free());
+                    logger.info(logFind);
+                    slackService.sendMessage(logFind, SlackMessageType.AUTO_STAKING);
+                    // Récupération des stakings products disponible pour cette crypto
+                    StakingProducts stakingProducts = binanceApi.getStakingProducts(coinWallet.coin());
+                    // Pour chaque produits disponibles,
+                    stakingProducts.stakingList()
+                        .stream()
+                        // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
+                        .filter(projectStaking -> Double.valueOf(projectStaking.quota().minimum()) >= Double.valueOf(coinWallet.free()))
+                        // Filtre les stakings déjà remplis totalement
+                        .filter(projectStaking -> {
+                            // Récupération du quota réstant sur le produit
+                            PersonalLeftQuota personalLeftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
+                            Double leftQuota = Double.valueOf(personalLeftQuota.leftPersonalQuota());
+                            Double totalPersonnalQuota = Double.valueOf(projectStaking.quota().totalPersonalQuota());
+                            // Comparaison avec le QuotaTotal de l'utilisateur
+                            return (leftQuota > 0) && leftQuota > totalPersonnalQuota;
+                        })
+                        .forEach(projectStaking -> {
+                            // Tentative de staking du produit avec le montant de la crypto disponible
+                            ProductResponse productResponse = binanceApi.postStakingProducts(projectStaking.projectId(), Double.valueOf(coinWallet.free()));
+                            String log = AutoRestackService.concatEndResult(
+                                coinWallet.coin(),
+                                coinWallet.free(),
+                                projectStaking.projectId(),
+                                productResponse.positionId(),
+                                productResponse.success()
+                            );
+                            // Envoie de la notif slack
+                            slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
+                            logger.info(log);
+                        });
+                });
+        } else {
+            logger.warn("Pas de monnaies sur le compte SPOT");
+        }
     }
 
     private static String concatEndResult(

@@ -61,7 +61,7 @@ public class BinanceApi {
      * @param asset : Trigramme d'une crypto
      * @return : Liste les produits de staking
      */
-    public StakingProducts getStakingProducts(CryptoAsset asset) {
+    public StakingProducts getStakingProducts(String asset) {
         return binanceStakingClientApi.getStakingProducts(asset);
     }
 
@@ -83,7 +83,7 @@ public class BinanceApi {
      * @param asset     : Trigramme d'une crypto
      * @return
      */
-    public StakingPositions getStakingPosition(String productId, CryptoAsset asset) {
+    public StakingPositions getStakingPosition(String productId, String asset) {
         return binanceStakingClientApi.getStakingPosition(productId, asset);
     }
 
