@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum SlackMessageType {
+    AUTO_STAKING("#trading-bot-antoine", "Stacking", ":banque:"),
     INFORMATIF("#trading-bot-antoine", "Trading App Binance", ":rocket:"),
     LANCEMENT("#trading-bot-antoine", "Trading App Binance", ":rocket:")
     ;
