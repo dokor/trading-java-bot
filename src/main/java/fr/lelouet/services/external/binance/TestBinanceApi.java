@@ -18,17 +18,14 @@ import javax.inject.Singleton;
 public class TestBinanceApi {
 
     private static final Logger logger = LoggerFactory.getLogger(TestBinanceApi.class);
-
-    private final BinanceWalletClientApi binanceWalletClientApi;
     private final BinanceApi binanceApi;
     private final SlackService slackService;
 
     @Inject
     public TestBinanceApi(
-        BinanceWalletClientApi binanceWalletClientApi,
-        BinanceApi binanceApi, SlackService slackService
+        BinanceApi binanceApi,
+        SlackService slackService
     ) {
-        this.binanceWalletClientApi = binanceWalletClientApi;
         this.binanceApi = binanceApi;
         this.slackService = slackService;
     }
@@ -57,6 +54,11 @@ public class TestBinanceApi {
         // Coins dispos pour le stacking
         coinsWalletInformations.getCoinsAvalaible()
             .forEach(coinWallet -> logger.info("Chercher un stacking pour {} : {}", coinWallet.coin(), coinWallet.free()));
+
+        // Todo
+        // Regarder ls cryptos en stacking flexible
+        // Regarder s'il y a un stacking non flex de cette crypto => dispo + montant minimum
+        // Rappatrié le flex dans spot et déclancher l'automatiqueRestack
 
         // TODO
         // Pour chaque crypto dispo
