@@ -66,6 +66,7 @@ public class BinanceGlobalProvider {
         try {
             Method method = client.getClass().getMethod(functionName, LinkedHashMap.class);
             String response = (String) method.invoke(client, stringObjectLinkedHashMap);
+            logger.debug("API Response : {}", response);
             // Vérifier si le type de retour est une liste ou non
             if (List.class.isAssignableFrom(returnType)) {
                 JavaType listType = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, returnType);

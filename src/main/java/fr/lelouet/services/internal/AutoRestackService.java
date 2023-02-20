@@ -39,6 +39,7 @@ public class AutoRestackService {
     /**
      * Fonction global de restack automatique
      * Les cryptos dispos dans stack doivent etre directement stackés lorsqu'elles sont disponible
+     * // todo a rediviser en sous fonctions une fois fonctionnel
      */
     public void automatiqueReStack() {
         // Récupération des cryptos depuis le compte spot de l'utilisateur
@@ -51,6 +52,7 @@ public class AutoRestackService {
                 .filter(coinWallet -> !configurationService.ignoreAutoStakingCryptoList().contains(coinWallet.coin()))
                 // Pour chaque crypto disponible
                 .forEach(coinWallet -> {
+                    // todo : add try catch
                     String logFind = AutoRestackService.concatFind(coinWallet.coin(), coinWallet.free());
                     logger.info(logFind);
                     slackService.sendMessage(logFind, SlackMessageType.AUTO_STAKING);
@@ -61,28 +63,46 @@ public class AutoRestackService {
                         .stream()
                         // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
                         .filter(projectStaking -> Double.valueOf(coinWallet.free()).compareTo(Double.valueOf(projectStaking.quota().minimum())) >= 0)
-                        // Filtre les stakings déjà remplis totalement
-                        .filter(projectStaking -> {
+
+                        .forEach(projectStaking -> {
                             // Récupération du quota réstant sur le produit
                             PersonalLeftQuota personalLeftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
                             Double leftQuota = Double.valueOf(personalLeftQuota.leftPersonalQuota());
                             Double totalPersonnalQuota = Double.valueOf(projectStaking.quota().totalPersonalQuota());
                             // Comparaison avec le QuotaTotal de l'utilisateur
-                            return (leftQuota > 0) && leftQuota.compareTo(totalPersonnalQuota) >= 0;
-                        })
-                        .forEach(projectStaking -> {
-                            // Tentative de staking du produit avec le montant de la crypto disponible
-                            ProductResponse productResponse = binanceApi.postStakingProducts(projectStaking.projectId(), Double.valueOf(coinWallet.free()));
-                            String log = AutoRestackService.concatEndResult(
-                                coinWallet.coin(),
-                                coinWallet.free(),
-                                projectStaking.projectId(),
-                                productResponse.positionId(),
-                                productResponse.success()
-                            );
-                            // Envoie de la notif slack
-                            slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
-                            logger.info(log);
+                            // Filtre les stakings déjà remplis totalement
+                            if ((leftQuota > 0) && leftQuota.compareTo(totalPersonnalQuota) >= 0) {
+
+                                Double freeCoin = Double.valueOf(coinWallet.free());
+                                int retval = Double.compare(leftQuota, freeCoin);
+
+                                ProductResponse productResponse;
+                                String log;
+                                // Tentative de staking du produit avec le montant de la crypto disponible ou du quota restant
+                                if (retval > 0) {
+                                    // todo a refacto
+                                    productResponse = binanceApi.postStakingProducts(projectStaking.projectId(), freeCoin);
+                                    log = AutoRestackService.concatEndResult(
+                                        coinWallet.coin(),
+                                        coinWallet.free(),
+                                        projectStaking.projectId(),
+                                        productResponse.positionId(),
+                                        productResponse.success()
+                                    );
+                                } else {
+                                    productResponse = binanceApi.postStakingProducts(projectStaking.projectId(), leftQuota);
+                                    log = AutoRestackService.concatEndResult(
+                                        coinWallet.coin(),
+                                        String.valueOf(leftQuota),
+                                        projectStaking.projectId(),
+                                        productResponse.positionId(),
+                                        productResponse.success()
+                                    );
+                                }
+                                // Envoie de la notif slack
+                                slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
+                                logger.info(log);
+                            }
                         });
                 });
         } else {
