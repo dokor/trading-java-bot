@@ -3,7 +3,7 @@ package fr.lelouet;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import fr.lelouet.services.external.binance.test.TestBinanceApi;
+import fr.lelouet.services.external.binance.TestBinanceApi;
 import org.glassfish.grizzly.GrizzlyFuture;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.server.ResourceConfig;

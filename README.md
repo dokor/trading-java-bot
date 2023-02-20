@@ -121,3 +121,29 @@ With this solution, `mvn package` will produce an executable jar file.
 Note that this last solution may produce side effects: files that share the same name can be overriden.
 However all Plume modules will work as expected with this solution.
 
+
+
+
+    /**
+     * Info trade:
+     * "base asset" refers to the asset that is the "quantity" of a symbol. For the symbol BTCUSDT, BTC would be the base asset.
+     * "quote asset" refers to the asset that is the "price" of a symbol. For the symbol BTCUSDT, USDT would be the quote asset.
+     */
+
+    /**
+     * Base endpoint without auth for market info :
+     * The base endpoint https://data.binance.com can be used to access the following API endpoints that have NONE as security type:
+     * GET /api/v3/aggTrades
+     * GET /api/v3/avgPrice
+     * GET /api/v3/depth
+     * GET /api/v3/exchangeInfo
+     * GET /api/v3/klines
+     * GET /api/v3/ping
+     * GET /api/v3/ticker
+     * GET /api/v3/ticker/24hr
+     * GET /api/v3/ticker/bookTicker
+     * GET /api/v3/ticker/price
+     * GET /api/v3/time
+     * GET /api/v3/trades
+     * GET /api/v3/uiKlines
+     */

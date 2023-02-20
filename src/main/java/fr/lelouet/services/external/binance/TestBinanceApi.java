@@ -1,4 +1,4 @@
-package fr.lelouet.services.external.binance.test;
+package fr.lelouet.services.external.binance;
 
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
@@ -20,14 +20,16 @@ public class TestBinanceApi {
     private static final Logger logger = LoggerFactory.getLogger(TestBinanceApi.class);
 
     private final BinanceWalletClientApi binanceWalletClientApi;
+    private final BinanceApi binanceApi;
     private final SlackService slackService;
 
     @Inject
     public TestBinanceApi(
         BinanceWalletClientApi binanceWalletClientApi,
-        SlackService slackService
+        BinanceApi binanceApi, SlackService slackService
     ) {
         this.binanceWalletClientApi = binanceWalletClientApi;
+        this.binanceApi = binanceApi;
         this.slackService = slackService;
     }
 
@@ -45,7 +47,7 @@ public class TestBinanceApi {
      */
     private void automatiqueReStack() {
         // Récupération des cryptos depuis le compte spot de l'utilisateur
-        CoinsWalletInformations coinsWalletInformations = new CoinsWalletInformations(binanceWalletClientApi.getAllCoinsOfConnectedUser());
+        CoinsWalletInformations coinsWalletInformations = binanceApi.getCoinsInformationsOfSpotWallet();
         // Log le contenu interessants
         coinsWalletInformations.getCoinsNotZero().forEach(coinWallet -> {
             logger.info(coinWallet.toCloseString());
