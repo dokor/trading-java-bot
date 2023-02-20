@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Class test pour préparer la mise en place des algos
+ * Class de test pour préparer la mise en place des algos
  */
 @Singleton
 public class TestBinanceApi {
@@ -62,14 +62,4 @@ public class TestBinanceApi {
         // Si stacking dispo, regarder si le montant mini est OK
         // Si montant OK => Faire le trade + envoyer une mail/slack
     }
-
-    /**
-     * TODO :
-     * - Récupérer le portefeuille des monnaies earn stackés
-     * - Récupérer le stacking disponible pour une monnaie
-     * - Faire un scheduler qui indique les monnaies qui peuvent etre stackés
-     *   - Fonction qui crée directement le stacking ?
-     *   - alerting par slack ou Mail des derniers trades effectués
-     *
-     */
 }

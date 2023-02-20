@@ -91,7 +91,6 @@ public class BinanceWalletClientApi {
             if (response != null) {
                 logger.debug("Response from Binance API : {}", response);
                 return binanceGlobalProvider.read(Objects.requireNonNull(response), responseClass);
-
             }
         } catch (BinanceConnectorException e) {
             logger.error("fullErrMessage: {}", e.getMessage(), e);

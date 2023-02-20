@@ -13,6 +13,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 
+/**
+ * Service de gestion de l'envoie de messages Slack
+ */
 @Singleton
 public class SlackService {
 
@@ -27,30 +30,45 @@ public class SlackService {
         this.slackConfiguration = configurationService.getSlackConfig();
     }
 
+    /**
+     * Méthode public permetant d'envoyer un message sur un channel Slack
+     * Ex : 
+     *  SlackService.sendMessage("mon message", SlackMessageType.INFORMATIF);
+     */
     public void sendMessage(String message, SlackMessageType slackMessageType) {
-        StringBuilder stringBuilder = new StringBuilder();
-        switch (slackMessageType) {
-            case LANCEMENT -> stringBuilder.append("LANCEMENT " + message);
-            case INFORMATIF -> stringBuilder.append("INFORMATIF " + message);
-            default -> stringBuilder.append(message);
-        }
-        processRequest(message);
+        String messageComputed = this.computeMessage(message, slackMessageType);
+        this.processRequest(messageComputed, slackMessageType);
     }
 
-    private void processRequest(String message) {
+    /**
+     * Compute le payload du message Slack et envoie le message vers le Webhook Slack
+     */
+    private void processRequest(String message, SlackMessageType slackMessageType) {
         Payload payload = Payload.builder()
-            .channel("#trading-bot-antoine")
-            .username("Trading App Binance")
-            .iconEmoji(":rocket:")
+            .channel(slackMessageType.getChannel())
+            .username(slackMessageType.getUsername())
+            .iconEmoji(slackMessageType.getIcon())
             .text(message)
             .build();
-
         try {
             WebhookResponse webhookResponse = Slack.getInstance().send(slackConfiguration.url(), payload);
             logger.debug("Slack Response [{}] : {}", webhookResponse.getCode(), webhookResponse.getMessage());
         } catch (IOException e) {
             logger.error("Slack Error : ", e);
         }
+    }
+
+    /**
+     * Compute du message à envoyer
+     */
+    private String computeMessage(String message, SlackMessageType slackMessageType) {
+        StringBuilder stringBuilder = new StringBuilder();
+        switch (slackMessageType) {
+            case LANCEMENT -> stringBuilder.append("LANCEMENT " + message);
+            case INFORMATIF -> stringBuilder.append("INFORMATIF " + message);
+            default -> stringBuilder.append(message);
+        }
+        return stringBuilder.toString();
     }
 
 }
