@@ -1,4 +1,4 @@
-package fr.lelouet.services.external.binance.stacking;
+package fr.lelouet.services.external.binance.staking;
 
 import com.binance.connector.client.impl.spot.Staking;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
@@ -9,15 +9,15 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class BinanceStackingClientApi {
+public class BinanceStakingClientApi {
 
-    private static final Logger logger = LoggerFactory.getLogger(BinanceStackingClientApi.class);
+    private static final Logger logger = LoggerFactory.getLogger(BinanceStakingClientApi.class);
 
     private final Staking client;
     private final BinanceGlobalProvider binanceGlobalProvider;
 
     @Inject
-    public BinanceStackingClientApi(
+    public BinanceStakingClientApi(
         BinanceGlobalProvider binanceGlobalProvider
     ) {
         this.binanceGlobalProvider = binanceGlobalProvider;

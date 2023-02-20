@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="clean client d'api">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/market/BinanceMarketClientApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/saving/BinanceSavingClientApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/stacking/BinanceStackingClientApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/trade/BinanceTradeClientApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceGlobalProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/utils/BinanceGlobalProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/test/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinsWalletInformations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinsWalletInformations.java" afterDir="false" />
+    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="refacto et init les différents clients">
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/jersey/GrizzlySetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/jersey/GrizzlySetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +132,7 @@
       <workItem from="1676737548308" duration="689000" />
       <workItem from="1676738250206" duration="16185000" />
       <workItem from="1676819380332" duration="952000" />
-      <workItem from="1676885681089" duration="10618000" />
+      <workItem from="1676885681089" duration="10953000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -250,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676894826436</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="refacto et init les différents clients">
+      <created>1676902525371</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1676902525371</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +263,7 @@
     <MESSAGE value="clean conf" />
     <MESSAGE value="comment Slack service" />
     <MESSAGE value="clean" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean" />
+    <MESSAGE value="refacto et init les différents clients" />
+    <option name="LAST_COMMIT_MESSAGE" value="refacto et init les différents clients" />
   </component>
 </project>
