@@ -60,7 +60,7 @@ public class AutoRestackService {
                     stakingProducts.stakingList()
                         .stream()
                         // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
-                        .filter(projectStaking -> Double.valueOf(projectStaking.quota().minimum()) >= Double.valueOf(coinWallet.free()))
+                        .filter(projectStaking -> Double.valueOf(coinWallet.free()).compareTo(Double.valueOf(projectStaking.quota().minimum())) >= 0)
                         // Filtre les stakings déjà remplis totalement
                         .filter(projectStaking -> {
                             // Récupération du quota réstant sur le produit
@@ -68,7 +68,7 @@ public class AutoRestackService {
                             Double leftQuota = Double.valueOf(personalLeftQuota.leftPersonalQuota());
                             Double totalPersonnalQuota = Double.valueOf(projectStaking.quota().totalPersonalQuota());
                             // Comparaison avec le QuotaTotal de l'utilisateur
-                            return (leftQuota > 0) && leftQuota > totalPersonnalQuota;
+                            return (leftQuota > 0) && leftQuota.compareTo(totalPersonnalQuota) >= 0;
                         })
                         .forEach(projectStaking -> {
                             // Tentative de staking du produit avec le montant de la crypto disponible
