@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/config/enums/CryptoAsset.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/PersonalLeftQuota.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/ProductResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/StakingPosition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/StakingPositions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/enums/ProductType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/BinanceStakingClientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/BinanceStakingClientApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/configuration/ConfigurationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinWallet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/bean/CoinWallet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +25,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
         <option value="Record" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -143,7 +138,7 @@
       <workItem from="1676737548308" duration="689000" />
       <workItem from="1676738250206" duration="16185000" />
       <workItem from="1676819380332" duration="952000" />
-      <workItem from="1676885681089" duration="14440000" />
+      <workItem from="1676885681089" duration="16853000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -278,7 +273,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676903427207</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="add Stacking module">
+      <created>1676906490974</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1676906490974</updated>
+    </task>
+    <task id="LOCAL-00021" summary="add queryParam ENUM">
+      <created>1676906724772</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1676906724772</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +307,8 @@
     <MESSAGE value="clean + todo" />
     <MESSAGE value="rename" />
     <MESSAGE value="add StakingProducts" />
-    <option name="LAST_COMMIT_MESSAGE" value="add StakingProducts" />
+    <MESSAGE value="add Stacking module" />
+    <MESSAGE value="add queryParam ENUM" />
+    <option name="LAST_COMMIT_MESSAGE" value="add queryParam ENUM" />
   </component>
 </project>

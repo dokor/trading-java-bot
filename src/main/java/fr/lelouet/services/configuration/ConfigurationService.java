@@ -7,6 +7,8 @@ import com.typesafe.config.Config;
 import fr.lelouet.services.external.binance.config.bean.BinanceApiKeys;
 import fr.lelouet.services.slack.bean.SlackConfiguration;
 
+import java.util.List;
+
 @Singleton
 public class ConfigurationService {
 
@@ -42,5 +44,9 @@ public class ConfigurationService {
             configBinance.getString("public"),
             configBinance.getString("secret")
         );
+    }
+
+    public List<String> ignoreAutoStakingCryptoList() {
+        return config.getStringList("algotithm.staking.crypto.list");
     }
 }
