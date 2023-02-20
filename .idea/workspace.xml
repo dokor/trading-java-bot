@@ -4,12 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="add StakingProducts">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/Detail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/ProjectStaking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/Quota.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/StakingProducts.java" afterDir="false" />
+    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/config/enums/CryptoAsset.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/PersonalLeftQuota.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/ProductResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/StakingPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/bean/StakingPositions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/enums/ProductType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/BinanceStakingClientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/BinanceStakingClientApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +89,9 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="fr.lelouet.services.external.binance.config.bean" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="fr.lelouet.services.external.binance.config" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="fr.lelouet.services.external.binance.spot" />
       <recent name="fr.lelouet.services.external.binance.trade" />
@@ -135,7 +143,7 @@
       <workItem from="1676737548308" duration="689000" />
       <workItem from="1676738250206" duration="16185000" />
       <workItem from="1676819380332" duration="952000" />
-      <workItem from="1676885681089" duration="11567000" />
+      <workItem from="1676885681089" duration="14440000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -263,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676903058074</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add StakingProducts">
+      <created>1676903427207</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1676903427207</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,6 +297,7 @@
     <MESSAGE value="refacto et init les différents clients" />
     <MESSAGE value="clean + todo" />
     <MESSAGE value="rename" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename" />
+    <MESSAGE value="add StakingProducts" />
+    <option name="LAST_COMMIT_MESSAGE" value="add StakingProducts" />
   </component>
 </project>
