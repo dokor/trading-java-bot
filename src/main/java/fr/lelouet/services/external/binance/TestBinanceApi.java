@@ -17,21 +17,12 @@ import javax.inject.Singleton;
 public class TestBinanceApi {
 
     private static final Logger logger = LoggerFactory.getLogger(TestBinanceApi.class);
-    private final BinanceApi binanceApi;
-    private final ConfigurationService configurationService;
-    private final SlackService slackService;
     private final AutoRestackService autoRestackService;
 
     @Inject
     public TestBinanceApi(
-        BinanceApi binanceApi,
-        ConfigurationService configurationService,
-        SlackService slackService,
         AutoRestackService autoRestackService
     ) {
-        this.binanceApi = binanceApi;
-        this.configurationService = configurationService;
-        this.slackService = slackService;
         this.autoRestackService = autoRestackService;
     }
 

@@ -18,9 +18,6 @@ public class ApplicationModule extends AbstractModule {
 	protected void configure() {
 		install(new GuiceConfModule());
 		install(new GuiceJacksonModule());
-		// database & Querydsl installation
-		// install(new GuiceQuerydslModule());
-
 		install(new GuiceSchedulerModule());
 
 		// prepare Jersey configuration

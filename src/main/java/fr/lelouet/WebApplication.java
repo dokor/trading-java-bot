@@ -3,6 +3,7 @@ package fr.lelouet;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import com.coreoz.wisp.Scheduler;
 import fr.lelouet.services.external.binance.TestBinanceApi;
 import fr.lelouet.services.scheduler.ScheduledJobs;
 import org.glassfish.grizzly.GrizzlyFuture;
@@ -45,10 +46,7 @@ public class WebApplication {
                 System.getProperty("http.address")
             );
 
-            // Add a shutdown hook to execute some code when the JVM receive a kill signal before it stops
-            addShutDownListener(httpServer);
-            // If Plume Scheduler / Wisp is used, uncomment next line
-            // addShutDownListerner(httpServer, injector.getInstance(Scheduler.class));
+            WebApplication.addShutDownListerner(httpServer, injector.getInstance(Scheduler.class));
 
             // Class Test => A supprimer plus tard
             applyTestClass(injector);
@@ -72,7 +70,7 @@ public class WebApplication {
         injector.getInstance(TestBinanceApi.class).mainTest();
     }
 
-    private static void addShutDownListener(HttpServer httpServer) { // If scheduler is used, add arg: Scheduler scheduler
+    private static void addShutDownListerner(HttpServer httpServer, Scheduler scheduler) { // If scheduler is used, add arg: Scheduler scheduler
         Runtime.getRuntime().addShutdownHook(new Thread(
             () -> {
                 logger.info("Stopping signal received, shutting down server and scheduler...");
@@ -80,7 +78,7 @@ public class WebApplication {
                 try {
                     logger.info("Waiting for server to shut down... Shutdown timeout is {} seconds", GRACEFUL_SHUTDOWN_TIMEOUT.toSeconds());
                     // If scheduler is used, uncomment next line
-                    // scheduler.gracefullyShutdown(GRACEFUL_SHUTDOWN_TIMEOUT);
+                    scheduler.gracefullyShutdown(GRACEFUL_SHUTDOWN_TIMEOUT);
                     grizzlyServerShutdownFuture.get();
                 } catch (Exception e) {
                     logger.error("Error while shutting down server.", e);

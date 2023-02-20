@@ -36,10 +36,11 @@ public class BinanceStakingClientApi {
     }
 
     public StakingProducts getStakingProducts(CryptoAsset asset) {
-        logger.debug("Tentative de récupération des staking products monnaies du user courant");
+        String assetName = asset.name();
+        logger.debug("Tentative de récupération des staking products [{}] du user courant", assetName);
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         stringObjectLinkedHashMap.put(BinanceQueryParam.SIZE.getValue(), 100);
-        stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), asset.name());
+        stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), assetName);
         stringObjectLinkedHashMap.put(BinanceQueryParam.PRODUCT.getValue(), ProductType.STAKING);
         return binanceGlobalProvider.callBinanceApi(client, "productList", StakingProducts.class, stringObjectLinkedHashMap);
     }
@@ -54,11 +55,12 @@ public class BinanceStakingClientApi {
     }
 
     public StakingPositions getStakingPosition(String productId, CryptoAsset asset) {
-        logger.debug("Tentative de récupération du stacking [{}] de [{}]", productId, asset.name());
+        String assetName = asset.name();
+        logger.debug("Tentative de récupération du stacking [{}] de [{}]", productId, assetName);
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         stringObjectLinkedHashMap.put(BinanceQueryParam.PRODUCT.getValue(), ProductType.STAKING);
         stringObjectLinkedHashMap.put(BinanceQueryParam.PRODUCT_ID.getValue(), productId);
-        stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), asset.name());
+        stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), assetName);
         stringObjectLinkedHashMap.put(BinanceQueryParam.SIZE.getValue(), 100);
         return binanceGlobalProvider.callBinanceApi(client, "getPosition", StakingPositions.class, stringObjectLinkedHashMap);
     }
