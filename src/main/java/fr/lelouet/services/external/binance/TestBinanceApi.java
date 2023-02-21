@@ -28,7 +28,7 @@ public class TestBinanceApi {
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
         autoRestackService.destackFlexibleStaking();
-        autoRestackService.automatiqueReStack();
+        autoRestackService.automaticReStack();
         logger.info("------------- Fin des tests principaux -------------");
     }
 
