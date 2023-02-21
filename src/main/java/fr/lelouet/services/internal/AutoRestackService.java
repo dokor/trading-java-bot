@@ -43,7 +43,7 @@ public class AutoRestackService {
 
     public void destackFlexibleStaking() {
         // Todo
-        // Regarder ls cryptos en stacking flexible
+        // Regarder les cryptos en stacking flexible
         // Regarder s'il y a un stacking non flex de cette crypto => dispo + montant minimum
         // Rappatrié le flex dans spot et déclancher l'automatiqueRestack
     }
@@ -68,7 +68,7 @@ public class AutoRestackService {
                 // Récupération des stakings products disponible pour cette crypto
                 StakingProducts stakingProducts = binanceApi.getStakingProducts(coinWallet.coin());
                 // Pour chaque produits disponibles,
-                for (ProjectStaking projectStaking : stakingProducts.stakingList()) {
+                for (ProjectStaking projectStaking : stakingProducts.orderByApy()) {
                     // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
                     if (Double.valueOf(coinWallet.free()).compareTo(Double.valueOf(projectStaking.quota().minimum())) < 0) {
                         logger.debug("[AUTO_STAKING] [{}] => [{}] ignoré car le montant du wallet est plus faible que le quota minimum", coinWallet.coin(), projectStaking.projectId());
