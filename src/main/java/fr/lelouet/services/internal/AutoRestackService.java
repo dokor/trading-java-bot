@@ -98,6 +98,7 @@ public class AutoRestackService {
             } catch (Exception e) {
                 logger.error("[AUTO_STAKING] Erreur durant l'autoStaking de la crypto [{}]", coinWallet.coin(), e);
             }
+            logger.debug("[AUTO_STAKING] Fin de la recherche de staking pour [{}]", coinWallet.coin());
         }
 
     }
