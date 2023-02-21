@@ -51,16 +51,16 @@ public class AutoRestackService {
     /**
      * Fonction global de restack automatique
      * Les cryptos dispos dans stack doivent etre directement stackés lorsqu'elles sont disponible
-     * // todo a rediviser en sous fonctions une fois fonctionnel
+     * todo a rediviser en sous fonctions
      */
     public void automaticReStack() {
         // Récupération des cryptos disponibles depuis le compte spot de l'utilisateur
         List<CoinWallet> coinsAvalaible = this.getSpotWalletCoins().getCoinsAvalaible();
         for (CoinWallet coinWallet : coinsAvalaible) {
             // Filtre les cryptos volontairement à ignorer
-            if (!configurationService.ignoreAutoStakingCryptoList().contains(coinWallet.coin())) {
+            if (configurationService.ignoreAutoStakingCryptoList().contains(coinWallet.coin())) {
                 logger.debug("[AUTO_STAKING] [{}] ignoré par la configuration projet", coinWallet.coin());
-                return;
+                break;
             }
             try {
                 // log et slack le début de la recherche
@@ -70,9 +70,9 @@ public class AutoRestackService {
                 // Pour chaque produits disponibles,
                 for (ProjectStaking projectStaking : stakingProducts.stakingList()) {
                     // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
-                    if (Double.valueOf(coinWallet.free()).compareTo(Double.valueOf(projectStaking.quota().minimum())) >= 0) {
+                    if (Double.valueOf(coinWallet.free()).compareTo(Double.valueOf(projectStaking.quota().minimum())) < 0) {
                         logger.debug("[AUTO_STAKING] [{}] => [{}] ignoré car le montant du wallet est plus faible que le quota minimum", coinWallet.coin(), projectStaking.projectId());
-                        return;
+                        break;
                     }
                     // Récupération du quota réstant sur le produit
                     PersonalLeftQuota personalLeftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
@@ -82,7 +82,7 @@ public class AutoRestackService {
                     // Filtre les stakings déjà remplis totalement
                     if ((leftQuota <= 0) && leftQuota.compareTo(totalPersonnalQuota) < 0) {
                         logger.debug("[AUTO_STAKING] [{}] => [{}] ignoré car le quota restant est trop bas", coinWallet.coin(), projectStaking.projectId());
-                        return;
+                        break;
                     }
 
                     Double freeCoin = Double.valueOf(coinWallet.free());
@@ -96,7 +96,7 @@ public class AutoRestackService {
                     }
                 }
             } catch (Exception e) {
-                logger.error("Erreur durant l'autoStaking de la crypto [{}]", coinWallet.coin(), e);
+                logger.error("[AUTO_STAKING] Erreur durant l'autoStaking de la crypto [{}]", coinWallet.coin(), e);
             }
         }
 
@@ -153,10 +153,10 @@ public class AutoRestackService {
         String positionId,
         boolean success
     ) {
-        return "[" + coinName + "] d'un montant [" + amount + "] pour le produit [" + projectId + "] avec une position [" + positionId + "] : [" + success + "]";
+        return "[AUTO_STAKING] [" + coinName + "] stacké pour un montant de [" + amount + "] sur le produit [" + projectId + "] avec une position [" + positionId + "] : [" + success + "]";
     }
 
     private static String concatFind(String coinName, String amount) {
-        return "Stacking à identifier pour [" + coinName + "] d'un montant de [" + amount + "]";
+        return "[AUTO_STAKING] Stacking à rechercher pour [" + coinName + "] d'un montant total de [" + amount + "]";
     }
 }
