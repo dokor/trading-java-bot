@@ -49,7 +49,11 @@ public class ConfigurationService {
     }
 
     public List<String> ignoreAutoStakingCryptoList() {
-        return config.getStringList("algotithm.staking.crypto.list");
+        return config.getStringList("algotithm.crypto.ignore-list.auto-staking");
+    }
+
+    public List<String> ignoreRedeemFlexibleCryptoList() {
+        return config.getStringList("algotithm.crypto.ignore-list.redeem-flexible");
     }
 
     public JobsConfiguration getJobsConfiguration() {

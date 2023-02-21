@@ -4,6 +4,7 @@ import com.coreoz.plume.jersey.errors.WsException;
 import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.errors.ProjectError;
 import fr.lelouet.services.external.binance.BinanceApi;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
 import fr.lelouet.services.external.binance.staking.bean.PersonalLeftQuota;
 import fr.lelouet.services.external.binance.staking.bean.ProductResponse;
 import fr.lelouet.services.external.binance.staking.bean.ProjectStaking;
@@ -41,8 +42,50 @@ public class AutoRestackService {
         this.slackService = slackService;
     }
 
+    // Todo : implémenter un % minimum en conf sur les apy, pour décider de destack le flex en staked
     public void destackFlexibleStaking() {
-        // Todo
+        logger.debug("[REDEEM_FLEXIBLE] Début");
+        // Récupère l'ensemble des positions prises sur des produits flexibles.
+        List<FlexiblePosition> flexiblePositions = binanceApi.flexibleProductPosition();
+        for (FlexiblePosition flexiblePosition : flexiblePositions) {
+            String assetName = flexiblePosition.asset();
+            String freeAmount = flexiblePosition.freeAmount();
+            String annualRate =  flexiblePosition.annualInterestRate();
+            // Filtre des cryptos ignorés volontairement dans la configuration projet
+            if (configurationService.ignoreRedeemFlexibleCryptoList().contains(assetName)) {
+                logger.debug("[REDEEM_FLEXIBLE] [{}] ignoré par la configuration projet", assetName);
+                break;
+            }
+            logger.debug("[REDEEM_FLEXIBLE] [{}] flexible avec un montant dispo de [{}]", assetName, freeAmount);
+            StakingProducts stakingProducts = binanceApi.getStakingProducts(assetName);
+            for (ProjectStaking projectStaking : stakingProducts.orderByApy()) {
+                // Filtre les stakings dont l'apy est plus basse que l'apy du flex
+                if (Double.valueOf(freeAmount).compareTo(Double.valueOf(projectStaking.quota().minimum())) < 0) {
+                    logger.debug("[REDEEM_FLEXIBLE] [{}] => Ignoré car l'APY du flexible actuel [{}] est plus élevé que celui du staking [{}] d'apy [{}]",
+                        assetName,
+                        annualRate,
+                        projectStaking.projectId(),
+                        projectStaking.detail().apy()
+                    );
+                    break;
+                }
+                // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
+                if (Double.valueOf(freeAmount).compareTo(Double.valueOf(projectStaking.quota().minimum())) < 0) {
+                    logger.debug("[REDEEM_FLEXIBLE] [{}] => [{}] ignoré car le montant du flexible est plus faible que le quota minimum", assetName, projectStaking.projectId());
+                    break;
+                }
+                String logRedeem = String.format("[REDEEM_FLEXIBLE] [%s] => Dispo pour une tranformation de flexible d'apy [%s] en staking [%s] d'apy [%s]",
+                    assetName,
+                    annualRate,
+                    projectStaking.projectId(),
+                    projectStaking.detail().apy()
+                );
+                logger.info(logRedeem);
+                slackService.sendMessage(logRedeem, SlackMessageType.AUTO_REDEEM);
+            }
+        }
+
+        logger.debug("[REDEEM_FLEXIBLE] Fin");
         // Regarder les cryptos en stacking flexible
         // Regarder s'il y a un stacking non flex de cette crypto => dispo + montant minimum
         // Rappatrié le flex dans spot et déclancher l'automatiqueRestack

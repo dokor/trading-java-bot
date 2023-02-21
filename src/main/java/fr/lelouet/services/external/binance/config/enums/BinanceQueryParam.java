@@ -10,6 +10,7 @@ public enum BinanceQueryParam {
     PRODUCT("product"),
     PRODUCT_ID("productId"),
     AMOUNT("amount"),
+    TYPE("type"),
     ASSET("asset");
     private final String value;
 }

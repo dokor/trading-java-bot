@@ -1,8 +1,11 @@
 package fr.lelouet.services.external.binance;
 
+import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.config.enums.CryptoAsset;
 import fr.lelouet.services.external.binance.market.BinanceMarketClientApi;
 import fr.lelouet.services.external.binance.saving.BinanceSavingClientApi;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
+import fr.lelouet.services.external.binance.saving.enums.RedeemType;
 import fr.lelouet.services.external.binance.staking.BinanceStakingClientApi;
 import fr.lelouet.services.external.binance.staking.bean.PersonalLeftQuota;
 import fr.lelouet.services.external.binance.staking.bean.ProductResponse;
@@ -14,6 +17,9 @@ import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Service principal d'accés à l'api Binance
@@ -89,6 +95,7 @@ public class BinanceApi {
 
     /**
      * Permet de connaitre le quota restant sur un produit de staking donnée
+     *
      * @param productId : Id du produit sur lequel on veut vérifier le quota
      */
     public PersonalLeftQuota getPersonalLeftQuota(String productId) {
@@ -98,5 +105,28 @@ public class BinanceApi {
     // Trade
 
     // Saving
+
+    /**
+     * Permet de récupérer les fonds investis dans un produit de staking flexible.
+     * Il est possible de récupérer en FAST (= instantanné) ou en NORMAL (= 02h du matin de j+1)
+     */
+    public void redeemFlexibleProduct(String productId, Double amount, RedeemType redeemType) {
+        binanceSavingClientApi.redeemFlexibleProduct(productId, amount, redeemType);
+    }
+
+    /**
+     * Récupére l'ensemble des postions flexible disponible pour un asset précis
+     */
+    public List<FlexiblePosition> flexibleProductPosition(String asset) {
+        return binanceSavingClientApi.flexibleProductPosition(asset);
+    }
+
+    /**
+     * Récupére l'ensemble des postions flexible disponible.
+     * Attention, cela dépasse surement le nombre de résultats renvoyés par l'api, il faudra surement paginé l'api
+     */
+    public List<FlexiblePosition> flexibleProductPosition() {
+        return binanceSavingClientApi.flexibleProductPosition(null);
+    }
 
 }
