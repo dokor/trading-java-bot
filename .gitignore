@@ -18,3 +18,18 @@ bin/
 log/
 target/
 
+.idea/codeStyles/
+.idea/shelf/
+.idea/sonarlint/
+.idea/checkstyle-idea.xml
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/sonarlint.xml
+.idea/sonarlint-state.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/workspace.xml
