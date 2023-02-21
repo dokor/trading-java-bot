@@ -64,7 +64,7 @@ public class WebApplication {
         }
     }
 
-    // A supprimer plus tard
+    // TODO A supprimer plus tard
     private static void applyTestClass(Injector injector) {
         // Lancement du service de test
         injector.getInstance(TestBinanceApi.class).mainTest();

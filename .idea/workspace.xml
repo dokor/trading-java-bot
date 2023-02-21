@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/utils/BinanceGlobalProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/utils/BinanceGlobalProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
