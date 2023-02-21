@@ -47,10 +47,7 @@ public class BinanceSavingClientApi {
         stringObjectLinkedHashMap.put(BinanceQueryParam.TYPE.getValue(), redeemType.name());
         stringObjectLinkedHashMap.put(BinanceQueryParam.PRODUCT_ID.getValue(), productId);
         stringObjectLinkedHashMap.put(BinanceQueryParam.AMOUNT.getValue(), amount);
-        String response = binanceGlobalProvider.callBinanceApi(client, "redeemFlexibleProduct", String.class, stringObjectLinkedHashMap);
-        if (!response.isBlank()) {
-            throw new RuntimeException("Invalid redeem product");
-        }
+        binanceGlobalProvider.callBinanceApi(client, "redeemFlexibleProduct", String.class, stringObjectLinkedHashMap);
     }
 
     /**

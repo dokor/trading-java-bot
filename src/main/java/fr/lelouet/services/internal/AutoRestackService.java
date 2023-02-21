@@ -5,6 +5,7 @@ import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.errors.ProjectError;
 import fr.lelouet.services.external.binance.BinanceApi;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
+import fr.lelouet.services.external.binance.saving.enums.RedeemType;
 import fr.lelouet.services.external.binance.staking.bean.PersonalLeftQuota;
 import fr.lelouet.services.external.binance.staking.bean.ProductResponse;
 import fr.lelouet.services.external.binance.staking.bean.ProjectStaking;
@@ -42,15 +43,18 @@ public class AutoRestackService {
         this.slackService = slackService;
     }
 
+    // todo : ajouter des logs et des gestions de cas d'erreurs
+    // todo : gérer le leftQuota
     // Todo : implémenter un % minimum en conf sur les apy, pour décider de destack le flex en staked
     public void destackFlexibleStaking() {
         logger.debug("[REDEEM_FLEXIBLE] Début");
         // Récupère l'ensemble des positions prises sur des produits flexibles.
         List<FlexiblePosition> flexiblePositions = binanceApi.flexibleProductPosition();
         for (FlexiblePosition flexiblePosition : flexiblePositions) {
+            Boolean toRedeem = false;
             String assetName = flexiblePosition.asset();
             String freeAmount = flexiblePosition.freeAmount();
-            String annualRate =  flexiblePosition.annualInterestRate();
+            String annualRate = flexiblePosition.annualInterestRate();
             // Filtre des cryptos ignorés volontairement dans la configuration projet
             if (configurationService.ignoreRedeemFlexibleCryptoList().contains(assetName)) {
                 logger.debug("[REDEEM_FLEXIBLE] [{}] ignoré par la configuration projet", assetName);
@@ -74,14 +78,22 @@ public class AutoRestackService {
                     logger.debug("[REDEEM_FLEXIBLE] [{}] => [{}] ignoré car le montant du flexible est plus faible que le quota minimum", assetName, projectStaking.projectId());
                     break;
                 }
-                String logRedeem = String.format("[REDEEM_FLEXIBLE] [%s] => Dispo pour une tranformation de flexible d'apy [%s] en staking [%s] d'apy [%s]",
+                String logRedeem = String.format("[REDEEM_FLEXIBLE] [%s] => Tranformation du flexible d'apy [%s] en staking [%s] d'apy [%s]",
                     assetName,
                     annualRate,
                     projectStaking.projectId(),
                     projectStaking.detail().apy()
                 );
                 logger.info(logRedeem);
-                slackService.sendMessage(logRedeem, SlackMessageType.AUTO_REDEEM);
+//                slackService.sendMessage(logRedeem, SlackMessageType.AUTO_REDEEM);
+
+                // todo : redeem pile le montant a stack dans le nouveau produit, a calculer avec le leftQuota de l'autre api
+                toRedeem = true;
+                break;
+            }
+            if (toRedeem) {
+                binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), Double.valueOf(flexiblePosition.freeAmount()), RedeemType.FAST);
+                slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + Double.valueOf(flexiblePosition.freeAmount()) + "]", SlackMessageType.AUTO_REDEEM);
             }
         }
 
