@@ -29,7 +29,6 @@ public class AutoRestackService {
     private static final Logger logger = LoggerFactory.getLogger(AutoRestackService.class);
 
     private final BinanceApi binanceApi;
-    private final ConfigurationService configurationService;
     private final SlackService slackService;
     private final List<String> ignoredCryproStaked;
     private final List<String> ignoredCryproRedeem;
@@ -41,7 +40,6 @@ public class AutoRestackService {
         SlackService slackService
     ) {
         this.binanceApi = binanceApi;
-        this.configurationService = configurationService;
         this.ignoredCryproStaked = configurationService.ignoreAutoStakingCryptoList();
         this.ignoredCryproRedeem = configurationService.ignoreRedeemFlexibleCryptoList();
         this.slackService = slackService;
