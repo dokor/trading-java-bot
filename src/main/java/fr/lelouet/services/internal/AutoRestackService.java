@@ -69,7 +69,7 @@ public class AutoRestackService {
             StakingProducts stakingProducts = binanceApi.getStakingProducts(assetName);
             for (ProjectStaking projectStaking : stakingProducts.orderByApy()) {
                 // Filtre les stakings dont l'apy est plus basse que l'apy du flex
-                if (Double.valueOf(freeAmount).compareTo(Double.valueOf(projectStaking.quota().minimum())) < 0) {
+                if (Double.valueOf(annualRate).compareTo(Double.valueOf(projectStaking.detail().apy())) >= 0) {
                     logger.debug("[REDEEM_FLEXIBLE] [{}] => Ignoré car l'APY du flexible actuel [{}] est plus élevé que celui du staking [{}] d'apy [{}]",
                         assetName,
                         annualRate,
