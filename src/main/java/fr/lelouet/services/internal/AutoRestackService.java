@@ -46,12 +46,17 @@ public class AutoRestackService {
     // todo : ajouter des logs et des gestions de cas d'erreurs
     // todo : gérer le leftQuota
     // Todo : implémenter un % minimum en conf sur les apy, pour décider de destack le flex en staked
+    // todo : refacto pour séparer la logique
     public void destackFlexibleStaking() {
         logger.debug("[REDEEM_FLEXIBLE] Début");
         // Récupère l'ensemble des positions prises sur des produits flexibles.
         List<FlexiblePosition> flexiblePositions = binanceApi.flexibleProductPosition();
         for (FlexiblePosition flexiblePosition : flexiblePositions) {
-            Boolean toRedeem = false;
+            // technique //todo : a refacto
+            boolean toRedeem = false;
+            int retval = 0;
+            Double leftQuota = 0.0;
+            // informatif
             String assetName = flexiblePosition.asset();
             String freeAmount = flexiblePosition.freeAmount();
             String annualRate = flexiblePosition.annualInterestRate();
@@ -78,25 +83,39 @@ public class AutoRestackService {
                     logger.debug("[REDEEM_FLEXIBLE] [{}] => [{}] ignoré car le montant du flexible est plus faible que le quota minimum", assetName, projectStaking.projectId());
                     break;
                 }
-                String logRedeem = String.format("[REDEEM_FLEXIBLE] [%s] => Tranformation du flexible d'apy [%s] en staking [%s] d'apy [%s]",
+                // Récupération du quota réstant sur le produit
+                leftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
+                Double totalPersonnalQuota = Double.valueOf(projectStaking.quota().totalPersonalQuota());
+                // Comparaison avec le QuotaTotal de l'utilisateur
+                // Filtre les stakings déjà remplis totalement
+                if ((leftQuota <= 0) && leftQuota.compareTo(totalPersonnalQuota) < 0) {
+                    logger.debug("[REDEEM_FLEXIBLE] [{}] => [{}] ignoré car le quota restant est trop bas", assetName, projectStaking.projectId());
+                    break;
+                }
+                logger.info("[REDEEM_FLEXIBLE] [{}] => Tranformation du flexible d'apy [{}] en staking [{}] d'apy [{}]",
                     assetName,
                     annualRate,
                     projectStaking.projectId(),
                     projectStaking.detail().apy()
                 );
-                logger.info(logRedeem);
-//                slackService.sendMessage(logRedeem, SlackMessageType.AUTO_REDEEM);
 
+                Double freeCoin = Double.valueOf(flexiblePosition.freeAmount());
+                retval = Double.compare(leftQuota, freeCoin);
                 // todo : redeem pile le montant a stack dans le nouveau produit, a calculer avec le leftQuota de l'autre api
                 toRedeem = true;
                 break;
             }
             if (toRedeem) {
-                binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), Double.valueOf(flexiblePosition.freeAmount()), RedeemType.FAST);
-                slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + Double.valueOf(flexiblePosition.freeAmount()) + "]", SlackMessageType.AUTO_REDEEM);
+                // Tentative de staking du produit avec le montant de la crypto disponible ou du quota restant
+                if (retval > 0) {
+                    binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), Double.valueOf(flexiblePosition.freeAmount()), RedeemType.FAST);
+                    slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + Double.valueOf(flexiblePosition.freeAmount()) + "]", SlackMessageType.AUTO_REDEEM);
+                } else {
+                    binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), leftQuota, RedeemType.FAST);
+                    slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + leftQuota + "]", SlackMessageType.AUTO_REDEEM);
+                }
             }
         }
-
         logger.debug("[REDEEM_FLEXIBLE] Fin");
         // Regarder les cryptos en stacking flexible
         // Regarder s'il y a un stacking non flex de cette crypto => dispo + montant minimum
@@ -106,7 +125,7 @@ public class AutoRestackService {
     /**
      * Fonction global de restack automatique
      * Les cryptos dispos dans stack doivent etre directement stackés lorsqu'elles sont disponible
-     * todo a rediviser en sous fonctions
+     * // todo : refacto pour séparer les logiques
      */
     public void automaticReStack() {
         // Récupération des cryptos disponibles depuis le compte spot de l'utilisateur
@@ -119,7 +138,8 @@ public class AutoRestackService {
             }
             try {
                 // log et slack le début de la recherche
-                informOfSearch(coinWallet.coin(), coinWallet.free());
+                String logFind = AutoRestackService.concatFind(coinWallet.coin(), coinWallet.free());
+                logger.info(logFind);
                 // Récupération des stakings products disponible pour cette crypto
                 StakingProducts stakingProducts = binanceApi.getStakingProducts(coinWallet.coin());
                 // Pour chaque produits disponibles,
@@ -130,8 +150,7 @@ public class AutoRestackService {
                         break;
                     }
                     // Récupération du quota réstant sur le produit
-                    PersonalLeftQuota personalLeftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
-                    Double leftQuota = Double.valueOf(personalLeftQuota.leftPersonalQuota());
+                    Double leftQuota = binanceApi.getPersonalLeftQuota(projectStaking.projectId());
                     Double totalPersonnalQuota = Double.valueOf(projectStaking.quota().totalPersonalQuota());
                     // Comparaison avec le QuotaTotal de l'utilisateur
                     // Filtre les stakings déjà remplis totalement
@@ -155,7 +174,6 @@ public class AutoRestackService {
             }
             logger.debug("[AUTO_STAKING] Fin de la recherche de staking pour [{}]", coinWallet.coin());
         }
-
     }
 
     /**
@@ -179,27 +197,19 @@ public class AutoRestackService {
      */
     private void postStakingProduct(String projectStakingId, Double amount, String asset) {
         ProductResponse productResponse = binanceApi.postStakingProducts(projectStakingId, amount);
-        String log = AutoRestackService.concatEndResult(
-            asset,
-            String.valueOf(amount),
-            projectStakingId,
-            productResponse.positionId(),
-            productResponse.success()
-        );
-        slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
-        logger.info(log);
-    }
-
-    /**
-     * Informe l'utilisateur sur slack et log du début de la recherche
-     *
-     * @param asset  : Trigramme de la crypto
-     * @param amount : Montant total
-     */
-    private void informOfSearch(String asset, String amount) {
-        String logFind = AutoRestackService.concatFind(asset, amount);
-        logger.info(logFind);
-        slackService.sendMessage(logFind, SlackMessageType.AUTO_STAKING);
+        if (productResponse != null) {
+            String log = AutoRestackService.concatEndResult(
+                asset,
+                String.valueOf(amount),
+                projectStakingId,
+                productResponse.positionId(),
+                productResponse.success()
+            );
+            slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
+            logger.info(log);
+        } else {
+            logger.error("Erreur durant le postStaking"); //todo : ajouter un peu de détail + gestion d'erreur
+        }
     }
 
     private static String concatEndResult(

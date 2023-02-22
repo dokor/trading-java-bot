@@ -66,12 +66,14 @@ public class BinanceSavingClientApi {
         return null;
     }
 
+    // TODO : A implementer ?
     //Get Fixed and Activity Project List
 //    public String projectList(LinkedHashMap<String, Object> parameters) {
 //        ParameterChecker.checkParameter(parameters, "type", String.class);
 //        return requestHandler.sendSignedRequest(baseUrl, ACTIVITY_PROJECT, parameters, HttpMethod.GET, showLimitUsage);
 //    }
 
+    // TODO : A implementer ?
     // Get Fixed/Activity Project Position
 //    public String projectPosition(LinkedHashMap<String, Object> parameters) {
 //        return requestHandler.sendSignedRequest(baseUrl, PROJECT_POSITION, parameters, HttpMethod.GET, showLimitUsage);

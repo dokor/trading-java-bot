@@ -98,8 +98,9 @@ public class BinanceApi {
      *
      * @param productId : Id du produit sur lequel on veut vérifier le quota
      */
-    public PersonalLeftQuota getPersonalLeftQuota(String productId) {
-        return binanceStakingClientApi.getPersonalLeftQuota(productId);
+    public Double getPersonalLeftQuota(String productId) {
+        PersonalLeftQuota leftQuota = binanceStakingClientApi.getPersonalLeftQuota(productId);
+        return Double.valueOf(leftQuota.leftPersonalQuota());
     }
 
     // Trade
