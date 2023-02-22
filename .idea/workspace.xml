@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" afterDir="false" />
     </list>
     <list id="fe8998c6-c37e-41a3-b2ca-391bb14b5923" name="ignored" comment="ignored" />
@@ -142,7 +143,8 @@
       <workItem from="1676819380332" duration="952000" />
       <workItem from="1676885681089" duration="21230000" />
       <workItem from="1676933378072" duration="2353000" />
-      <workItem from="1677055733283" duration="3789000" />
+      <workItem from="1677055733283" duration="3882000" />
+      <workItem from="1677065310134" duration="1813000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -389,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677059498501</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="fix">
+      <created>1677060234613</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1677060234613</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,11 +425,11 @@
     <MESSAGE value="add todo" />
     <MESSAGE value="add gitignore" />
     <MESSAGE value="clean fonction principal d'autostaking" />
-    <MESSAGE value="fix" />
     <MESSAGE value="order staking products by apy" />
     <MESSAGE value="init redeem flex staking" />
     <MESSAGE value="clean" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -432,7 +441,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java</url>
-          <line>145</line>
+          <line>128</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -442,7 +451,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java</url>
-          <line>71</line>
+          <line>77</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>

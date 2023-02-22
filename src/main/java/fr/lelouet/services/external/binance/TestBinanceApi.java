@@ -27,7 +27,7 @@ public class TestBinanceApi {
     @SneakyThrows
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
-        autoRestackService.destackFlexibleStaking();
+        autoRestackService.redeemFlexibleStaking();
         autoRestackService.automaticReStack();
         logger.info("------------- Fin des tests principaux -------------");
     }
