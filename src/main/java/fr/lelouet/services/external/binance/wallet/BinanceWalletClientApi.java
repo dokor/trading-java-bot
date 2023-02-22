@@ -20,9 +20,6 @@ public class BinanceWalletClientApi {
     private final Wallet clientWallet;
     private final BinanceGlobalProvider binanceGlobalProvider;
 
-    // TODO faire un snapshot journalier = Scheduler
-    // Daily Account Snapshot GET /sapi/v1/accountSnapshot
-
     @Inject
     public BinanceWalletClientApi(
         BinanceGlobalProvider binanceGlobalProvider
@@ -45,6 +42,7 @@ public class BinanceWalletClientApi {
     }
 
     // TODO implements
+    // GET /sapi/v1/accountSnapshot   => Daily Account Snapshot
     // GET /sapi/v1/asset/tradeFee   =>  Fetch trade fee
     // POST /sapi/v1/asset/transfer (HMAC SHA256) =>  You need to enable Permits Universal Transfer option for the API Key which requests this endpoint.
     // GET /sapi/v1/asset/transfer (HMAC SHA256) => Get les transferts de compte actuels

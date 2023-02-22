@@ -1,7 +1,5 @@
 package fr.lelouet.services.external.binance;
 
-import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
-import fr.lelouet.services.external.binance.config.enums.CryptoAsset;
 import fr.lelouet.services.external.binance.market.BinanceMarketClientApi;
 import fr.lelouet.services.external.binance.saving.BinanceSavingClientApi;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
@@ -17,8 +15,6 @@ import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -53,6 +49,10 @@ public class BinanceApi {
     }
 
     // Wallet
+
+    /**
+     * Récupération des différentes monnaies de l'utilisateur dans le wallet Spot
+     */
     public CoinsWalletInformations getCoinsInformationsOfSpotWallet() {
         return binanceWalletClientApi.coinInfo();
     }

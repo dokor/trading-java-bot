@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
+    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="init redeem flex staking">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/WebApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/BinanceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/wallet/BinanceWalletClientApi.java" afterDir="false" />
     </list>
+    <list id="fe8998c6-c37e-41a3-b2ca-391bb14b5923" name="ignored" comment="ignored" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,9 +24,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -73,7 +75,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -124,6 +126,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\alelouet\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="" />
@@ -138,6 +143,7 @@
       <workItem from="1676819380332" duration="952000" />
       <workItem from="1676885681089" duration="21230000" />
       <workItem from="1676933378072" duration="2353000" />
+      <workItem from="1677055733283" duration="755000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -321,7 +327,56 @@
       <option name="project" value="LOCAL" />
       <updated>1676934902646</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="add todo">
+      <created>1676982415321</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1676982415321</updated>
+    </task>
+    <task id="LOCAL-00028" summary="add gitignore">
+      <created>1676982826000</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1676982826000</updated>
+    </task>
+    <task id="LOCAL-00029" summary="clean fonction principal d'autostaking">
+      <created>1676985213743</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1676985213743</updated>
+    </task>
+    <task id="LOCAL-00030" summary="fix">
+      <created>1676996703204</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1676996703204</updated>
+    </task>
+    <task id="LOCAL-00031" summary="order staking products by apy">
+      <created>1676997455344</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1676997455344</updated>
+    </task>
+    <task id="LOCAL-00032" summary="clean">
+      <created>1676998343890</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1676998343890</updated>
+    </task>
+    <task id="LOCAL-00033" summary="init redeem flex staking">
+      <created>1677001980273</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1677001980273</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,10 +398,16 @@
     <MESSAGE value="add Stacking module" />
     <MESSAGE value="add queryParam ENUM" />
     <MESSAGE value="fin autostaking" />
-    <MESSAGE value="clean" />
     <MESSAGE value="add ScheduledJobs" />
     <MESSAGE value="FIX" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIX" />
+    <MESSAGE value="add todo" />
+    <MESSAGE value="add gitignore" />
+    <MESSAGE value="clean fonction principal d'autostaking" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="order staking products by apy" />
+    <MESSAGE value="clean" />
+    <MESSAGE value="init redeem flex staking" />
+    <option name="LAST_COMMIT_MESSAGE" value="init redeem flex staking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -355,6 +416,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/BinanceStakingClientApi.java</url>
           <line>58</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/saving/BinanceSavingClientApi.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
