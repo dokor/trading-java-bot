@@ -32,5 +32,7 @@ public class TestBinanceApi {
         logger.info("------------- Fin des tests principaux -------------");
     }
 
+    //BOT INTERESSANT : https://trading-bot.cassandre.tech/fr/
+
 
 }
