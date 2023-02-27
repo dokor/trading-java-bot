@@ -155,6 +155,11 @@ public class AutoRestackService {
         }
     }
 
+    /**
+     * Fonction de validation des montants d'un produit
+     * Est ce que le montant voulu n'est pas plus petit que le quota minimum ?
+     * Est ce qu'il reste un montant disponible sur le produit ?
+     */
     private Double validateStackProduct(String productId, String assetName, Double amount, Quota productQuota) {
         // Filtre les stakings dont le minimum est trop élevé par rapport aux coins de l'utilisateur
         if (amount.compareTo(Double.valueOf(productQuota.minimum())) < 0) {
