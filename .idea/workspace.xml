@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="clean confService on import">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" afterDir="false" />
-    </list>
+    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="" />
     <list id="fe8998c6-c37e-41a3-b2ca-391bb14b5923" name="ignored" comment="ignored" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +145,7 @@
       <workItem from="1677055733283" duration="3882000" />
       <workItem from="1677065310134" duration="3201000" />
       <workItem from="1677141766780" duration="597000" />
-      <workItem from="1677486895217" duration="1760000" />
+      <workItem from="1677486895217" duration="2080000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -416,14 +413,27 @@
       <option name="project" value="LOCAL" />
       <updated>1677067216040</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="comment">
+      <created>1677511666869</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1677511666869</updated>
+    </task>
+    <task id="LOCAL-00040" summary="comment">
+      <created>1677511804219</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1677511804219</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add binance API + initAppData dans webApp" />
     <MESSAGE value="init keys binance" />
     <MESSAGE value="affichage de la récupération du porte feuille" />
     <MESSAGE value="add todo + recherche dans l'api" />
@@ -448,7 +458,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="refacto" />
     <MESSAGE value="clean confService on import" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean confService on import" />
+    <MESSAGE value="comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -457,11 +468,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/staking/BinanceStakingClientApi.java</url>
           <line>58</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/saving/BinanceSavingClientApi.java</url>
