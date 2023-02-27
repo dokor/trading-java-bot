@@ -7,8 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Class tests de la génération d'id de commande.
- * L'objectif est de vérifier l'unicité d'un numéro de commande malgrés une création multiple au meme timestamp
+ *
  */
 @RunWith(GuiceTestRunner.class)
 @GuiceModules(TestModule.class)
