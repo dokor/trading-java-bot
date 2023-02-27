@@ -133,6 +133,14 @@ public class AutoRestackService {
         }
     }
 
+    /**
+     * Permet d'essayer de staker un produit en particulier.
+     *
+     * @param productId : Produit que l'utilisateur veut stacker
+     * @param assetName : Trigramme de la crypto
+     * @param amount : Amount maximum qui sera stacké, au minimum => Le quota restant
+     * @param productQuota : Le quota restant sur le produit
+     */
     private void tryStackAsset(String productId, String assetName, Double amount, Quota productQuota) {
         Double leftQuota = this.validateStackProduct(productId, assetName, amount, productQuota);
         // Si leftQuota null c'est que le stacking ne respecte pas les conditions necessaires
@@ -197,8 +205,7 @@ public class AutoRestackService {
             slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
             logger.info(log);
         } else {
-            //todo : ajouter un peu de détail + gestion d'erreur
-            logger.error("Erreur durant le postStaking");
+            logger.error("Erreur durant le postStaking [{}] [{}] [{}]", projectStakingId, amount, asset);
         }
     }
 

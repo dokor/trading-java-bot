@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="">
+    <list default="true" id="a494333e-a72f-42ed-802b-acb33fac33b2" name="Changes" comment="clean confService on import">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/external/binance/TestBinanceApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java" afterDir="false" />
     </list>
     <list id="fe8998c6-c37e-41a3-b2ca-391bb14b5923" name="ignored" comment="ignored" />
@@ -38,6 +37,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/2.0.0/slf4j-api-2.0.0.jar!/org/slf4j/Logger.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -144,7 +146,9 @@
       <workItem from="1676885681089" duration="21230000" />
       <workItem from="1676933378072" duration="2353000" />
       <workItem from="1677055733283" duration="3882000" />
-      <workItem from="1677065310134" duration="1813000" />
+      <workItem from="1677065310134" duration="3201000" />
+      <workItem from="1677141766780" duration="597000" />
+      <workItem from="1677486895217" duration="1760000" />
     </task>
     <task id="LOCAL-00001" summary="init squelette java">
       <created>1676691867413</created>
@@ -398,14 +402,27 @@
       <option name="project" value="LOCAL" />
       <updated>1677060234613</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="refacto">
+      <created>1677067184838</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1677067184838</updated>
+    </task>
+    <task id="LOCAL-00038" summary="clean confService on import">
+      <created>1677067216040</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1677067216040</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init squelette java" />
     <MESSAGE value="add binance API + initAppData dans webApp" />
     <MESSAGE value="init keys binance" />
     <MESSAGE value="affichage de la récupération du porte feuille" />
@@ -429,7 +446,9 @@
     <MESSAGE value="init redeem flex staking" />
     <MESSAGE value="clean" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="refacto" />
+    <MESSAGE value="clean confService on import" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean confService on import" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -441,7 +460,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java</url>
-          <line>128</line>
+          <line>125</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -451,7 +470,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/lelouet/services/internal/AutoRestackService.java</url>
-          <line>77</line>
+          <line>74</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
