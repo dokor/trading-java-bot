@@ -30,9 +30,7 @@ public interface Strategy {
     void onPositionsUpdated();
 
     /**
-     * Actions à réaliser lorsque les positions sont annulés ou ajoutés
-     * Une position est l'ensemble des trades d'une meme pair dans le meme sens
-     * ex : position d'achat BTC/USDT => L'ensemble des trades de la pair BTC/USDT qui cherchent à acheter du BTC
+     * Actions à réaliser lorsque le statuts d'une positions est mis a jour
      */
     void onPositionsStatusUpdates();
 }
