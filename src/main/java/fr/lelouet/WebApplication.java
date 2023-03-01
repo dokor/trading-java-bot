@@ -48,9 +48,6 @@ public class WebApplication {
 
             WebApplication.addShutDownListerner(httpServer, injector.getInstance(Scheduler.class));
 
-            // Class Test => A supprimer plus tard
-            applyTestClass(injector);
-
             // schedule tasks
             injector.getInstance(ScheduledJobs.class).scheduleJobs();
 
@@ -62,12 +59,6 @@ public class WebApplication {
             // Stopping the JVM is important to enable production supervision tools to detect and restart the project.
             System.exit(1);
         }
-    }
-
-    // TODO A supprimer plus tard
-    private static void applyTestClass(Injector injector) {
-        // Lancement du service de test
-        injector.getInstance(TestBinanceApi.class).mainTest();
     }
 
     private static void addShutDownListerner(HttpServer httpServer, Scheduler scheduler) { // If scheduler is used, add arg: Scheduler scheduler

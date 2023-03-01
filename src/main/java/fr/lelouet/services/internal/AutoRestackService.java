@@ -49,7 +49,9 @@ public class AutoRestackService {
     // Todo : implémenter un % minimum en conf sur les apy, pour décider de destack le flex en staked
     // todo : refacto pour séparer la logique
     public void redeemFlexibleStaking() {
-        logger.debug("[REDEEM_FLEXIBLE] Début");
+        String logStart = "[REDEEM_FLEXIBLE] Début";
+        logger.debug(logStart);
+        slackService.sendMessage(logStart, SlackMessageType.AUTO_REDEEM);
         // Récupère l'ensemble des positions prises sur des produits flexibles.
         List<FlexiblePosition> flexiblePositions = binanceApi.flexibleProductPosition();
         for (FlexiblePosition flexiblePosition : flexiblePositions) {
@@ -99,7 +101,9 @@ public class AutoRestackService {
                 logger.error("[REDEEM_FLEXIBLE] Erreur de la crypto [{}]", assetName, e);
             }
         }
-        logger.debug("[REDEEM_FLEXIBLE] Fin");
+        String logEnd = "[REDEEM_FLEXIBLE] Fin";
+        logger.debug(logEnd);
+        slackService.sendMessage(logEnd, SlackMessageType.AUTO_REDEEM);
     }
 
     /**
@@ -107,6 +111,9 @@ public class AutoRestackService {
      * Les cryptos dispos dans stack doivent etre directement stackés lorsqu'elles sont disponible
      */
     public void automaticReStack() {
+        String logStart = "[AUTO_STAKING] debut";
+        logger.debug(logStart);
+        slackService.sendMessage(logStart, SlackMessageType.AUTO_STAKING);
         // Récupération des cryptos disponibles depuis le compte spot de l'utilisateur
         List<CoinWallet> coinsAvalaible = this.getSpotWalletCoins().getCoinsAvalaible();
         for (CoinWallet coinWallet : coinsAvalaible) {
@@ -131,6 +138,9 @@ public class AutoRestackService {
             }
             logger.debug("[AUTO_STAKING] Fin de la recherche de staking pour [{}]", assetName);
         }
+        String logEnd = "[AUTO_STAKING] End";
+        logger.debug(logEnd);
+        slackService.sendMessage(logEnd, SlackMessageType.AUTO_STAKING);
     }
 
     /**
