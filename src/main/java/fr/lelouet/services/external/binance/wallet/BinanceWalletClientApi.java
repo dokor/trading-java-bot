@@ -46,7 +46,11 @@ public class BinanceWalletClientApi {
         logger.debug("Tentative de récupération du spot de [{}]", asset);
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), asset);
-        return binanceGlobalProvider.callBinanceApi(clientWallet, "getUserAsset", CoinWallet.class, stringObjectLinkedHashMap);
+        CoinWallet[] coinWallets = binanceGlobalProvider.callBinanceApi(clientWallet, "getUserAsset", CoinWallet[].class, stringObjectLinkedHashMap);
+        if (coinWallets != null && coinWallets.length > 0) {
+            return coinWallets[0];
+        }
+        return null;
     }
 
     // TODO implements

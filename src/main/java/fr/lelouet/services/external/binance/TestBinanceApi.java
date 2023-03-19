@@ -27,7 +27,7 @@ public class TestBinanceApi {
     @SneakyThrows
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
-        binanceApi.getOrderBookOfSymbol("BTCUSDT");
+        binanceApi.getCoinWallet("BTC");
         logger.info("------------- Fin des tests principaux -------------");
     }
 

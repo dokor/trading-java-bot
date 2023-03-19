@@ -1,7 +1,5 @@
 package fr.lelouet.services.external.binance.wallet.bean;
 
-import fr.lelouet.services.external.binance.config.enums.CryptoAsset;
-
 /**
  * Bean Binance à la récupération des coins spot de l'utilisateur
  */
