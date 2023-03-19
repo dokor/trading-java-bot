@@ -8,8 +8,10 @@ import fr.lelouet.services.slack.enums.SlackMessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.Map;
 
 @Singleton
 public class LiquidityService {
@@ -28,16 +30,25 @@ public class LiquidityService {
     }
 
     public Boolean redeemLiquidityReward() {
+        Map<String, Double> unclamedLiquidityRewards = this.getLiquidityRewards();
+        return this.claimLiquidityRewards(unclamedLiquidityRewards.toString());
+    }
+
+    private Map<String, Double> getLiquidityRewards() {
         LiquidityRewards liquidityRewards = binanceApi.getUnclaimRewards();
         logger.debug("Récupération de la liste des récompenses à récupérer : [{}]", liquidityRewards.totalUnclaimedRewards());
+        return liquidityRewards.totalUnclaimedRewards();
+    }
+
+    private Boolean claimLiquidityRewards(@Nullable String logCryptoList) {
         ClaimRewardResponse claimRewardResponse = binanceApi.claimRewards();
         if (Boolean.TRUE.equals(claimRewardResponse.success())) {
-            String message = "[LIQUIDITY_REDEEM] Les liquidités ont bien été récupérées !"
-                + liquidityRewards.totalUnclaimedRewards();
+            String message = "[LIQUIDITY_REDEEM] Les liquidités ont bien été récupérées !" + logCryptoList;
             slackService.sendMessage(message, SlackMessageType.LIQUIDITY_REDEEM);
             logger.info("La récupération des liquidity à récupérer est réussi !");
+        } else {
+            logger.warn("La récupération des liquidity n'est pas en erreur mais n'a pas fonctionné");
         }
         return claimRewardResponse.success();
-
     }
 }
