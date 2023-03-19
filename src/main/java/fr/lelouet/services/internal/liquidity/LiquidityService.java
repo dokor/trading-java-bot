@@ -43,7 +43,7 @@ public class LiquidityService {
     private Boolean claimLiquidityRewards(@Nullable String logCryptoList) {
         ClaimRewardResponse claimRewardResponse = binanceApi.claimRewards();
         if (Boolean.TRUE.equals(claimRewardResponse.success())) {
-            String message = "[LIQUIDITY_REDEEM] Les liquidités ont bien été récupérées !" + logCryptoList;
+            String message = "[LIQUIDITY_REDEEM] Les liquidités ont bien été récupérées ! => " + logCryptoList;
             slackService.sendMessage(message, SlackMessageType.LIQUIDITY_REDEEM);
             logger.info("La récupération des liquidity à récupérer est réussi !");
         } else {
