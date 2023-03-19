@@ -2,6 +2,7 @@ package fr.lelouet.services.scheduler;
 
 import com.coreoz.wisp.Scheduler;
 import fr.lelouet.services.configuration.ConfigurationService;
+import fr.lelouet.services.internal.liquidity.LiquidityService;
 import fr.lelouet.services.internal.staking.AutoRestackService;
 import fr.lelouet.services.scheduler.bean.JobsConfiguration;
 import org.slf4j.Logger;
@@ -20,16 +21,19 @@ public class ScheduledJobs {
 
     private final Scheduler scheduler;
     private final AutoRestackService autoRestackService;
+    private final LiquidityService liquidityService;
     private final JobsConfiguration jobsConfiguration;
 
     @Inject
     ScheduledJobs(Scheduler scheduler,
                   ConfigurationService configurationService,
-                  AutoRestackService autoRestackService
+                  AutoRestackService autoRestackService,
+                  LiquidityService liquidityService
     ) {
         this.scheduler = scheduler;
         this.jobsConfiguration = configurationService.getJobsConfiguration();
         this.autoRestackService = autoRestackService;
+        this.liquidityService = liquidityService;
     }
 
     /**
@@ -48,6 +52,13 @@ public class ScheduledJobs {
 //                "Lancement du restack automatique",
 //                autoRestackService::automatiqueReStack,
 //                CronSchedule.parseUnixCron(jobsConfiguration.getCronAutoRestack())
+//            );
+//        }
+//        if (jobsConfiguration.getCronRedeemLiquidity() != null && !jobsConfiguration.getCronRedeemLiquidity().isEmpty()) {
+//            scheduler.schedule(
+//                "Lancement du redeem des liquidity rewards",
+//                liquidityService::redeemLiquidityReward,
+//                CronSchedule.parseUnixCron(jobsConfiguration.getCronRedeemLiquidity())
 //            );
 //        }
 

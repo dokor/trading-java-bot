@@ -60,7 +60,8 @@ public class ConfigurationService {
         Config configBinance = config.getConfig(JOBS_CRON);
         return JobsConfiguration.of(
             configBinance.getString("auto-restack"),
-            configBinance.getString("destack-flexible")
+            configBinance.getString("destack-flexible"),
+            configBinance.getString("redeem-liquidity")
         );
     }
 }

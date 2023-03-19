@@ -8,4 +8,5 @@ import lombok.Getter;
 public class JobsConfiguration {
     private String cronAutoRestack;
     private String cronDestackFlex;
+    private String cronRedeemLiquidity;
 }
