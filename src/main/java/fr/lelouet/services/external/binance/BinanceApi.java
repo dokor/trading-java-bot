@@ -14,6 +14,7 @@ import fr.lelouet.services.external.binance.swap.bean.ClaimRewardResponse;
 import fr.lelouet.services.external.binance.swap.bean.LiquidityRewards;
 import fr.lelouet.services.external.binance.trade.BinanceTradeClientApi;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
+import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
 
 import javax.inject.Inject;
@@ -61,6 +62,14 @@ public class BinanceApi {
      */
     public CoinsWalletInformations getCoinsInformationsOfSpotWallet() {
         return binanceWalletClientApi.coinInfo();
+    }
+
+
+    /**
+     * Permet de récupérer le montant spot d'une crypto
+     */
+    public CoinWallet getCoinWallet(String asset) {
+        return binanceWalletClientApi.getCoinWallet(asset);
     }
 
     // Market

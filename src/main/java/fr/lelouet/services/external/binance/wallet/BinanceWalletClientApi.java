@@ -1,6 +1,7 @@
 package fr.lelouet.services.external.binance.wallet;
 
 import com.binance.connector.client.impl.spot.Wallet;
+import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
@@ -39,6 +40,13 @@ public class BinanceWalletClientApi {
             return CoinsWalletInformations.of(Arrays.stream(coinWalletList).toList());
         }
         return null;
+    }
+
+    public CoinWallet getCoinWallet(String asset) {
+        logger.debug("Tentative de récupération du spot de [{}]", asset);
+        LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
+        stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), asset);
+        return binanceGlobalProvider.callBinanceApi(clientWallet, "getUserAsset", CoinWallet.class, stringObjectLinkedHashMap);
     }
 
     // TODO implements
