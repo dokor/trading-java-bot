@@ -12,7 +12,14 @@ import javax.inject.Inject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
+ * Lancement de l'autoStacking
+ * Le principe :
+ *  - Déstacker le staking flexible afin de prévoir un staking non flexible plus intéréssant.
+ *  - Stacker les cryptos de spots dans des staking non flexible.
  *
+ *  PI :
+ *  - Choisi les taux plus intéréssants.
+ *  - Vérifie que le staking est possible avant de destacker
  */
 @RunWith(GuiceTestRunner.class)
 @GuiceModules(TestModule.class)
