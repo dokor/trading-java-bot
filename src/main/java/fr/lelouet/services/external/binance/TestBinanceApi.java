@@ -15,20 +15,19 @@ import javax.inject.Singleton;
 public class TestBinanceApi {
 
     private static final Logger logger = LoggerFactory.getLogger(TestBinanceApi.class);
-    private final AutoRestackService autoRestackService;
+    private final BinanceApi binanceApi;
 
     @Inject
     public TestBinanceApi(
-        AutoRestackService autoRestackService
+        BinanceApi binanceApi
     ) {
-        this.autoRestackService = autoRestackService;
+        this.binanceApi = binanceApi;
     }
 
     @SneakyThrows
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
-        autoRestackService.redeemFlexibleStaking();
-        autoRestackService.automaticReStack();
+        binanceApi.getOrderBookOfSymbol("BTCUSDT");
         logger.info("------------- Fin des tests principaux -------------");
     }
 

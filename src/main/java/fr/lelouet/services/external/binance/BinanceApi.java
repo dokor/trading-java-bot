@@ -1,6 +1,7 @@
 package fr.lelouet.services.external.binance;
 
 import fr.lelouet.services.external.binance.market.BinanceMarketClientApi;
+import fr.lelouet.services.external.binance.market.beans.OrderBook;
 import fr.lelouet.services.external.binance.saving.BinanceSavingClientApi;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
 import fr.lelouet.services.external.binance.saving.enums.RedeemType;
@@ -64,7 +65,6 @@ public class BinanceApi {
         return binanceWalletClientApi.coinInfo();
     }
 
-
     /**
      * Permet de récupérer le montant spot d'une crypto
      */
@@ -73,6 +73,13 @@ public class BinanceApi {
     }
 
     // Market
+
+    /**
+     * Permet de récupérer l'orderBook d'un symbol
+     */
+    public OrderBook getOrderBookOfSymbol(String symbol) {
+        return binanceMarketClientApi.getOrderBookOfSymbol(symbol);
+    }
 
     // Stacking
 
