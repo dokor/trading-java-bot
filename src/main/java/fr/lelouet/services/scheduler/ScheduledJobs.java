@@ -1,17 +1,14 @@
 package fr.lelouet.services.scheduler;
 
 import com.coreoz.wisp.Scheduler;
-import com.coreoz.wisp.schedule.Schedules;
-import com.coreoz.wisp.schedule.cron.CronSchedule;
 import fr.lelouet.services.configuration.ConfigurationService;
-import fr.lelouet.services.internal.AutoRestackService;
+import fr.lelouet.services.internal.staking.AutoRestackService;
 import fr.lelouet.services.scheduler.bean.JobsConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.time.Duration;
 
 /**
  * Classe de définition des taches schedulées.

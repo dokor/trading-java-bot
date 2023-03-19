@@ -9,6 +9,9 @@ import fr.lelouet.services.external.binance.staking.bean.PersonalLeftQuota;
 import fr.lelouet.services.external.binance.staking.bean.ProductResponse;
 import fr.lelouet.services.external.binance.staking.bean.StakingPositions;
 import fr.lelouet.services.external.binance.staking.bean.StakingProducts;
+import fr.lelouet.services.external.binance.swap.BinanceSwapClientApi;
+import fr.lelouet.services.external.binance.swap.bean.ClaimRewardResponse;
+import fr.lelouet.services.external.binance.swap.bean.LiquidityRewards;
 import fr.lelouet.services.external.binance.trade.BinanceTradeClientApi;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
@@ -32,6 +35,7 @@ public class BinanceApi {
     private final BinanceStakingClientApi binanceStakingClientApi;
     private final BinanceTradeClientApi binanceTradeClientApi;
     private final BinanceSavingClientApi binanceSavingClientApi;
+    private final BinanceSwapClientApi binanceSwapClientApi;
 
     @Inject
     public BinanceApi(
@@ -39,13 +43,15 @@ public class BinanceApi {
         BinanceMarketClientApi binanceMarketClientApi,
         BinanceStakingClientApi binanceStakingClientApi,
         BinanceTradeClientApi binanceTradeClientApi,
-        BinanceSavingClientApi binanceSavingClientApi
+        BinanceSavingClientApi binanceSavingClientApi,
+        BinanceSwapClientApi binanceSwapClientApi
     ) {
         this.binanceWalletClientApi = binanceWalletClientApi;
         this.binanceMarketClientApi = binanceMarketClientApi;
         this.binanceStakingClientApi = binanceStakingClientApi;
         this.binanceTradeClientApi = binanceTradeClientApi;
         this.binanceSavingClientApi = binanceSavingClientApi;
+        this.binanceSwapClientApi = binanceSwapClientApi;
     }
 
     // Wallet
@@ -129,5 +135,22 @@ public class BinanceApi {
     public List<FlexiblePosition> flexibleProductPosition() {
         return binanceSavingClientApi.flexibleProductPosition(null);
     }
+
+    // Swap
+
+    /**
+     * Permet de récupérer les liquidity rewards de l'ensemble des staking liquidity
+     */
+    public ClaimRewardResponse claimRewards() {
+        return binanceSwapClientApi.claimRewards();
+    }
+
+    /**
+     * Permet de connaitre la valeur des liquidity rewards de l'ensemble des staking liquidity qui sont récupérables
+     */
+    public LiquidityRewards getUnclaimRewards() {
+        return binanceSwapClientApi.getUnclaimRewards();
+    }
+
 
 }

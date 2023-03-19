@@ -5,7 +5,7 @@ import com.github.seratch.jslack.api.webhook.Payload;
 import com.github.seratch.jslack.api.webhook.WebhookResponse;
 import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.slack.bean.SlackConfiguration;
-import fr.lelouet.services.slack.bean.SlackMessageType;
+import fr.lelouet.services.slack.enums.SlackMessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

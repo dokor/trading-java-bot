@@ -3,7 +3,7 @@ package fr.lelouet.services;
 import com.carlosbecker.guice.GuiceModules;
 import com.carlosbecker.guice.GuiceTestRunner;
 import fr.lelouet.guice.TestModule;
-import fr.lelouet.services.internal.AutoRestackService;
+import fr.lelouet.services.internal.staking.AutoRestackService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

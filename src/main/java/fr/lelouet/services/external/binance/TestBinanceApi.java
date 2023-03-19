@@ -1,6 +1,6 @@
 package fr.lelouet.services.external.binance;
 
-import fr.lelouet.services.internal.AutoRestackService;
+import fr.lelouet.services.internal.staking.AutoRestackService;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

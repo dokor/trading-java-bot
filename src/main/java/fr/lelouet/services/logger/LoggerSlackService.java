@@ -1,9 +1,8 @@
 package fr.lelouet.services.logger;
 
-import fr.lelouet.services.internal.AutoRestackService;
 import fr.lelouet.services.logger.enums.LogType;
 import fr.lelouet.services.slack.SlackService;
-import fr.lelouet.services.slack.bean.SlackMessageType;
+import fr.lelouet.services.slack.enums.SlackMessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

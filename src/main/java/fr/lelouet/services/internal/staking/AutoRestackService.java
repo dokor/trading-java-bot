@@ -1,4 +1,4 @@
-package fr.lelouet.services.internal;
+package fr.lelouet.services.internal.staking;
 
 import com.coreoz.plume.jersey.errors.WsException;
 import fr.lelouet.services.configuration.ConfigurationService;
@@ -13,7 +13,7 @@ import fr.lelouet.services.external.binance.staking.bean.StakingProducts;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
 import fr.lelouet.services.slack.SlackService;
-import fr.lelouet.services.slack.bean.SlackMessageType;
+import fr.lelouet.services.slack.enums.SlackMessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
