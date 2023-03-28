@@ -59,6 +59,5 @@ public class BinanceWalletClientApi {
     // POST /sapi/v1/asset/transfer (HMAC SHA256) =>  You need to enable Permits Universal Transfer option for the API Key which requests this endpoint.
     // GET /sapi/v1/asset/transfer (HMAC SHA256) => Get les transferts de compte actuels
     // POST /sapi/v1/asset/get-funding-asset (HMAC SHA256) => Récuperer le solde d'un asset dans spot, utile que pour requeter les comptes parallaleles (CB etc)
-    // POST /sapi/v3/asset/getUserAsset => Get user assets, just for positive data. (plus simple que l'api CoinInfo
 
 }
