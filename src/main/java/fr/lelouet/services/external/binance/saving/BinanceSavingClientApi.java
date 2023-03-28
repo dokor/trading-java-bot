@@ -1,23 +1,17 @@
 package fr.lelouet.services.external.binance.saving;
 
-import com.binance.connector.client.enums.HttpMethod;
 import com.binance.connector.client.impl.spot.Savings;
-import com.binance.connector.client.utils.ParameterChecker;
-import fr.lelouet.services.external.binance.config.bean.BinanceResponse;
 import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
 import fr.lelouet.services.external.binance.saving.enums.RedeemType;
-import fr.lelouet.services.external.binance.staking.bean.ProjectStaking;
-import fr.lelouet.services.external.binance.staking.bean.StakingProducts;
-import fr.lelouet.services.external.binance.staking.enums.ProductType;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
-import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -63,24 +57,6 @@ public class BinanceSavingClientApi {
         if (flexiblePositions != null) {
             return Arrays.stream(flexiblePositions).toList();
         }
-        return null;
+        return Collections.emptyList();
     }
-
-    // TODO : A implementer ?
-    //Get Fixed and Activity Project List
-//    public String projectList(LinkedHashMap<String, Object> parameters) {
-//        ParameterChecker.checkParameter(parameters, "type", String.class);
-//        return requestHandler.sendSignedRequest(baseUrl, ACTIVITY_PROJECT, parameters, HttpMethod.GET, showLimitUsage);
-//    }
-
-    // TODO : A implementer ?
-    // Get Fixed/Activity Project Position
-//    public String projectPosition(LinkedHashMap<String, Object> parameters) {
-//        return requestHandler.sendSignedRequest(baseUrl, PROJECT_POSITION, parameters, HttpMethod.GET, showLimitUsage);
-//    }
-
-    // TODO implements
-    // GET /api/v3/depth => Récupere l'orderBook
-    // GET /api/v3/ticker/bookTicker => Best price/qty on the order book for a symbol or symbols.
-
 }

@@ -1,8 +1,6 @@
 package fr.lelouet.guice;
 
-import com.coreoz.plume.jersey.errors.WsError;
 import com.coreoz.plume.scheduler.guice.GuiceSchedulerModule;
-import fr.lelouet.services.errors.ProjectError;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import fr.lelouet.jersey.JerseyConfigProvider;
