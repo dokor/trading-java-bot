@@ -9,6 +9,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * FIXME : Ajouter en buy et sell :
+ * STOP_LOSS	quantity, stopPrice or trailingDelta	This will execute a MARKET order when the conditions are met. (e.g. stopPrice is met or trailingDelta is activated)
+ * STOP_LOSS_LIMIT	timeInForce, quantity, price, stopPrice or trailingDelta
+ * TAKE_PROFIT	quantity, stopPrice or trailingDelta	This will execute a MARKET order when the conditions are met. (e.g. stopPrice is met or trailingDelta is activated)
+ * TAKE_PROFIT_LIMIT	timeInForce, quantity, price, stopPrice or trailingDelta
+ * LIMIT_MAKER	quantity, price	This is a LIMIT order that will be rejected if the order immediately matches and trades as a taker.
+ * This is also known as a POST-ONLY order.
+ *
+ * Other info:
+ *
+ * Any LIMIT or LIMIT_MAKER type order can be made an iceberg order by sending an icebergQty.
+ *
+ * Any order with an icebergQty MUST have timeInForce set to GTC.
+ *
+ * For STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT_LIMIT and TAKE_PROFIT orders, trailingDelta can be combined with stopPrice.
+ *
+ * MARKET orders using quoteOrderQty will not break LOT_SIZE filter rules; the order will execute a quantity that will have the notional value as close as possible to quoteOrderQty. Trigger order price rules against market price for both MARKET and LIMIT versions:
+ *
+ * Price above market price: STOP_LOSS BUY, TAKE_PROFIT SELL
+ *
+ * Price below market price: STOP_LOSS SELL, TAKE_PROFIT BUY
+ */
+
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -127,6 +152,7 @@ public class NewOrder {
     public static NewOrder limitSell(String symbol, TimeInForce timeInForce, String quantity, String price) {
         return new NewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price);
     }
+
 
     /**
      * Creates a new order with all required parameters.
