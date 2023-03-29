@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor(staticName = "of")
+@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
