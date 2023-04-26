@@ -53,6 +53,7 @@ public class BinanceSavingClientApi {
         if (asset != null) {
             stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), asset);
         }
+        stringObjectLinkedHashMap.put(BinanceQueryParam.SIZE.getValue(), 100);
         FlexiblePosition[] flexiblePositions = binanceGlobalProvider.callBinanceApi(client, "flexibleProductPosition", FlexiblePosition[].class, stringObjectLinkedHashMap);
         if (flexiblePositions != null) {
             return Arrays.stream(flexiblePositions).toList();
