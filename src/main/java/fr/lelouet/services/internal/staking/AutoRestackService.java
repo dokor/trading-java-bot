@@ -60,7 +60,7 @@ public class AutoRestackService {
             Double leftQuota = 0.0;
             // informatif
             String assetName = flexiblePosition.asset();
-            Double freeAmount = Double.valueOf(flexiblePosition.totalAmount());
+            Double totalAmount = Double.valueOf(flexiblePosition.totalAmount());
             String annualRate = flexiblePosition.annualInterestRate();
             // Filtre des cryptos ignorés volontairement dans la configuration projet
             if (ignoredCryproRedeem.contains(assetName)) {
@@ -68,7 +68,7 @@ public class AutoRestackService {
                 break;
             }
             try {
-                logger.debug("[REDEEM_FLEXIBLE] [{}] flexible avec un montant dispo de [{}]", assetName, freeAmount);
+                logger.debug("[REDEEM_FLEXIBLE] [{}] flexible avec un montant dispo de [{}]", assetName, totalAmount);
                 StakingProducts stakingProducts = binanceApi.getStakingProducts(assetName);
                 for (ProjectStaking projectStaking : stakingProducts.orderByApy()) {
                     String projetId = projectStaking.projectId();
@@ -78,11 +78,11 @@ public class AutoRestackService {
                         logger.debug("[REDEEM_FLEXIBLE] [{}] => Ignoré car l'APY du flexible actuel [{}] est plus élevé que celui du staking [{}] d'apy [{}]", assetName, annualRate, projetId, projectApy);
                         break;
                     }
-                    leftQuota = this.validateStackProduct(projetId, assetName, freeAmount, projectStaking.quota());
-                    if (leftQuota != null) {
+                    leftQuota = this.validateStackProduct(projetId, assetName, totalAmount, projectStaking.quota());
+                    if (leftQuota != null && totalAmount > 0) {
                         logger.info("[REDEEM_FLEXIBLE] [{}] => Tentative de tranformation du flexible d'apy [{}] en staking [{}] d'apy [{}]", assetName, annualRate, projetId, projectApy);
 
-                        retval = Double.compare(leftQuota, freeAmount);
+                        retval = Double.compare(leftQuota, totalAmount);
                         redeemThisCrypto = true;
                         break;
                     }
@@ -90,11 +90,11 @@ public class AutoRestackService {
                 if (redeemThisCrypto) {
                     // Tentative de staking du produit avec le montant de la crypto disponible ou du quota restant
                     if (retval > 0) {
-                        binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), Double.valueOf(flexiblePosition.freeAmount()), RedeemType.FAST);
-                        slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + Double.valueOf(flexiblePosition.freeAmount()) + "]", SlackMessageType.AUTO_REDEEM);
+                        binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), totalAmount, RedeemType.FAST);
+                        slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + totalAmount + "]", SlackMessageType.AUTO_REDEEM);
                     } else {
                         binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), leftQuota, RedeemType.FAST);
-                        slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + leftQuota + "]", SlackMessageType.AUTO_REDEEM);
+                        slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] leftQuota ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + leftQuota + "]", SlackMessageType.AUTO_REDEEM);
                     }
                 }
             } catch (Exception e) {
