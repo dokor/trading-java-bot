@@ -41,7 +41,7 @@ public class BinanceSavingClientApi {
         stringObjectLinkedHashMap.put(BinanceQueryParam.TYPE.getValue(), redeemType.name());
         stringObjectLinkedHashMap.put(BinanceQueryParam.PRODUCT_ID.getValue(), productId);
         stringObjectLinkedHashMap.put(BinanceQueryParam.AMOUNT.getValue(), amount);
-        binanceGlobalProvider.callBinanceApi(client, "redeemFlexibleProduct", String.class, stringObjectLinkedHashMap);
+        binanceGlobalProvider.callBinanceApi(client, "redeemFlexibleProduct", Object.class, stringObjectLinkedHashMap);
     }
 
     /**
