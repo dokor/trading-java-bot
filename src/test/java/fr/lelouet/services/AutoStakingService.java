@@ -34,4 +34,16 @@ public class AutoStakingService {
         autoRestackService.automaticReStack();
         assertThat(true).isEqualTo(true);
     }
+
+    @Test
+    public void redeemFlexibleStaking(){
+        autoRestackService.redeemFlexibleStaking();
+        assertThat(true).isEqualTo(true);
+    }
+
+    @Test
+    public void automaticReStack(){
+        autoRestackService.automaticReStack();
+        assertThat(true).isEqualTo(true);
+    }
 }
