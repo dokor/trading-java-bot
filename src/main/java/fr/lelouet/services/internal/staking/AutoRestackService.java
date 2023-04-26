@@ -60,7 +60,7 @@ public class AutoRestackService {
             Double leftQuota = 0.0;
             // informatif
             String assetName = flexiblePosition.asset();
-            Double freeAmount = Double.valueOf(flexiblePosition.freeAmount());
+            Double freeAmount = Double.valueOf(flexiblePosition.totalAmount());
             String annualRate = flexiblePosition.annualInterestRate();
             // Filtre des cryptos ignorés volontairement dans la configuration projet
             if (ignoredCryproRedeem.contains(assetName)) {
