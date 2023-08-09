@@ -1,6 +1,7 @@
 package fr.lelouet.services.scheduler;
 
 import com.coreoz.wisp.Scheduler;
+import com.coreoz.wisp.schedule.Schedules;
 import com.coreoz.wisp.schedule.cron.CronSchedule;
 import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.internal.liquidity.LiquidityService;
@@ -41,27 +42,26 @@ public class ScheduledJobs {
      * Initialisation des taches schedulées
      */
     public void scheduleJobs() {
+        if (jobsConfiguration.getCronRedeemLiquidity() != null && !jobsConfiguration.getCronRedeemLiquidity().isEmpty()) {
+            scheduler.schedule(
+                "Lancement du redeem des liquidity rewards",
+                liquidityService::redeemLiquidityReward,
+                Schedules.executeAt(jobsConfiguration.getCronRedeemLiquidity())
+            );
+        }
         if (jobsConfiguration.getCronDestackFlex() != null && !jobsConfiguration.getCronDestackFlex().isEmpty()) {
             scheduler.schedule(
                 "Lancement du destack flexible automatique",
                 autoRestackService::redeemFlexibleStaking,
-                CronSchedule.parseUnixCron(jobsConfiguration.getCronDestackFlex())
+                Schedules.executeAt(jobsConfiguration.getCronDestackFlex())
             );
         }
         if (jobsConfiguration.getCronAutoRestack() != null && !jobsConfiguration.getCronAutoRestack().isEmpty()) {
             scheduler.schedule(
                 "Lancement du restack automatique",
                 autoRestackService::automaticReStack,
-                CronSchedule.parseUnixCron(jobsConfiguration.getCronAutoRestack())
+                Schedules.executeAt(jobsConfiguration.getCronAutoRestack())
             );
         }
-        if (jobsConfiguration.getCronRedeemLiquidity() != null && !jobsConfiguration.getCronRedeemLiquidity().isEmpty()) {
-            scheduler.schedule(
-                "Lancement du redeem des liquidity rewards",
-                liquidityService::redeemLiquidityReward,
-                CronSchedule.parseUnixCron(jobsConfiguration.getCronRedeemLiquidity())
-            );
-        }
-
     }
 }

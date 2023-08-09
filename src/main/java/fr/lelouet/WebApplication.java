@@ -40,13 +40,13 @@ public class WebApplication {
             // enable Jersey to create objects through Guice Injector instance
             jerseyResourceConfig.register(new JerseyGuiceFeature(injector));
             // starts the server
-            HttpServer httpServer = GrizzlySetup.start(
-                jerseyResourceConfig,
-                System.getProperty("http.port"),
-                System.getProperty("http.address")
-            );
-
-            WebApplication.addShutDownListerner(httpServer, injector.getInstance(Scheduler.class));
+//            HttpServer httpServer = GrizzlySetup.start(
+//                jerseyResourceConfig,
+//                System.getProperty("http.port"),
+//                System.getProperty("http.address")
+//            );
+//
+//            WebApplication.addShutDownListerner(httpServer, injector.getInstance(Scheduler.class));
 
             // schedule tasks
             injector.getInstance(ScheduledJobs.class).scheduleJobs();
