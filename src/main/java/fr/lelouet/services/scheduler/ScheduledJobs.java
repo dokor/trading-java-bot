@@ -1,6 +1,7 @@
 package fr.lelouet.services.scheduler;
 
 import com.coreoz.wisp.Scheduler;
+import com.coreoz.wisp.schedule.cron.CronSchedule;
 import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.internal.liquidity.LiquidityService;
 import fr.lelouet.services.internal.staking.AutoRestackService;
@@ -40,27 +41,27 @@ public class ScheduledJobs {
      * Initialisation des taches schedulées
      */
     public void scheduleJobs() {
-//        if (jobsConfiguration.getCronDestackFlex() != null && !jobsConfiguration.getCronDestackFlex().isEmpty()) {
-//            scheduler.schedule(
-//                "Lancement du destack flexible automatique",
-//                autoRestackService::destackFlexibleStaking,
-//                CronSchedule.parseUnixCron(jobsConfiguration.getCronDestackFlex())
-//            );
-//        }
-//        if (jobsConfiguration.getCronAutoRestack() != null && !jobsConfiguration.getCronAutoRestack().isEmpty()) {
-//            scheduler.schedule(
-//                "Lancement du restack automatique",
-//                autoRestackService::automatiqueReStack,
-//                CronSchedule.parseUnixCron(jobsConfiguration.getCronAutoRestack())
-//            );
-//        }
-//        if (jobsConfiguration.getCronRedeemLiquidity() != null && !jobsConfiguration.getCronRedeemLiquidity().isEmpty()) {
-//            scheduler.schedule(
-//                "Lancement du redeem des liquidity rewards",
-//                liquidityService::redeemLiquidityReward,
-//                CronSchedule.parseUnixCron(jobsConfiguration.getCronRedeemLiquidity())
-//            );
-//        }
+        if (jobsConfiguration.getCronDestackFlex() != null && !jobsConfiguration.getCronDestackFlex().isEmpty()) {
+            scheduler.schedule(
+                "Lancement du destack flexible automatique",
+                autoRestackService::redeemFlexibleStaking,
+                CronSchedule.parseUnixCron(jobsConfiguration.getCronDestackFlex())
+            );
+        }
+        if (jobsConfiguration.getCronAutoRestack() != null && !jobsConfiguration.getCronAutoRestack().isEmpty()) {
+            scheduler.schedule(
+                "Lancement du restack automatique",
+                autoRestackService::automaticReStack,
+                CronSchedule.parseUnixCron(jobsConfiguration.getCronAutoRestack())
+            );
+        }
+        if (jobsConfiguration.getCronRedeemLiquidity() != null && !jobsConfiguration.getCronRedeemLiquidity().isEmpty()) {
+            scheduler.schedule(
+                "Lancement du redeem des liquidity rewards",
+                liquidityService::redeemLiquidityReward,
+                CronSchedule.parseUnixCron(jobsConfiguration.getCronRedeemLiquidity())
+            );
+        }
 
     }
 }
