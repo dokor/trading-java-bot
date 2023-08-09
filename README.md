@@ -1,6 +1,28 @@
 java-trading
 =============
 
+
+How to run the project
+=============
+
+1 - Add secret configuration file in src/main/resources/conf/secret.conf whit the following content :
+```
+swagger.access.password = "XXXXXXXXXXXXXXX"
+
+# Binance Lecture
+# api.binance.key.public = "XXXXXXXXXXXXXXX"
+# api.binance.key.secret = "XXXXXXXXXXXXXXX"
+
+# Binance Lecture & Ecriture
+api.binance.key.public = "XXXXXXXXXXXXXXX"
+api.binance.key.secret = "XXXXXXXXXXXXXXX"
+
+# SLACK
+# Url du channel "XXXXXXXXXXXXXXX"
+api.slack.url = "XXXXXXXXXXXXXXX"
+api.slack.token = "XXXXXXXXXXXXXXX"
+```
+
 Welcome to your [Plume](https://github.com/Coreoz/Plume) project!
 Here are some reminders to get your project up and running.
 
