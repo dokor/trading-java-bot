@@ -35,9 +35,9 @@ public class AutoRestackService {
 
     @Inject
     public AutoRestackService(
-        BinanceApi binanceApi,
-        ConfigurationService configurationService,
-        SlackService slackService
+            BinanceApi binanceApi,
+            ConfigurationService configurationService,
+            SlackService slackService
     ) {
         this.binanceApi = binanceApi;
         this.ignoredCryproStaked = configurationService.ignoreAutoStakingCryptoList();
@@ -65,40 +65,40 @@ public class AutoRestackService {
             // Filtre des cryptos ignorés volontairement dans la configuration projet
             if (ignoredCryproRedeem.contains(assetName)) {
                 logger.debug("[REDEEM_FLEXIBLE] [{}] ignoré par la configuration projet", assetName);
-                break;
-            }
-            try {
-                logger.debug("[REDEEM_FLEXIBLE] [{}] flexible avec un montant dispo de [{}]", assetName, totalAmount);
-                StakingProducts stakingProducts = binanceApi.getStakingProducts(assetName);
-                for (ProjectStaking projectStaking : stakingProducts.orderByApy()) {
-                    String projetId = projectStaking.projectId();
-                    String projectApy = projectStaking.detail().apy();
-                    // Filtre les stakings dont l'apy est plus basse que l'apy du flex
-                    if (Double.valueOf(annualRate).compareTo(Double.valueOf(projectStaking.detail().apy())) >= 0) {
-                        logger.debug("[REDEEM_FLEXIBLE] [{}] => Ignoré car l'APY du flexible actuel [{}] est plus élevé que celui du staking [{}] d'apy [{}]", assetName, annualRate, projetId, projectApy);
-                        break;
-                    }
-                    leftQuota = this.validateStackProduct(projetId, assetName, totalAmount, projectStaking.quota());
-                    if (leftQuota != null && totalAmount > 0) {
-                        logger.info("[REDEEM_FLEXIBLE] [{}] => Tentative de tranformation du flexible d'apy [{}] en staking [{}] d'apy [{}]", assetName, annualRate, projetId, projectApy);
+            } else {
+                try {
+                    logger.debug("[REDEEM_FLEXIBLE] [{}] flexible avec un montant dispo de [{}]", assetName, totalAmount);
+                    StakingProducts stakingProducts = binanceApi.getStakingProducts(assetName);
+                    for (ProjectStaking projectStaking : stakingProducts.orderByApy()) {
+                        String projetId = projectStaking.projectId();
+                        String projectApy = projectStaking.detail().apy();
+                        // Filtre les stakings dont l'apy est plus basse que l'apy du flex
+                        if (Double.valueOf(annualRate).compareTo(Double.valueOf(projectStaking.detail().apy())) >= 0) {
+                            logger.debug("[REDEEM_FLEXIBLE] [{}] => Ignoré car l'APY du flexible actuel [{}] est plus élevé que celui du staking [{}] d'apy [{}]", assetName, annualRate, projetId, projectApy);
+                            break;
+                        }
+                        leftQuota = this.validateStackProduct(projetId, assetName, totalAmount, projectStaking.quota());
+                        if (leftQuota != null && totalAmount > 0) {
+                            logger.info("[REDEEM_FLEXIBLE] [{}] => Tentative de tranformation du flexible d'apy [{}] en staking [{}] d'apy [{}]", assetName, annualRate, projetId, projectApy);
 
-                        retval = Double.compare(leftQuota, totalAmount);
-                        redeemThisCrypto = true;
-                        break;
+                            retval = Double.compare(leftQuota, totalAmount);
+                            redeemThisCrypto = true;
+                            break;
+                        }
                     }
-                }
-                if (redeemThisCrypto) {
-                    // Tentative de staking du produit avec le montant de la crypto disponible ou du quota restant
-                    if (retval > 0) {
-                        binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), totalAmount, RedeemType.FAST);
-                        slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + totalAmount + "]", SlackMessageType.AUTO_REDEEM);
-                    } else {
-                        binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), leftQuota, RedeemType.FAST);
-                        slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] leftQuota ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + leftQuota + "]", SlackMessageType.AUTO_REDEEM);
+                    if (redeemThisCrypto) {
+                        // Tentative de staking du produit avec le montant de la crypto disponible ou du quota restant
+                        if (retval > 0) {
+                            binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), totalAmount, RedeemType.FAST);
+                            slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + totalAmount + "]", SlackMessageType.AUTO_REDEEM);
+                        } else {
+                            binanceApi.redeemFlexibleProduct(flexiblePosition.productId(), leftQuota, RedeemType.FAST);
+                            slackService.sendMessage("[REDEEM_FLEXIBLE_SUCCESS] leftQuota ProductId [" + flexiblePosition.productId() + "] redeem d'un montant de [" + leftQuota + "]", SlackMessageType.AUTO_REDEEM);
+                        }
                     }
+                } catch (Exception e) {
+                    logger.error("[REDEEM_FLEXIBLE] Erreur de la crypto [{}]", assetName, e);
                 }
-            } catch (Exception e) {
-                logger.error("[REDEEM_FLEXIBLE] Erreur de la crypto [{}]", assetName, e);
             }
         }
         String logEnd = "[REDEEM_FLEXIBLE] Fin";
@@ -122,21 +122,21 @@ public class AutoRestackService {
             // Filtre les cryptos volontairement à ignorer
             if (ignoredCryproStaked.contains(assetName)) {
                 logger.debug("[AUTO_STAKING] [{}] ignoré par la configuration projet", assetName);
-                break;
-            }
-            try {
-                // log et slack le début de la recherche
-                logger.info("[AUTO_STAKING] Stacking à rechercher pour [{}] d'un montant total de [{}]", assetName, amountFree);
-                // Récupération des stakings products disponible pour cette crypto
-                List<ProjectStaking> stakingProducts = binanceApi.getStakingProducts(assetName).orderByApy();
-                // Pour chaque produits de stakings disponibles,
-                for (ProjectStaking projectStaking : stakingProducts) {
-                    this.tryStackAsset(projectStaking.projectId(), assetName, amountFree, projectStaking.quota());
+            } else {
+                try {
+                    // log et slack le début de la recherche
+                    logger.info("[AUTO_STAKING] Stacking à rechercher pour [{}] d'un montant total de [{}]", assetName, amountFree);
+                    // Récupération des stakings products disponible pour cette crypto
+                    List<ProjectStaking> stakingProducts = binanceApi.getStakingProducts(assetName).orderByApy();
+                    // Pour chaque produits de stakings disponibles,
+                    for (ProjectStaking projectStaking : stakingProducts) {
+                        this.tryStackAsset(projectStaking.projectId(), assetName, amountFree, projectStaking.quota());
+                    }
+                } catch (Exception e) {
+                    logger.error("[AUTO_STAKING] Erreur de la crypto [{}]", assetName, e);
                 }
-            } catch (Exception e) {
-                logger.error("[AUTO_STAKING] Erreur de la crypto [{}]", assetName, e);
+                logger.debug("[AUTO_STAKING] Fin de la recherche de staking pour [{}]", assetName);
             }
-            logger.debug("[AUTO_STAKING] Fin de la recherche de staking pour [{}]", assetName);
         }
         String logEnd = "[AUTO_STAKING] End";
         logger.debug(logEnd);
@@ -146,9 +146,9 @@ public class AutoRestackService {
     /**
      * Permet d'essayer de staker un produit en particulier.
      *
-     * @param productId : Produit que l'utilisateur veut stacker
-     * @param assetName : Trigramme de la crypto
-     * @param amount : Amount maximum qui sera stacké, au minimum => Le quota restant
+     * @param productId    : Produit que l'utilisateur veut stacker
+     * @param assetName    : Trigramme de la crypto
+     * @param amount       : Amount maximum qui sera stacké, au minimum => Le quota restant
      * @param productQuota : Le quota restant sur le produit
      */
     private void tryStackAsset(String productId, String assetName, Double amount, Quota productQuota) {
@@ -211,11 +211,11 @@ public class AutoRestackService {
         ProductResponse productResponse = binanceApi.postStakingProducts(projectStakingId, amount);
         if (productResponse != null) {
             String log = AutoRestackService.concatEndResult(
-                asset,
-                String.valueOf(amount),
-                projectStakingId,
-                productResponse.positionId(),
-                productResponse.success()
+                    asset,
+                    String.valueOf(amount),
+                    projectStakingId,
+                    productResponse.positionId(),
+                    productResponse.success()
             );
             slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
             logger.info(log);
@@ -225,11 +225,11 @@ public class AutoRestackService {
     }
 
     private static String concatEndResult(
-        String coinName,
-        String amount,
-        String projectId,
-        String positionId,
-        boolean success
+            String coinName,
+            String amount,
+            String projectId,
+            String positionId,
+            boolean success
     ) {
         return "[AUTO_STAKING] [" + coinName + "] stacké pour un montant de [" + amount + "] sur le produit [" + projectId + "] avec une position [" + positionId + "] : [" + success + "]";
     }
