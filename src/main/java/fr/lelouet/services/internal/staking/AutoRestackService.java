@@ -213,9 +213,7 @@ public class AutoRestackService {
             String log = AutoRestackService.concatEndResult(
                     asset,
                     String.valueOf(amount),
-                    projectStakingId,
-                    productResponse.positionId(),
-                    productResponse.success()
+                    projectStakingId
             );
             slackService.sendMessage(log, SlackMessageType.AUTO_STAKING);
             logger.info(log);
@@ -227,11 +225,9 @@ public class AutoRestackService {
     private static String concatEndResult(
             String coinName,
             String amount,
-            String projectId,
-            String positionId,
-            boolean success
+            String projectId
     ) {
-        return "[AUTO_STAKING] [" + coinName + "] stacké pour un montant de [" + amount + "] sur le produit [" + projectId + "] avec une position [" + positionId + "] : [" + success + "]";
+        return "[AUTO_STAKING] [" + coinName + "] stacké pour un montant de [" + amount + "] sur le produit [" + projectId + "]";
     }
 
 }
