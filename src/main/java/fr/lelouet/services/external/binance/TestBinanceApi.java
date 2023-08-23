@@ -1,11 +1,13 @@
 package fr.lelouet.services.external.binance;
 
+import fr.lelouet.services.external.binance.trade.PastOrder;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * Class de test pour préparer la mise en place des algos
@@ -26,7 +28,8 @@ public class TestBinanceApi {
     @SneakyThrows
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
-        binanceApi.getCoinWallet("BTC");
+        List<PastOrder> pastOrdersBTCUSDT = binanceApi.getTradeHistory("BTCUSDT");
+        List<PastOrder> pastOrdersBTCBUSD = binanceApi.getTradeHistory("BTCBUSD");
         logger.info("------------- Fin des tests principaux -------------");
     }
 

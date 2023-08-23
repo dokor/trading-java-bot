@@ -15,8 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Gestionnaire du client principal de l'api Binance
@@ -62,9 +62,9 @@ public class BinanceGlobalProvider {
         return this.client;
     }
 
-    public <T, K> T callBinanceApi(K client, String functionName, Class<T> returnType, LinkedHashMap<String, Object> stringObjectLinkedHashMap) {
+    public <T, K> T callBinanceApi(K client, String functionName, Class<T> returnType, Map<String, Object> stringObjectLinkedHashMap) {
         try {
-            Method method = client.getClass().getMethod(functionName, LinkedHashMap.class);
+            Method method = client.getClass().getMethod(functionName, Map.class);
             String response = (String) method.invoke(client, stringObjectLinkedHashMap);
             logger.debug("API Response : {}", response);
             // Vérifier si le type de retour est une liste ou non

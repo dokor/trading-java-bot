@@ -14,6 +14,7 @@ import fr.lelouet.services.external.binance.swap.BinanceSwapClientApi;
 import fr.lelouet.services.external.binance.swap.bean.ClaimRewardResponse;
 import fr.lelouet.services.external.binance.swap.bean.LiquidityRewards;
 import fr.lelouet.services.external.binance.trade.BinanceTradeClientApi;
+import fr.lelouet.services.external.binance.trade.PastOrder;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
@@ -126,6 +127,13 @@ public class BinanceApi {
     }
 
     // Trade
+
+    /**
+     * Permet de récupérer l'historique des transactions réalisés ou annulés
+     */
+    public List<PastOrder> getTradeHistory(String symbol) {
+        return binanceTradeClientApi.getHistory(symbol);
+    }
 
     // Saving
 
