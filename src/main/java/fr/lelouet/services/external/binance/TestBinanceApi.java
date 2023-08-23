@@ -29,7 +29,6 @@ public class TestBinanceApi {
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
         List<PastOrder> pastOrdersBTCUSDT = binanceApi.getTradeHistory("BTCUSDT");
-        List<PastOrder> pastOrdersBTCBUSD = binanceApi.getTradeHistory("BTCBUSD");
         logger.info("------------- Fin des tests principaux -------------");
     }
 
