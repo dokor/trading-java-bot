@@ -65,7 +65,6 @@ public class SlackService {
         StringBuilder stringBuilder = new StringBuilder();
         switch (slackMessageType) {
             case LANCEMENT -> stringBuilder.append("LANCEMENT ");
-            case INFORMATIF -> stringBuilder.append("INFORMATIF ");
             default -> stringBuilder.append("");
         }
         stringBuilder.append(message);

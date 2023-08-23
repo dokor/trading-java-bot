@@ -7,6 +7,8 @@ import fr.lelouet.services.slack.enums.SlackMessageType;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +54,30 @@ public class TradeHistoryService {
     }
 
     public void logHistory(Map<String, List<PastOrder>> history) {
-        slackService.sendMessage("Historique des trades : \n" + history, SlackMessageType.INFORMATIF);
+        slackService.sendMessage("[DEBUT Historique des trades]\n", SlackMessageType.INFORMATIF);
+        List<String> messages = new ArrayList<>();
+        for (List<PastOrder> pastOrders : history.values()) {
+            for (PastOrder pastOrder : pastOrders) {
+                messages.add(cleanPastOrder(pastOrder));
+            }
+        }
+        for (String message : messages) {
+            slackService.sendMessage(message, SlackMessageType.INFORMATIF);
+        }
+        slackService.sendMessage("[FIN Historique des trades]\n", SlackMessageType.INFORMATIF);
+    }
+
+    private String cleanPastOrder(PastOrder pastOrder) {
+        return cleanSymbol(pastOrder.symbol())
+            + " [" + pastOrder.side() + "]"
+            + " [" + pastOrder.type() + "]"
+            + ": " + pastOrder.executedQty() + " à "
+            + pastOrder.price() + "$ " + " le "
+            + Instant.ofEpochMilli(pastOrder.time())
+            ;
+    }
+
+    private String cleanSymbol(String symbol) {
+        return symbol.replace("BUSD", "").replace("USDT", "");
     }
 }
