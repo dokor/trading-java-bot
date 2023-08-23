@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(GuiceTestRunner.class)
 @GuiceModules(TestModule.class)
-public class AutoStakingService {
+public class AutoStakingServiceTest {
 
     @Inject
     AutoRestackService autoRestackService;

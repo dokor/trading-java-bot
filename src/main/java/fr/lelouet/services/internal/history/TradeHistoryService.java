@@ -2,6 +2,8 @@ package fr.lelouet.services.internal.history;
 
 import fr.lelouet.services.external.binance.BinanceApi;
 import fr.lelouet.services.external.binance.trade.PastOrder;
+import fr.lelouet.services.slack.SlackService;
+import fr.lelouet.services.slack.enums.SlackMessageType;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,6 +15,7 @@ import java.util.Map;
 public class TradeHistoryService {
 
     private final BinanceApi binanceApi;
+    private final SlackService slackService;
 
     private static final List<String> FIAT = List.of("BUSD", "USDT");
     private static final List<String> CRYPTO = List.of(
@@ -28,9 +31,11 @@ public class TradeHistoryService {
 
     @Inject
     public TradeHistoryService(
-        BinanceApi binanceApi
+        BinanceApi binanceApi,
+        SlackService slackService
     ) {
         this.binanceApi = binanceApi;
+        this.slackService = slackService;
     }
 
     public Map<String, List<PastOrder>> getFullHistory() {
@@ -42,6 +47,11 @@ public class TradeHistoryService {
                 map.put(symbol, binanceApi.getTradeHistory(symbol));
             }
         }
+        this.logHistory(map);
         return map;
+    }
+
+    public void logHistory(Map<String, List<PastOrder>> history) {
+        slackService.sendMessage("Historique des trades : \n" + history, SlackMessageType.INFORMATIF);
     }
 }
