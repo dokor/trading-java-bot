@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum SlackChannels {
-    TRADING_BOT("#trading-bot-antoine")
+    TRADING_BOT_ANTOINE("#trading-bot-antoine"),
+    TRADING_BOT_INFO("#trading-bot-information")
     ;
 
     private final String channel;
