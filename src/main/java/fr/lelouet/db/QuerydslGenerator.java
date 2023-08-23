@@ -46,10 +46,6 @@ public class QuerydslGenerator {
 		exporter.setNamingStrategy(new DefaultNamingStrategy() {
 			@Override
 			public String getClassName(String tableName) {
-				// uncomment if you are using plume file
-//				if("plm_file".equalsIgnoreCase(tableName)) {
-//					return FileEntityQuerydsl.class.getName();
-//				}
 				return super.getClassName(tableName.substring(TABLES_PREFIX.length()));
 			}
 

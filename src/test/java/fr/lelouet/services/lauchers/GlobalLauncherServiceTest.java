@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(GuiceTestRunner.class)
 @GuiceModules(TestModule.class)
-public class GlobalLauncherService {
+public class GlobalLauncherServiceTest {
 
     @Inject
     AutoRestackService autoRestackService;

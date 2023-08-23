@@ -31,48 +31,48 @@ import lombok.SneakyThrows;
 @PublicApi
 public class SwaggerWs {
 
-	private final String swaggerDefinition;
-	private final BasicAuthenticator<String> basicAuthenticator;
+    private final String swaggerDefinition;
+    private final BasicAuthenticator<String> basicAuthenticator;
 
-	@Inject
-	@SneakyThrows
-	public SwaggerWs(ConfigurationService configurationService) {
-		// Basic configuration
-		SwaggerConfiguration openApiConfig = new SwaggerConfiguration()
-			.resourcePackages(Set.of("fr.lelouet.webservices.api"))
-			.sortOutput(true)
-			.openAPI(new OpenAPI().servers(List.of(
-				new Server()
-					.url("/api")
-					.description("API java-trading")
-			)));
+    @Inject
+    @SneakyThrows
+    public SwaggerWs(ConfigurationService configurationService) {
+        // Basic configuration
+        SwaggerConfiguration openApiConfig = new SwaggerConfiguration()
+            .resourcePackages(Set.of("fr.lelouet.webservices.api"))
+            .sortOutput(true)
+            .openAPI(new OpenAPI().servers(List.of(
+                new Server()
+                    .url("/api")
+                    .description("API java-trading")
+            )));
 
-		// Generation of the OpenApi object
-		OpenApiContext context = new JaxrsOpenApiContextBuilder<>()
-			.openApiConfiguration(openApiConfig)
-			.buildContext(true);
-		// the OpenAPI object can be changed to add security definition
-		// or to alter the generated mapping
-		OpenAPI openApi = context.read();
+        // Generation of the OpenApi object
+        OpenApiContext context = new JaxrsOpenApiContextBuilder<>()
+            .openApiConfiguration(openApiConfig)
+            .buildContext(true);
+        // the OpenAPI object can be changed to add security definition
+        // or to alter the generated mapping
+        OpenAPI openApi = context.read();
 
-		// serialization of the Swagger definition
-		this.swaggerDefinition = Yaml.mapper().writeValueAsString(openApi);
+        // serialization of the Swagger definition
+        this.swaggerDefinition = Yaml.mapper().writeValueAsString(openApi);
 
-		// require authentication to access the API documentation
-		this.basicAuthenticator = BasicAuthenticator.fromSingleCredentials(
-			configurationService.swaggerAccessUsername(),
-			configurationService.swaggerAccessPassword(),
-			"API java-trading"
-		);
-	}
+        // require authentication to access the API documentation
+        this.basicAuthenticator = BasicAuthenticator.fromSingleCredentials(
+            configurationService.swaggerAccessUsername(),
+            configurationService.swaggerAccessPassword(),
+            "API java-trading"
+        );
+    }
 
-	@Produces(MediaType.APPLICATION_JSON)
-	@GET
-	public String get(@Context ContainerRequestContext requestContext) throws JsonProcessingException {
-		basicAuthenticator.requireAuthentication(requestContext);
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public String get(@Context ContainerRequestContext requestContext) {
+        basicAuthenticator.requireAuthentication(requestContext);
 
-		return swaggerDefinition;
-	}
+        return swaggerDefinition;
+    }
 
 }
 

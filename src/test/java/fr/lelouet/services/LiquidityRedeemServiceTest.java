@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(GuiceTestRunner.class)
 @GuiceModules(TestModule.class)
-public class LiquidityRedeemService {
+public class LiquidityRedeemServiceTest {
 
     @Inject
     LiquidityService liquidityService;
@@ -21,6 +21,6 @@ public class LiquidityRedeemService {
     @Test
     public void start() {
         liquidityService.redeemLiquidityReward();
-        assertThat(true).isEqualTo(true);
+        assertThat(true).isTrue();
     }
 }

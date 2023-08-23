@@ -16,5 +16,3 @@ public enum SlackMessageType {
     private final String username;
     private final String icon;
 }
-
-// fixme : changer le typage des valeurs de l'enum et faire le get directement à l'utilisation
