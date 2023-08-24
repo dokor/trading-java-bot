@@ -21,20 +21,20 @@ public class TradeHistoryService {
 
     private static final List<String> FIAT = List.of("BUSD", "USDT");
     private static final List<String> CRYPTO = List.of(
-        "BTC",
-        "ETH",
-        "ADA",
-        "AVAX",
-        "BNB",
-        "VET",
-        "DOT",
-        "SOL"
+            "BTC",
+            "ETH",
+            "ADA",
+            "AVAX",
+            "BNB",
+            "VET",
+            "DOT",
+            "SOL"
     );
 
     @Inject
     public TradeHistoryService(
-        BinanceApi binanceApi,
-        SlackService slackService
+            BinanceApi binanceApi,
+            SlackService slackService
     ) {
         this.binanceApi = binanceApi;
         this.slackService = slackService;
@@ -69,12 +69,13 @@ public class TradeHistoryService {
 
     private String cleanPastOrder(PastOrder pastOrder) {
         return cleanSymbol(pastOrder.symbol())
-            + " [" + pastOrder.side() + "]"
-            + " [" + pastOrder.type() + "]"
-            + ": " + pastOrder.executedQty() + " à "
-            + pastOrder.price() + "$ " + " le "
-            + Instant.ofEpochMilli(pastOrder.time())
-            ;
+                + " [" + pastOrder.side() + "]"
+                + " [" + pastOrder.type() + "]"
+                + ": " + pastOrder.executedQty() + " à "
+                + pastOrder.price() + "$ "
+                + " (" + pastOrder.price() * pastOrder.executedQty() + "$)"
+                + " le " + Instant.ofEpochMilli(pastOrder.time())
+                ;
     }
 
     private String cleanSymbol(String symbol) {
