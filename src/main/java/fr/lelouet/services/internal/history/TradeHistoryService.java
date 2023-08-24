@@ -8,10 +8,7 @@ import fr.lelouet.services.slack.enums.SlackMessageType;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Singleton
 public class TradeHistoryService {
@@ -55,15 +52,13 @@ public class TradeHistoryService {
 
     public void logHistory(Map<String, List<PastOrder>> history) {
         slackService.sendMessage("[DEBUT Historique des trades]\n", SlackMessageType.INFORMATIF);
-        List<String> messages = new ArrayList<>();
+        List<PastOrder> pastOrdersSorted = new ArrayList<>();
         for (List<PastOrder> pastOrders : history.values()) {
-            for (PastOrder pastOrder : pastOrders) {
-                messages.add(cleanPastOrder(pastOrder));
-            }
+            pastOrdersSorted.addAll(pastOrders);
         }
-        for (String message : messages) {
-            slackService.sendMessage(message, SlackMessageType.INFORMATIF);
-        }
+        pastOrdersSorted.stream()
+                .sorted(Comparator.comparing(PastOrder::symbol).thenComparingLong(PastOrder::time))
+                .forEach(pastOrder -> slackService.sendMessage(cleanPastOrder(pastOrder), SlackMessageType.INFORMATIF));
         slackService.sendMessage("[FIN Historique des trades]\n", SlackMessageType.INFORMATIF);
     }
 
