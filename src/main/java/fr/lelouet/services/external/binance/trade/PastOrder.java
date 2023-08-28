@@ -19,10 +19,10 @@ public record PastOrder(
     OrderSide side, //	SELL
     Double stopPrice, //	0.00000000
     Double icebergQty, //	0.00000000
-    Long time, //	15795164952312020-01-20T10,
-    Long updateTime, //	15795164952312020-01-20T10, //34, //55.231Z
+    Long time, //	1579516495231
+    Long updateTime, //	1579516495231
     Boolean isWorking, //	true
-    Long workingTime, //	15795164952312020-01-20T10, //34, //55.231Z
+    Long workingTime, //	1579516495231
     Double origQuoteOrderQty, //	0.00000000
     String selfTradePreventionMode //	NONE //todo : enum
 ) {

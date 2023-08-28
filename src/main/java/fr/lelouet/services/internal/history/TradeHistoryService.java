@@ -69,6 +69,9 @@ public class TradeHistoryService {
         slackService.sendMessage("[FIN Historique des trades]\n", SlackMessageType.INFORMATIF);
     }
 
+    /**
+     * Netoyage du trade pour affichage dans un log informatif
+     */
     private String cleanPastOrder(PastOrder pastOrder) {
         return cleanSymbol(pastOrder.symbol())
             + " [" + pastOrder.side() + "]"
@@ -82,10 +85,6 @@ public class TradeHistoryService {
 
     /**
      * Calcul du prix d'un trade et réduction de l'arrondi pour affiche de 2 chiffres après la virgule
-     *
-     * @param price
-     * @param qty
-     * @return
      */
     private String calculatePrice(Double price, Double qty) {
         BigDecimal prixBigDecimal = new BigDecimal(price * qty);
@@ -95,9 +94,6 @@ public class TradeHistoryService {
 
     /**
      * Netoyage du symbol du trade pour connaitre la crypto
-     *
-     * @param symbol
-     * @return
      */
     private String cleanSymbol(String symbol) {
         for (String s : FIAT) {
