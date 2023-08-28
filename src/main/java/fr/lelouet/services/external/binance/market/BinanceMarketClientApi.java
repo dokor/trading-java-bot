@@ -4,6 +4,7 @@ import com.binance.connector.client.impl.spot.Market;
 
 import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.market.beans.OrderBook;
+import fr.lelouet.services.external.binance.market.beans.TickerPrice;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,10 @@ public class BinanceMarketClientApi {
         return binanceGlobalProvider.callBinanceApi(clientMarket, "depth", OrderBook.class, stringObjectLinkedHashMap);
     }
 
-    // TODO implements
-    // GET /api/v3/ticker/bookTicker => Best price/qty on the order book for a symbol or symbols.
-
+    public TickerPrice getAveragePrice(String symbol) {
+        logger.debug("Tentative de récupération du prix moyen de la pair [{}]", symbol);
+        LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
+        stringObjectLinkedHashMap.put(BinanceQueryParam.SYMBOL.getValue(), symbol);
+        return binanceGlobalProvider.callBinanceApi(clientMarket, "averagePrice", TickerPrice.class, stringObjectLinkedHashMap);
+    }
 }

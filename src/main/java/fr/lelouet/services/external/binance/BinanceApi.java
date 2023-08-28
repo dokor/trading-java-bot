@@ -2,6 +2,7 @@ package fr.lelouet.services.external.binance;
 
 import fr.lelouet.services.external.binance.market.BinanceMarketClientApi;
 import fr.lelouet.services.external.binance.market.beans.OrderBook;
+import fr.lelouet.services.external.binance.market.beans.TickerPrice;
 import fr.lelouet.services.external.binance.saving.BinanceSavingClientApi;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
 import fr.lelouet.services.external.binance.saving.enums.RedeemType;
@@ -80,6 +81,15 @@ public class BinanceApi {
      */
     public OrderBook getOrderBookOfSymbol(String symbol) {
         return binanceMarketClientApi.getOrderBookOfSymbol(symbol);
+    }
+
+    /**
+     * Permet de récupérer le prix moyen d'une pair de crypto
+     *
+     * @param symbol : "BTCBUSD"
+     */
+    public TickerPrice getAveragePrice(String symbol) {
+        return binanceMarketClientApi.getAveragePrice(symbol);
     }
 
     // Stacking
