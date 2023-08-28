@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Getter
@@ -40,6 +41,16 @@ public class CoinsWalletInformations {
             .filter(coinWallet -> !Objects.equals(coinWallet.free(), "0"))
             .sorted(Comparator.comparing(CoinWallet::coin))
             .toList();
+    }
+
+    public Map<String, CoinWallet> transformToMap() {
+        return this.coinWalletList.stream()
+            .collect(
+                java.util.stream.Collectors.toMap(
+                    CoinWallet::coin,
+                    coinWallet -> coinWallet
+                )
+            );
     }
 
 
