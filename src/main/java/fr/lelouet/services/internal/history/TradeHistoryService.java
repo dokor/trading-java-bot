@@ -1,6 +1,7 @@
 package fr.lelouet.services.internal.history;
 
 import fr.lelouet.services.external.binance.BinanceApi;
+import fr.lelouet.services.external.binance.market.beans.TickerPrice;
 import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import fr.lelouet.services.external.binance.trade.enums.OrderSide;
 import fr.lelouet.services.internal.history.beans.ProfitBean;
@@ -77,12 +78,10 @@ public class TradeHistoryService {
                 ProfitBean profitBean;
                 // Création/Recupération du bean
                 if (profitBeanMap.get(cleanSymbol(pastOrder.symbol())) == null) {
-                    profitBean = new ProfitBean("", null, null);
+                    profitBean = new ProfitBean(cleanSymbol(pastOrder.symbol()), null, null);
                 } else {
                     profitBean = profitBeanMap.get(cleanSymbol(pastOrder.symbol()));
-
                 }
-
                 // Ajout du trade dans le bean
                 if (OrderSide.BUY.equals(pastOrder.side())) {
                     profitBean.addBuy(pastOrder);
@@ -93,6 +92,21 @@ public class TradeHistoryService {
                 profitBeanMap.put(cleanSymbol(pastOrder.symbol()), profitBean);
             }
         }
+
+        for (ProfitBean profitBean : profitBeanMap.values()) {
+            TickerPrice tickerPrice = binanceApi.getAveragePrice(profitBean.getSymbol()+"BUSD");
+            double profit = profitBean.netProfitOrLoss(); // Profit déjà réalisée
+            double restant = profitBean.getCurrentBalance() * tickerPrice.price(); // Stock actuel au prix courant
+
+            // si profit >= 0 : J'ai gagné de l'argent sur cette crypto
+            // si profit < 0
+                // si restant < 0 : J'ai perdu de l'argent sur cette crypto
+                // si restant > 0 : J'ai perdu de l'argent sur cette crypto mais j'ai encore des stocks
+                    // si restant > profit : J'ai encore possibilité de gagner de l'argent sur cette crypto
+            String m = "";
+        }
+
+
         return profitBeanMap;
     }
 
