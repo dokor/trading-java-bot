@@ -71,4 +71,16 @@ public class ProfitBean {
     public double netProfitOrLoss() {
         return totalSellAmount() - totalBuyAmount();
     }
+
+    public double getCurrentBalance() {
+        double totalBuyQty = buys.stream()
+            .mapToDouble(PastOrder::executedQty)
+            .sum();
+
+        double totalSellQty = sells.stream()
+            .mapToDouble(PastOrder::executedQty)
+            .sum();
+
+        return totalSellQty - totalBuyQty;
+    }
 }
