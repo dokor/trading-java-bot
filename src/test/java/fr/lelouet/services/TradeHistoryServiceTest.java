@@ -5,6 +5,7 @@ import com.carlosbecker.guice.GuiceTestRunner;
 import fr.lelouet.guice.TestModule;
 import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import fr.lelouet.services.internal.history.TradeHistoryService;
+import fr.lelouet.services.internal.history.beans.ProfitBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,6 +26,12 @@ public class TradeHistoryServiceTest {
     @Test
     public void start() {
         Map<String, List<PastOrder>> fullHistory = tradeHistoryService.getFullHistory();
+        assertThat(true).isEqualTo(true);
+    }
+
+    @Test
+    public void profit() {
+        Map<String, ProfitBean> fullHistory = tradeHistoryService.calculProfitOfHistory();
         assertThat(true).isEqualTo(true);
     }
 }

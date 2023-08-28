@@ -3,6 +3,7 @@ package fr.lelouet.services.internal.history;
 import fr.lelouet.services.external.binance.BinanceApi;
 import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import fr.lelouet.services.external.binance.trade.enums.OrderSide;
+import fr.lelouet.services.internal.history.beans.ProfitBean;
 import fr.lelouet.services.slack.SlackService;
 import fr.lelouet.services.slack.enums.SlackMessageType;
 
@@ -53,15 +54,46 @@ public class TradeHistoryService {
      */
     public Map<String, List<PastOrder>> getFullHistory() {
         Map<String, List<PastOrder>> map = new HashMap<>();
-
         for (String crypto : CRYPTO) {
             for (String fiat : FIAT) {
                 String symbol = crypto + fiat;
                 map.put(symbol, binanceApi.getTradeHistory(symbol));
             }
         }
-        this.logHistory(map);
+//        this.logHistory(map);
         return map;
+    }
+
+    /**
+     * En cours de dev
+     * // TODO : 2021-10-13 : a terminer
+     */
+    public Map<String, ProfitBean> calculProfitOfHistory() {
+        // todo : opti
+        Map<String, ProfitBean> profitBeanMap = new HashMap<>();
+        Map<String, List<PastOrder>> fullHistory = this.getFullHistory();
+        for (List<PastOrder> pastOrders : fullHistory.values()) {
+            for (PastOrder pastOrder : pastOrders) {
+                ProfitBean profitBean;
+                // Création/Recupération du bean
+                if (profitBeanMap.get(cleanSymbol(pastOrder.symbol())) == null) {
+                    profitBean = new ProfitBean("", null, null);
+                } else {
+                    profitBean = profitBeanMap.get(cleanSymbol(pastOrder.symbol()));
+
+                }
+
+                // Ajout du trade dans le bean
+                if (OrderSide.BUY.equals(pastOrder.side())) {
+                    profitBean.addBuy(pastOrder);
+                }
+                if (OrderSide.SELL.equals(pastOrder.side())) {
+                    profitBean.addSell(pastOrder);
+                }
+                profitBeanMap.put(cleanSymbol(pastOrder.symbol()), profitBean);
+            }
+        }
+        return profitBeanMap;
     }
 
     public void logHistory(Map<String, List<PastOrder>> history) {
