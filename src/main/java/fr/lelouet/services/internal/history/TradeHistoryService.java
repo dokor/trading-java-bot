@@ -7,6 +7,8 @@ import fr.lelouet.services.slack.enums.SlackMessageType;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.*;
 
@@ -18,20 +20,20 @@ public class TradeHistoryService {
 
     private static final List<String> FIAT = List.of("BUSD", "USDT");
     private static final List<String> CRYPTO = List.of(
-            "BTC",
-            "ETH",
-            "ADA",
-            "AVAX",
-            "BNB",
-            "VET",
-            "DOT",
-            "SOL"
+        "BTC",
+        "ETH",
+        "ADA",
+        "AVAX",
+        "BNB",
+        "VET",
+        "DOT",
+        "SOL"
     );
 
     @Inject
     public TradeHistoryService(
-            BinanceApi binanceApi,
-            SlackService slackService
+        BinanceApi binanceApi,
+        SlackService slackService
     ) {
         this.binanceApi = binanceApi;
         this.slackService = slackService;
@@ -57,23 +59,47 @@ public class TradeHistoryService {
             pastOrdersSorted.addAll(pastOrders);
         }
         pastOrdersSorted.stream()
-                .sorted(Comparator.comparing(PastOrder::symbol).thenComparingLong(PastOrder::time))
-                .forEach(pastOrder -> slackService.sendMessage(cleanPastOrder(pastOrder), SlackMessageType.INFORMATIF));
+            .sorted(Comparator.comparing(PastOrder::symbol).thenComparingLong(PastOrder::time))
+            .forEach(pastOrder -> slackService.sendMessage(cleanPastOrder(pastOrder), SlackMessageType.INFORMATIF));
         slackService.sendMessage("[FIN Historique des trades]\n", SlackMessageType.INFORMATIF);
     }
 
     private String cleanPastOrder(PastOrder pastOrder) {
         return cleanSymbol(pastOrder.symbol())
-                + " [" + pastOrder.side() + "]"
-                + " [" + pastOrder.type() + "]"
-                + ": " + pastOrder.executedQty() + " à "
-                + pastOrder.price() + "$ "
-                + " (" + pastOrder.price() * pastOrder.executedQty() + "$)"
-                + " le " + Instant.ofEpochMilli(pastOrder.time())
-                ;
+            + " [" + pastOrder.side() + "]"
+            + " [" + pastOrder.type() + "]"
+            + ": " + pastOrder.executedQty() + " à "
+            + pastOrder.price() + "$ "
+            + " (" + calculatePrice(pastOrder.price(), pastOrder.executedQty()) + "$)"
+            + " le " + Instant.ofEpochMilli(pastOrder.time())
+            ;
     }
 
+    /**
+     * Calcul du prix d'un trade et réduction de l'arrondi pour affiche de 2 chiffres après la virgule
+     *
+     * @param price
+     * @param qty
+     * @return
+     */
+    private String calculatePrice(Double price, Double qty) {
+        BigDecimal prixBigDecimal = new BigDecimal(price * qty);
+        BigDecimal prixArrondi = prixBigDecimal.setScale(2, RoundingMode.HALF_UP);
+        return prixArrondi + "$";
+    }
+
+    /**
+     * Netoyage du symbol du trade pour connaitre la crypto
+     *
+     * @param symbol
+     * @return
+     */
     private String cleanSymbol(String symbol) {
-        return symbol.replace("BUSD", "").replace("USDT", "");
+        for (String s : FIAT) {
+            if (symbol.contains(s)) {
+                return symbol.replace(s, "");
+            }
+        }
+        return symbol;
     }
 }
