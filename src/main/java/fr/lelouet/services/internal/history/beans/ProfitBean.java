@@ -14,8 +14,8 @@ import java.util.ArrayList;
 @Setter
 public class ProfitBean {
     private String symbol;
-    private ArrayList<PastOrder> buys;
-    private ArrayList<PastOrder> sells;
+    private ArrayList<PastOrder> buys = new ArrayList<>();
+    private ArrayList<PastOrder> sells = new ArrayList<>();
 
     public void addBuy(PastOrder pastOrder) {
         if (buys == null) {
@@ -33,18 +33,21 @@ public class ProfitBean {
 
 
     public double totalBuyAmount() {
+        if (buys == null) return 0.0;
         return buys.stream()
             .mapToDouble(pastOrder -> pastOrder.executedQty() * pastOrder.price())
             .sum();
     }
 
     public double totalSellAmount() {
+        if (sells == null) return 0.0;
         return sells.stream()
             .mapToDouble(pastOrder -> pastOrder.executedQty() * pastOrder.price())
             .sum();
     }
 
     public double averageBuyPrice() {
+        if (buys == null) return 0.0;
         double totalQty = buys.stream()
             .mapToDouble(PastOrder::executedQty)
             .sum();
@@ -57,6 +60,7 @@ public class ProfitBean {
     }
 
     public double averageSellPrice() {
+        if (sells == null) return 0.0;
         double totalQty = sells.stream()
             .mapToDouble(PastOrder::executedQty)
             .sum();
@@ -73,14 +77,20 @@ public class ProfitBean {
     }
 
     public double getCurrentBalance() {
-        double totalBuyQty = buys.stream()
-            .mapToDouble(PastOrder::executedQty)
-            .sum();
+        double totalBuyQty = 0.0;
+        double totalSellQty = 0.0;
 
-        double totalSellQty = sells.stream()
-            .mapToDouble(PastOrder::executedQty)
-            .sum();
+        if (buys != null) {
+            totalBuyQty = buys.stream()
+                .mapToDouble(PastOrder::executedQty)
+                .sum();
+        }
+        if (sells != null) {
+            totalSellQty = sells.stream()
+                .mapToDouble(PastOrder::executedQty)
+                .sum();
 
-        return totalSellQty - totalBuyQty;
+        }
+        return totalBuyQty - totalSellQty;
     }
 }
