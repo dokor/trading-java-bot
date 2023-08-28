@@ -63,7 +63,6 @@ public class TradeHistoryService {
                 map.put(symbol, binanceApi.getTradeHistory(symbol));
             }
         }
-//        this.logHistory(map);
         return map;
     }
 
@@ -113,8 +112,6 @@ public class TradeHistoryService {
                 }
             }
         }
-
-
         return profitBeanMap;
     }
 

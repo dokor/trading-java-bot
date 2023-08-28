@@ -26,6 +26,7 @@ public class TradeHistoryServiceTest {
     @Test
     public void start() {
         Map<String, List<PastOrder>> fullHistory = tradeHistoryService.getFullHistory();
+        tradeHistoryService.logHistory(fullHistory);
         assertThat(true).isEqualTo(true);
     }
 
