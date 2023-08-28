@@ -39,6 +39,10 @@ public class TradeHistoryService {
         this.slackService = slackService;
     }
 
+    /**
+     * Récupération l'historique complet des trades réalisés sur les cryptos listés dans CRYPTO
+     * avec les FIAT listés
+     */
     public Map<String, List<PastOrder>> getFullHistory() {
         Map<String, List<PastOrder>> map = new HashMap<>();
 
@@ -53,6 +57,7 @@ public class TradeHistoryService {
     }
 
     public void logHistory(Map<String, List<PastOrder>> history) {
+        // todo : opti
         slackService.sendMessage("[DEBUT Historique des trades]\n", SlackMessageType.INFORMATIF);
         List<PastOrder> pastOrdersSorted = new ArrayList<>();
         for (List<PastOrder> pastOrders : history.values()) {
