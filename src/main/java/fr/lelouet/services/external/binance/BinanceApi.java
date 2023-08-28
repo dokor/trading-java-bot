@@ -19,6 +19,7 @@ import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
+import fr.lelouet.services.external.binance.wallet.bean.TradingFeeResponse;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -72,6 +73,9 @@ public class BinanceApi {
      */
     public CoinWallet getCoinWallet(String asset) {
         return binanceWalletClientApi.getCoinWallet(asset);
+    }
+    public TradingFeeResponse getTradingFee(String asset) {
+        return binanceWalletClientApi.getTradeFee(asset);
     }
 
     // Market
