@@ -18,7 +18,10 @@ public class TradeHistoryService {
     private final BinanceApi binanceApi;
     private final SlackService slackService;
 
-    private static final List<String> FIAT = List.of("BUSD", "USDT");
+    private static final List<String> FIAT = List.of(
+        "BUSD",
+        "USDT"
+    );
     private static final List<String> CRYPTO = List.of(
         "BTC",
         "ETH",
