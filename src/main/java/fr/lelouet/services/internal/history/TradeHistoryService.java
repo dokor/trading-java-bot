@@ -7,6 +7,8 @@ import fr.lelouet.services.external.binance.trade.enums.OrderSide;
 import fr.lelouet.services.internal.history.beans.ProfitBean;
 import fr.lelouet.services.slack.SlackService;
 import fr.lelouet.services.slack.enums.SlackMessageType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,7 +23,7 @@ import java.util.Map;
 
 @Singleton
 public class TradeHistoryService {
-
+    private static final Logger logger = LoggerFactory.getLogger(TradeHistoryService.class);
     private final BinanceApi binanceApi;
     private final SlackService slackService;
 
@@ -94,16 +96,22 @@ public class TradeHistoryService {
         }
 
         for (ProfitBean profitBean : profitBeanMap.values()) {
-            TickerPrice tickerPrice = binanceApi.getAveragePrice(profitBean.getSymbol()+"BUSD");
+            TickerPrice tickerPrice = binanceApi.getAveragePrice(profitBean.getSymbol() + "BUSD");
             double profit = profitBean.netProfitOrLoss(); // Profit déjà réalisée
             double restant = profitBean.getCurrentBalance() * tickerPrice.price(); // Stock actuel au prix courant
-
-            // si profit >= 0 : J'ai gagné de l'argent sur cette crypto
-            // si profit < 0
-                // si restant < 0 : J'ai perdu de l'argent sur cette crypto
-                // si restant > 0 : J'ai perdu de l'argent sur cette crypto mais j'ai encore des stocks
-                    // si restant > profit : J'ai encore possibilité de gagner de l'argent sur cette crypto
-            String m = "";
+            if (profit >= 0) {
+                logger.warn("[{}] [WIN] Trading [{}]$ et il reste un stock de [{}]$ ", profitBean.getSymbol(), profit, restant);
+            } else {
+                if (restant < 0) {
+                    logger.warn("[{}] [LOOSE] Trading [{}]$ + un stock de [{}]$", profitBean.getSymbol(), profit, restant);
+                } else {
+                    if (profit + restant > 0) {
+                        logger.warn("[{}] [WIN] Trading [{}]$ + un stock de [{}]$", profitBean.getSymbol(), profit, restant);
+                    } else {
+                        logger.warn("[{}] [LOOSE] Trading [{}]$ + un stock de [{}]$", profitBean.getSymbol(), profit, restant);
+                    }
+                }
+            }
         }
 
 
