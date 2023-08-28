@@ -1,6 +1,6 @@
 package fr.lelouet.services.external.binance;
 
-import fr.lelouet.services.external.binance.trade.PastOrder;
+import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

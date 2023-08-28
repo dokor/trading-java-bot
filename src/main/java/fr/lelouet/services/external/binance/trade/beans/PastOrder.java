@@ -1,4 +1,4 @@
-package fr.lelouet.services.external.binance.trade;
+package fr.lelouet.services.external.binance.trade.beans;
 
 import fr.lelouet.services.external.binance.trade.enums.OrderSide;
 import fr.lelouet.services.external.binance.trade.enums.OrderType;

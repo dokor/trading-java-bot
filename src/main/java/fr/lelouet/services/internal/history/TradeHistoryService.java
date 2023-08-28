@@ -1,7 +1,8 @@
 package fr.lelouet.services.internal.history;
 
 import fr.lelouet.services.external.binance.BinanceApi;
-import fr.lelouet.services.external.binance.trade.PastOrder;
+import fr.lelouet.services.external.binance.trade.beans.PastOrder;
+import fr.lelouet.services.external.binance.trade.enums.OrderSide;
 import fr.lelouet.services.slack.SlackService;
 import fr.lelouet.services.slack.enums.SlackMessageType;
 

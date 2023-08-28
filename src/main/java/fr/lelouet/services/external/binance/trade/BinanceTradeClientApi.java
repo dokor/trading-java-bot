@@ -3,6 +3,7 @@ package fr.lelouet.services.external.binance.trade;
 import com.binance.connector.client.impl.spot.Trade;
 import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.trade.beans.NewOrder;
+import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

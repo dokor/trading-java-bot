@@ -14,7 +14,7 @@ import fr.lelouet.services.external.binance.swap.BinanceSwapClientApi;
 import fr.lelouet.services.external.binance.swap.bean.ClaimRewardResponse;
 import fr.lelouet.services.external.binance.swap.bean.LiquidityRewards;
 import fr.lelouet.services.external.binance.trade.BinanceTradeClientApi;
-import fr.lelouet.services.external.binance.trade.PastOrder;
+import fr.lelouet.services.external.binance.trade.beans.PastOrder;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
