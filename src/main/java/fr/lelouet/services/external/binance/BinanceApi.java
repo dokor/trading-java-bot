@@ -15,7 +15,9 @@ import fr.lelouet.services.external.binance.swap.BinanceSwapClientApi;
 import fr.lelouet.services.external.binance.swap.bean.ClaimRewardResponse;
 import fr.lelouet.services.external.binance.swap.bean.LiquidityRewards;
 import fr.lelouet.services.external.binance.trade.BinanceTradeClientApi;
+import fr.lelouet.services.external.binance.trade.beans.Candlestick;
 import fr.lelouet.services.external.binance.trade.beans.PastOrder;
+import fr.lelouet.services.external.binance.trade.enums.CandlestickInterval;
 import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import fr.lelouet.services.external.binance.wallet.bean.CoinWallet;
 import fr.lelouet.services.external.binance.wallet.bean.CoinsWalletInformations;
@@ -94,6 +96,10 @@ public class BinanceApi {
      */
     public TickerPrice getAveragePrice(String symbol) {
         return binanceMarketClientApi.getAveragePrice(symbol);
+    }
+
+    public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval candlestickInterval) {
+        return binanceMarketClientApi.getCandlestickBars(symbol, candlestickInterval);
     }
 
     // Stacking
@@ -189,6 +195,7 @@ public class BinanceApi {
     public LiquidityRewards getUnclaimRewards() {
         return binanceSwapClientApi.getUnclaimRewards();
     }
+
 
 
 }

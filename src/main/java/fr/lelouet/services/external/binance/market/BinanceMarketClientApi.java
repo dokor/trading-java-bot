@@ -5,6 +5,8 @@ import com.binance.connector.client.impl.spot.Market;
 import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.market.beans.OrderBook;
 import fr.lelouet.services.external.binance.market.beans.TickerPrice;
+import fr.lelouet.services.external.binance.trade.beans.Candlestick;
+import fr.lelouet.services.external.binance.trade.enums.CandlestickInterval;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 @Singleton
 public class BinanceMarketClientApi {
@@ -41,5 +44,10 @@ public class BinanceMarketClientApi {
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         stringObjectLinkedHashMap.put(BinanceQueryParam.SYMBOL.getValue(), symbol);
         return binanceGlobalProvider.callBinanceApi(clientMarket, "averagePrice", TickerPrice.class, stringObjectLinkedHashMap);
+    }
+
+    public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval candlestickInterval) {
+        // todo
+        return List.of();
     }
 }
