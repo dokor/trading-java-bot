@@ -37,6 +37,8 @@ public class RSIService {
 
     private final BinanceApi binanceApi;
     private static final int RSI_PERIOD = 14;
+    private static final int UPPER_LIMIT = 70;
+    private static final int LOWER_LIMIT = 30;
 
     @Inject
     public RSIService(
@@ -48,7 +50,7 @@ public class RSIService {
     /**
      * Permet d'obtenir le RSI d'une paire de crypto
      *
-     * @param symbol : la paire de crypto à analyser ex : BTCBUSD
+     * @param symbol              : la paire de crypto à analyser ex : BTCBUSD
      * @param candlestickInterval : la taille des bougies récupérées
      */
     public void analysisRSI(String symbol, CandlestickInterval candlestickInterval) {
@@ -88,8 +90,7 @@ public class RSIService {
 
     public static Bar convertToTa4jTick(Candlestick candlestick) {
         ZonedDateTime closeTime = getZonedDateTime(candlestick.getCloseTime());
-        Duration candleDuration = Duration.ofMillis(candlestick.getCloseTime()
-            - candlestick.getOpenTime());
+        Duration candleDuration = Duration.ofMillis(candlestick.getCloseTime() - candlestick.getOpenTime());
         Num openPrice = DecimalNum.valueOf(candlestick.getOpen());
         Num closePrice = DecimalNum.valueOf(candlestick.getClose());
         Num highPrice = DecimalNum.valueOf(candlestick.getHigh());
