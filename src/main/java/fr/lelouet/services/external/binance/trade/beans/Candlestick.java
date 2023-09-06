@@ -18,8 +18,8 @@ public class Candlestick {
     private String volume;
     private Long closeTime;
     private String quoteAssetVolume;
-    private Long numberOfTrades;
+    private Integer numberOfTrades;
     private String takerBuyBaseAssetVolume;
     private String takerBuyQuoteAssetVolume;
-
+    private String unusedField;
 }

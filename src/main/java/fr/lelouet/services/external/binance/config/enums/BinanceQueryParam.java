@@ -14,7 +14,9 @@ public enum BinanceQueryParam {
     SYMBOL("symbol"),
     ASSET("asset"),
     START_TIME("startTime"),
-    END_TIME("endTime")
+    END_TIME("endTime"),
+    INTERVAL("interval"),
+    LIMIT("limit")
     ;
     private final String value;
 }
