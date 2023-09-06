@@ -28,7 +28,7 @@ public class TestBinanceApi {
     @SneakyThrows
     public void mainTest() {
         logger.info("------------- Lancement des tests principaux -------------");
-        List<PastOrder> pastOrdersBTCUSDT = binanceApi.getTradeHistory("BTCUSDT");
+        List<PastOrder> pastOrdersBTCUSDT = binanceApi.getTradeHistory("BTCBUSD");
         logger.info("------------- Fin des tests principaux -------------");
     }
 

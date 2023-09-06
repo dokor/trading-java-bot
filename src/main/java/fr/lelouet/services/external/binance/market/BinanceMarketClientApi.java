@@ -60,7 +60,7 @@ public class BinanceMarketClientApi {
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         stringObjectLinkedHashMap.put(BinanceQueryParam.SYMBOL.getValue(), symbol);
         stringObjectLinkedHashMap.put(BinanceQueryParam.INTERVAL.getValue(), candlestickInterval.getIntervalId());
-        stringObjectLinkedHashMap.put(BinanceQueryParam.LIMIT.getValue(), 1000); // default : 500, max : 1000
+        stringObjectLinkedHashMap.put(BinanceQueryParam.LIMIT.getValue(), 500); // default : 500, max : 1000
         String objects = binanceGlobalProvider.callBinanceApi(clientMarket, "klines", String.class, stringObjectLinkedHashMap);
         if (objects != null) {
             return transform(objects);
