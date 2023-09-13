@@ -11,6 +11,7 @@ import org.ta4j.core.indicators.RSIIndicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 import org.ta4j.core.num.DecimalNum;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class RSIService {
      * @param candlestickInterval : la taille des bougies récupérées
      * @return
      */
-    public List<Bar> analysisRSI(String symbol, CandlestickInterval candlestickInterval) {
+    public List<Bar> analysisRSI(String symbol, @Nullable CandlestickInterval candlestickInterval) {
         if (candlestickInterval == null) {
             candlestickInterval = CandlestickInterval.ONE_DAY;
         }
