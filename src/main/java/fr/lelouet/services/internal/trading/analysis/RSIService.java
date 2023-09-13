@@ -17,8 +17,6 @@ import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.lelouet.services.internal.trading.analysis.IndicateursUtilsService.convertToTimeSeries;
-
 /**
  * TODO : REFACTO + sortir les transformations communes + sortir les calculs communs + faire quelque chose pour une vérification uniques d'une pair
  */
@@ -61,7 +59,7 @@ public class RSIService {
 
     public static List<Bar> calculate(String symbol, List<Candlestick> candlestickList) {
         // Créez une série de prix à partir des données Candlestick
-        BarSeries series = convertToTimeSeries(candlestickList, symbol);
+        BarSeries series = IndicateursUtilsService.convertToTimeSeries(candlestickList, symbol);
 
         // Créez l'indicateur de prix de clôture
         ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
