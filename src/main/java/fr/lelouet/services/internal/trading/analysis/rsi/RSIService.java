@@ -1,8 +1,9 @@
-package fr.lelouet.services.internal.trading.analysis;
+package fr.lelouet.services.internal.trading.analysis.rsi;
 
 import fr.lelouet.services.external.binance.BinanceApi;
 import fr.lelouet.services.external.binance.trade.beans.Candlestick;
 import fr.lelouet.services.external.binance.trade.enums.CandlestickInterval;
+import fr.lelouet.services.internal.trading.analysis.IndicateursUtilsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.ta4j.core.Bar;
