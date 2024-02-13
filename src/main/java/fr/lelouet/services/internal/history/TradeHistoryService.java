@@ -21,16 +21,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Sercice de gestion de l'historique des trades réalisés
+ * Permet de récupérer l'historique des trades réalisés, de les analysés et de logger les informations intéréssantes
+ */
 @Singleton
 public class TradeHistoryService {
     private static final Logger logger = LoggerFactory.getLogger(TradeHistoryService.class);
     private final BinanceApi binanceApi;
     private final SlackService slackService;
 
+    // Liste des FIAT utilisés pour calculer les pairs
     private static final List<String> FIAT = List.of(
         "BUSD",
         "USDT"
     );
+
+    // Liste des Crypto qui seront récupérés dans l'historique
     private static final List<String> CRYPTO = List.of(
         "BTC",
         "ETH",

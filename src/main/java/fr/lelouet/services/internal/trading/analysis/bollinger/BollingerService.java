@@ -1,26 +1,14 @@
-package fr.lelouet.services.internal.trading.analysis;
+package fr.lelouet.services.internal.trading.analysis.bollinger;
 
 import fr.lelouet.services.external.binance.BinanceApi;
 import fr.lelouet.services.external.binance.trade.beans.Candlestick;
 import fr.lelouet.services.external.binance.trade.enums.CandlestickInterval;
-import fr.lelouet.services.external.binance.wallet.BinanceWalletClientApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.ta4j.core.Bar;
-import org.ta4j.core.BaseBar;
 import org.ta4j.core.BaseBarSeries;
-import org.ta4j.core.indicators.bollinger.BollingerBandsLowerIndicator;
-import org.ta4j.core.indicators.bollinger.BollingerBandsMiddleIndicator;
-import org.ta4j.core.indicators.bollinger.BollingerBandsUpperIndicator;
-import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
-import org.ta4j.core.indicators.statistics.StandardDeviationIndicator;
-import org.ta4j.core.num.DecimalNum;
-import org.ta4j.core.num.Num;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.time.Duration;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Singleton

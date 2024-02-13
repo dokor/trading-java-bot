@@ -20,7 +20,7 @@ public class TradingService {
     /**
      * TODO : Equilibrer les comtpes FIAT
      */
-    public void todo(){
+    public void todo() {
         // Récupérer le prix courant du symbol BUSD/USDT
         // Trouver une Pair Crypto qui a un prix en BUSD plus faible que celui en USDT
         // Prendre en compte les Fee et la liquidité
@@ -28,7 +28,5 @@ public class TradingService {
 
         // Faire la meme chose avec d'autres FIAT
     }
-
-
 
 }

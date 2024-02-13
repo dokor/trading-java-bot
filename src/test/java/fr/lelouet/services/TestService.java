@@ -4,6 +4,7 @@ import com.carlosbecker.guice.GuiceModules;
 import com.carlosbecker.guice.GuiceTestRunner;
 import fr.lelouet.guice.TestModule;
 import fr.lelouet.services.external.binance.TestBinanceApi;
+import fr.lelouet.services.internal.trading.analysis.rsi.RSIService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,9 +19,12 @@ public class TestService {
     @Inject
     TestBinanceApi testBinanceApi;
 
+    @Inject
+    RSIService rsiService;
+
     @Test
     public void start() {
-        testBinanceApi.mainTest();
+        rsiService.analysisRSI("BTCBUSD", null);
         assertThat(true).isEqualTo(true);
     }
 }

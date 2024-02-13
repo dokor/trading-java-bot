@@ -13,6 +13,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Map;
 
+/**
+ * Service de récupération des liquidités
+ * Se base sur l'api Bswap de Binance pour lister les récompensens disponibles et les récupérer
+ */
 @Singleton
 public class LiquidityService {
 
@@ -29,6 +33,10 @@ public class LiquidityService {
         this.slackService = slackService;
     }
 
+    /**
+     * Récupération des liquidité et log de l'ensemble des cryptos récupérés
+     * @return true si la récupération des liquidités s'est bien passée
+     */
     public Boolean redeemLiquidityReward() {
         Map<String, Double> unclamedLiquidityRewards = this.getLiquidityRewards();
         return this.claimLiquidityRewards(unclamedLiquidityRewards.toString());

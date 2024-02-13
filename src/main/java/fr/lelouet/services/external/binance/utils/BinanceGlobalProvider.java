@@ -27,7 +27,7 @@ public class BinanceGlobalProvider {
 
     /**
      * Documentations externes :
-     *
+     * <p>
      * Bible : https://binance-docs.github.io/apidocs/spot/en/#api-key-setup
      * Users can use the SPOT Testnet to practice SPOT trading : https://testnet.binance.vision/
      * Swagger API : https://binance.github.io/binance-api-swagger/
@@ -67,9 +67,13 @@ public class BinanceGlobalProvider {
             Method method = client.getClass().getMethod(functionName, Map.class);
             String response = (String) method.invoke(client, stringObjectLinkedHashMap);
             logger.debug("API Response : {}", response);
+            // Vérifier si le type de retour demandé est une String, alors désérialisation réalisé en dehors de cette méthode
+            if (String.class.isAssignableFrom(returnType)) {
+                return (T) response;
+            }
             // Vérifier si le type de retour est une liste ou non
             if (List.class.isAssignableFrom(returnType)) {
-                JavaType listType = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, returnType);
+                JavaType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, returnType);
                 return objectMapper.readValue(response, listType);
             } else {
                 return objectMapper.readValue(response, returnType);
