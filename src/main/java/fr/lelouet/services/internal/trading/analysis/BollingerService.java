@@ -65,4 +65,43 @@ public class BollingerService {
         // Interpréter les résultats et prendre des décisions
         // ... (analysez les indicateurs pour prendre des décisions de trading)
     }
+
+//    public static void main(String[] args) {
+//        List<Candlestick> candlestickList = new ArrayList<>(); // Remplissez cette liste avec vos données Candlestick
+//
+//        // Créez une série de prix à partir des données Candlestick
+//        TimeSeries series = createPriceSeries(candlestickList);
+//
+//        // Définissez la période pour les bandes de Bollinger
+//        int period = 20;
+//
+//        // Créez l'indicateur de prix de clôture
+//        ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
+//
+//        // Calculez la SMA sur la période donnée
+//        SMAIndicator sma = new SMAIndicator(closePrice, period);
+//
+//        // Calculez l'écart type sur la même période que la SMA
+//        StandardDeviationIndicator standardDeviation = new StandardDeviationIndicator(closePrice, period);
+//
+//        // Calculez les bandes de Bollinger
+//        Indicator<Num> upperBand = sma.plus(standardDeviation.multipliedBy(PrecisionNum.valueOf(2)));
+//        Indicator<Num> lowerBand = sma.minus(standardDeviation.multipliedBy(PrecisionNum.valueOf(2)));
+//
+//        // Maintenant, vous pouvez utiliser upperBand et lowerBand pour obtenir les valeurs des bandes supérieure et inférieure
+//    }
+//
+//    private static TimeSeries createPriceSeries(List<Candlestick> candlestickList) {
+//        TimeSeries series = new BaseTimeSeries("Candlestick Prices");
+//
+//        for (Candlestick candlestick : candlestickList) {
+//            // Convertissez le prix de clôture en Num (BigDecimal)
+//            Num closePrice = PrecisionNum.valueOf(candlestick.getClose());
+//
+//            // Ajoutez une bougie à la série
+//            series.addBar(new BaseBar(candlestick.getOpenTime(), closePrice));
+//        }
+//
+//        return series;
+//    }
 }
