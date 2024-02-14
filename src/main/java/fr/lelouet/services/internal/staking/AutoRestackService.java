@@ -5,6 +5,7 @@ import fr.lelouet.services.configuration.ConfigurationService;
 import fr.lelouet.services.errors.ProjectError;
 import fr.lelouet.services.external.binance.BinanceApi;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePositionByAsset;
 import fr.lelouet.services.external.binance.saving.enums.RedeemType;
 import fr.lelouet.services.external.binance.staking.bean.ProductResponse;
 import fr.lelouet.services.external.binance.staking.bean.ProjectStaking;
@@ -53,15 +54,15 @@ public class AutoRestackService {
         logger.debug(logStart);
         slackService.sendMessage(logStart, SlackMessageType.AUTO_REDEEM);
         // Récupère l'ensemble des positions prises sur des produits flexibles.
-        List<FlexiblePosition> flexiblePositions = binanceApi.flexibleProductPosition();
-        for (FlexiblePosition flexiblePosition : flexiblePositions) {
+        List<FlexiblePositionByAsset> flexiblePositions = binanceApi.flexibleProductPosition();
+        for (FlexiblePositionByAsset flexiblePosition : flexiblePositions) {
             boolean redeemThisCrypto = false;
             int retval = 0;
             Double leftQuota = 0.0;
             // informatif
             String assetName = flexiblePosition.asset();
-            Double totalAmount = Double.valueOf(flexiblePosition.totalAmount());
-            String annualRate = flexiblePosition.annualInterestRate();
+            double totalAmount = Double.parseDouble(flexiblePosition.totalAmount());
+            String annualRate = flexiblePosition.latestAnnualPercentageRate();
             // Filtre des cryptos ignorés volontairement dans la configuration projet
             if (ignoredCryproRedeem.contains(assetName)) {
                 logger.debug("[REDEEM_FLEXIBLE] [{}] ignoré par la configuration projet", assetName);

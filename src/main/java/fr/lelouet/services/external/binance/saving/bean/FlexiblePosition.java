@@ -2,6 +2,7 @@ package fr.lelouet.services.external.binance.saving.bean;
 
 import java.util.Map;
 
+@Deprecated
 public record FlexiblePosition(
     Map<String, Double> tierAnnualInterestRate,
     String annualInterestRate,
