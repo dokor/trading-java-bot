@@ -5,6 +5,8 @@ import fr.lelouet.services.external.binance.market.beans.OrderBook;
 import fr.lelouet.services.external.binance.market.beans.TickerPrice;
 import fr.lelouet.services.external.binance.saving.BinanceSavingClientApi;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePositionByAsset;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePositionResponse;
 import fr.lelouet.services.external.binance.saving.enums.RedeemType;
 import fr.lelouet.services.external.binance.staking.BinanceStakingClientApi;
 import fr.lelouet.services.external.binance.staking.bean.PersonalLeftQuota;
@@ -168,7 +170,7 @@ public class BinanceApi {
     /**
      * Récupére l'ensemble des postions flexible disponible pour un asset précis
      */
-    public List<FlexiblePosition> flexibleProductPosition(String asset) {
+    public List<FlexiblePositionByAsset> flexibleProductPosition(String asset) {
         return binanceSavingClientApi.flexibleProductPosition(asset);
     }
 
@@ -176,7 +178,7 @@ public class BinanceApi {
      * Récupére l'ensemble des postions flexible disponible.
      * Attention, cela dépasse surement le nombre de résultats renvoyés par l'api, il faudra surement paginé l'api
      */
-    public List<FlexiblePosition> flexibleProductPosition() {
+    public List<FlexiblePositionByAsset> flexibleProductPosition() {
         return binanceSavingClientApi.flexibleProductPosition(null);
     }
 

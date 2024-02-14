@@ -1,8 +1,10 @@
 package fr.lelouet.services.external.binance.saving;
 
-import com.binance.connector.client.impl.spot.Savings;
+import com.binance.connector.client.impl.spot.SimpleEarn;
 import fr.lelouet.services.external.binance.config.enums.BinanceQueryParam;
 import fr.lelouet.services.external.binance.saving.bean.FlexiblePosition;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePositionByAsset;
+import fr.lelouet.services.external.binance.saving.bean.FlexiblePositionResponse;
 import fr.lelouet.services.external.binance.saving.enums.RedeemType;
 import fr.lelouet.services.external.binance.utils.BinanceGlobalProvider;
 import org.slf4j.Logger;
@@ -20,7 +22,7 @@ public class BinanceSavingClientApi {
 
     private static final Logger logger = LoggerFactory.getLogger(BinanceSavingClientApi.class);
 
-    private final Savings client;
+    private final SimpleEarn client;
     private final BinanceGlobalProvider binanceGlobalProvider;
 
     @Inject
@@ -28,7 +30,7 @@ public class BinanceSavingClientApi {
         BinanceGlobalProvider binanceGlobalProvider
     ) {
         this.binanceGlobalProvider = binanceGlobalProvider;
-        this.client = binanceGlobalProvider.getSpotClient().createSavings();
+        this.client = binanceGlobalProvider.getSpotClient().createSimpleEarn();
     }
 
     /**
@@ -47,16 +49,16 @@ public class BinanceSavingClientApi {
     /**
      * Récupére l'ensemble des postions flexible disponible pour un asset précis
      */
-    public List<FlexiblePosition> flexibleProductPosition(String asset) {
+    public List<FlexiblePositionByAsset> flexibleProductPosition(String asset) {
         logger.debug("Tentative de get du staking de [{}]", asset);
         LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
         if (asset != null) {
             stringObjectLinkedHashMap.put(BinanceQueryParam.ASSET.getValue(), asset);
         }
         stringObjectLinkedHashMap.put(BinanceQueryParam.SIZE.getValue(), 100);
-        FlexiblePosition[] flexiblePositions = binanceGlobalProvider.callBinanceApi(client, "flexibleProductPosition", FlexiblePosition[].class, stringObjectLinkedHashMap);
+        FlexiblePositionResponse flexiblePositions = binanceGlobalProvider.callBinanceApi(client, "flexibleProductPosition", FlexiblePositionResponse.class, stringObjectLinkedHashMap);
         if (flexiblePositions != null) {
-            return Arrays.stream(flexiblePositions).toList();
+            return flexiblePositions.rows();
         }
         return Collections.emptyList();
     }
