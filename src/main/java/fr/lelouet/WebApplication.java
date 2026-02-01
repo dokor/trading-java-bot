@@ -32,7 +32,7 @@ public class WebApplication {
             // schedule tasks
             injector.getInstance(ScheduledJobs.class).scheduleJobs();
 
-            logger.info("Server started in {} ms ! Super !", System.currentTimeMillis() - startTimestamp);
+            logger.info("Server started in {} ms !", System.currentTimeMillis() - startTimestamp);
         } catch (Throwable e) {
             logger.error("Failed to start server", e);
             // This line is important, because during initialization some libraries change the main thread type
