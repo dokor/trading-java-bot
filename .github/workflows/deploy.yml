@@ -1,0 +1,20 @@
+name: Deploy java-secure-api to Raspberry
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on:
+      - self-hosted
+      - raspberry
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build & deploy
+        run: |
+          docker compose -f docker-compose.prod.yml up -d --build --remove-orphans

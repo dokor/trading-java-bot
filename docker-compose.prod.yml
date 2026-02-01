@@ -1,0 +1,24 @@
+services:
+  java-secure-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: java-secure-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - proxy
+      - java-secure-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.java-secure.rule=Host(`${JAVA_SECURE_DOMAIN}`)"
+      - "traefik.http.routers.java-secure.entrypoints=web"
+      - "traefik.http.services.java-secure.loadbalancer.server.port=8080"
+
+networks:
+  proxy:
+    external: true
+  java-secure-net:
+    external: true
+    name: java-secure-net
