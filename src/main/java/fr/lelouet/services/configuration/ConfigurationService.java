@@ -24,14 +24,6 @@ public class ConfigurationService {
         this.config = config;
     }
 
-    public String swaggerAccessUsername() {
-        return config.getString("swagger.access.username");
-    }
-
-    public String swaggerAccessPassword() {
-        return config.getString("swagger.access.password");
-    }
-
     public SlackConfiguration getSlackConfig() {
         Config configSlack = config.getConfig(API_SLACK);
         return SlackConfiguration.of(
