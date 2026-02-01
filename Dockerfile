@@ -6,7 +6,7 @@ COPY pom.xml .
 RUN mvn -q -e -DskipTests dependency:go-offline
 
 COPY src ./src
-RUN mvn -DskipTests package
+RUN mvn -DskipTests package assembly:single
 
 # ---- Runtime stage ----
 FROM eclipse-temurin:17-jre
@@ -15,7 +15,7 @@ WORKDIR /app
 RUN useradd -m appuser
 USER appuser
 
-COPY --from=build /app/target/*.jar /app/app.jar
+COPY --from=build /app/target/*-jar-with-dependencies.jar /app/app.jar
 
 EXPOSE 8080
 ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0 -XX:+UseG1GC"
