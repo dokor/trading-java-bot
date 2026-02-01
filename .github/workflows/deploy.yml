@@ -1,4 +1,4 @@
-name: Deploy java-secure-api to Raspberry
+name: Deploy java-secure-api
 
 on:
   push:
@@ -15,6 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build & deploy
+      - name: Deploy with Docker Compose
         run: |
           docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
