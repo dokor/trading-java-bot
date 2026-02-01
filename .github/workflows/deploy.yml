@@ -2,7 +2,7 @@ name: Deploy java-secure-api
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "v1/main" ]
   workflow_dispatch:
 
 jobs:
