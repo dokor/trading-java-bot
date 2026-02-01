@@ -21,6 +21,19 @@ api.binance.key.secret = "XXXXXXXXXXXXXXX"
 # Url du channel "XXXXXXXXXXXXXXX"
 api.slack.url = "XXXXXXXXXXXXXXX"
 api.slack.token = "XXXXXXXXXXXXXXX"
+
+# SLACK
+# Url du channel "XXXXXXXXXXXXXXX"
+api.slack.url = "XXXXXXXXXXXXXXX"
+api.slack.token = "XXXXXXXXXXXXXXX"
+
+algotithm.crypto.ignore-list.auto-staking = ["BNB"]
+algotithm.crypto.ignore-list.redeem-flexible = ["BNB"]
+
+jobs.cron.auto-restack=""
+jobs.cron.destack-flexible=""
+jobs.cron.redeem-liquidity=""
+
 ```
 
 Welcome to your [Plume](https://github.com/Coreoz/Plume) project!
