@@ -9,7 +9,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.java-secure.rule=Host(`${JAVA_SECURE_DOMAIN}`)"
+      - "traefik.http.routers.java-secure.rule=Host(`trading-java-bot`)"
       - "traefik.http.routers.java-secure.entrypoints=web"
       - "traefik.http.services.java-secure.loadbalancer.server.port=8080"
 
